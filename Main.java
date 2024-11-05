@@ -2,13 +2,13 @@ import classes.*;
 import ui.*;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.Scanner;
 
 
 public class Main {
     public static Scanner sc = new Scanner(System.in);
-    public static HashSet<Customer> customers = new HashSet<>();
+    public static HashMap<String, Customer> customers = new HashMap<>();
     public static Stock stock = new Stock();
     public static ArrayList<Log> logs = new ArrayList<>();
 
