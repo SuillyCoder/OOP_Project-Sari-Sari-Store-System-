@@ -1,12 +1,14 @@
 import classes.*;
 import ui.*;
 
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Scanner;
+
 
 public class Main {
     public static Scanner sc = new Scanner(System.in);
-    public static ArrayList<Customer> customers = new ArrayList<>();
+    public static HashSet<Customer> customers = new HashSet<>();
     public static Stock stock = new Stock();
     public static ArrayList<Log> logs = new ArrayList<>();
 
