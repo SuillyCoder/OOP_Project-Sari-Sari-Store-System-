@@ -1,3 +1,4 @@
+package classes;
 public class Item implements Cloneable {
     private String name;
     private double price;

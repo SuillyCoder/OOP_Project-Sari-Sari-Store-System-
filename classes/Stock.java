@@ -1,3 +1,4 @@
+package classes;
 import java.util.HashMap;
 
 public class Stock {
