@@ -25,7 +25,7 @@ public class Reciept implements Cloneable {
     }
 
     @Override
-    public Object clone() {
+    public Reciept clone() {
         Reciept reciept = new Reciept(this.customer, this.date);
         reciept.items = new ArrayList<>();
         for (Item i : this.items) {
