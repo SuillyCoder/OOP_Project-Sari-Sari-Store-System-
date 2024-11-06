@@ -1,4 +1,5 @@
 package classes;
+
 import java.util.HashMap;
 
 public class Stock {
@@ -8,26 +9,36 @@ public class Stock {
         this.items = new HashMap<>();
     }
 
-    // change arguments to something more sensible
-    public void addItem(Item item, int quantity) {
-        // if (this.items.containsKey(item)) {
-        //     this.items.put(item, this.items.get(item) + quantity);
-        // } else {
-        //     this.items.put(item, quantity);
-        // }
+    public HashMap<String, Item> getItems() {
+        return this.items;
     }
 
-    public void removeItem(Item item, int quantity) {
-        // if (this.items.containsKey(item)) {
-        //     this.items.put(item, this.items.get(item) - quantity);
-        // }
+    public void addItem(String name, Item item) {
+        name = name.toUpperCase().strip();
+        if (!this.items.containsKey(name)) { // if the item does not exist
+            this.items.put(name, item);
+
+        } else { // if the item already exists
+            this.items.get(name).incQuantity(item.getQuantity());
+        }
+
+    }
+
+    public void removeItem(String name, Item item) {
+        name = name.toUpperCase().strip();
+        if (this.items.containsKey(name)) {
+            this.items.remove(name);
+        }
     }
 
     public String toString() {
-        String output = "Items:\n";
-        for (String item : this.items.keySet()) {
-            output += item + " - " + this.items.get(item).getQuantity() + "\n";
+        String output = "";
+
+        for (String key : this.items.keySet()) {
+            Item item = this.items.get(key);
+            output += item;
         }
+
         return output;
     }
 

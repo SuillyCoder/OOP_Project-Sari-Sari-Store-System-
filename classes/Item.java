@@ -10,6 +10,12 @@ public class Item implements Cloneable {
         this.quantity = quantity;
     }
 
+    public Item(String name, double price) {
+        this.name = name;
+        this.price = price;
+        this.quantity = 0;
+    }
+
     @Override
     public Item clone() {
         return new Item(this.name, this.price, this.quantity);
@@ -35,13 +41,23 @@ public class Item implements Cloneable {
         this.price = price;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setQuantity(int quantity) { this.quantity = quantity; }
+    public void incQuantity(int quantity) {
+        this.quantity += quantity;
+        if (this.quantity < 0) {
+            this.quantity = 0;
+        }
+    }
+    public void decQuantity(int quantity) {
+        this.quantity -= quantity;
+        if (this.quantity < 0) {
+            this.quantity = 0;
+        }
     }
 
     // modify if necessary
     public String toString() {
-        return "Name: " + name + "\nPrice: " + price + "\nQuantity: " + quantity + "\n";
+        return "Name: " + name + "\t\tPrice: " + price + "\t\tQuantity: " + quantity + "\n";
     }
 
     public void fromFile(){

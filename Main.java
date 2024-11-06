@@ -1,5 +1,5 @@
 import classes.*;
-import ui.Profit;
+import ui.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,7 +50,7 @@ public class Main {
                     // implement code here
                     break;
                 case '3':
-                    // implement code here
+                    Inventory.inventoryManagerUI(stock);
                     break;
                 case '4':
                     // implement code here
