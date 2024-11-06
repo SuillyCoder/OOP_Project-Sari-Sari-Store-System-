@@ -11,6 +11,7 @@ public class Main {
     public static HashMap<String, Customer> customers = new HashMap<>();
     public static Stock stock = new Stock();
     public static ArrayList<Log> logs = new ArrayList<>();
+    public static Customer customer;
 
     public static void main(String[] args) {
         char choice;
@@ -28,6 +29,21 @@ public class Main {
     
             switch (choice) {
                 case '1':
+                //Enters customer name
+                    System.out.print("Enter customer name: ");
+                    String customerName = sc.nextLine();
+                //Enters their outstanding balance
+                    System.out.print("Enter outstanding balance: "); 
+                    double outstanding = sc.nextDouble();
+                //Enters days since outstanding balance was 0
+                    System.out.print("Enter no. of days since last outstanding: ");
+                    int days = sc.nextInt();
+                    sc.nextLine(); 
+                //Add data within the customer constructor
+                    customer = new Customer(customerName, outstanding, days);
+                //Add instance of constructor within the hashset
+                    customers.add(customer);
+                    System.out.println();
                     break;
                 case '2':
                     // implement code here
@@ -41,9 +57,9 @@ public class Main {
                 case 5:
                     // implement code here
                     break;
-                
                 case 'x':
                     choice = 'X';
+                    break;
                 case 'X':
                     break;
                 default:
