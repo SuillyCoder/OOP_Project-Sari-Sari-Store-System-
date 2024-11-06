@@ -24,7 +24,7 @@ public class Stock {
 
     }
 
-    public void removeItem(String name, Item item) {
+    public void removeItem(String name) {
         name = name.toUpperCase().strip();
         if (this.items.containsKey(name)) {
             this.items.remove(name);

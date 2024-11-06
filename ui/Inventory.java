@@ -8,18 +8,16 @@ import classes.Stock;
 import classes.Item;
 
 public class Inventory {
-
     public static Scanner sc = new Scanner(System.in);
 
     public static void inventoryManagerUI(Stock stock) {
         char choice;
 
-
         do {
             System.out.println("[1] Add item"); // Will also add quantity if already present
-            System.out.println("[2] Remove item"); // 
-            System.out.println("[3] Change price"); //
-            System.out.println("[4] Stock an item"); // only increments quantity
+            System.out.println("[2] Remove item"); 
+            System.out.println("[3] Change price");
+            System.out.println("[4] Stock an item"); // increments quantity
             System.out.println("[5] Show all inventory");
 
             System.out.println("[X] Exit");
@@ -32,35 +30,19 @@ public class Inventory {
                 case '1': // Add item
                     addItemUI(stock);
                     break;
-                case '2':
-                    // Remove item
-                    // System.out.print("Enter item name: ");
-                    // itemName = sc.nextLine();
-                    // items.remove(itemName);
-                    // System.out.println();
+
+                case '2': // Remove item
+                    removeItemUI(stock);
                     break;
-                case '3':
-                    // Change price
-                    // System.out.print("Enter item name: ");
-                    // itemName = sc.nextLine();
-                    // System.out.print("Enter new price: ");
-                    // itemPrice = sc.nextDouble();
-                    // sc.nextLine();
-                    // item = items.get(itemName);
-                    // item.setPrice(itemPrice);
-                    // System.out.println();
+
+                case '3': // Change price
+                    changePriceUI(stock);
                     break;
-                case '4':
-                    // Stock an item
-                    // System.out.print("Enter item name: ");
-                    // itemName = sc.nextLine();
-                    // System.out.print("Enter quantity: ");
-                    // int quantity = sc.nextInt();
-                    // sc.nextLine();
-                    // item = items.get(itemName);
-                    // item.setQuantity(item.getQuantity() + quantity);
-                    // System.out.println();
+
+                case '4': // Stock an item
+                    restockItemUI(stock);
                     break;
+
                 case '5': // Show all inventory
                     inventoryListUI(stock);
                     break;
@@ -68,11 +50,7 @@ public class Inventory {
         } while (choice != 'X');
     }
 
-    public static void inventoryListUI(Stock stock) {
-        System.out.println("Inventory: " + stock.getItems().size() + " SKUs");
-        System.out.println(stock);
-    }
-
+    // TUI for adding an item
     public static void addItemUI(Stock stock) {
         HashMap<String, Item> items = stock.getItems();
         String itemName;
@@ -87,6 +65,7 @@ public class Inventory {
             Item item = items.get(itemName.toUpperCase().strip());
             System.out.println("Already existing product: " + itemName + "!");
 
+            // change price
             System.out.print("Restock by (Current: " + item.getQuantity() + ") >> ");
             itemQuantity = sc.nextInt();
             sc.nextLine();
@@ -108,5 +87,74 @@ public class Inventory {
 
         stock.addItem(itemName, newItem);
         System.out.println();
+    }
+
+    // TUI for removing an item
+    public static void removeItemUI(Stock stock) {
+        HashMap<String, Item> items = stock.getItems();
+        String itemName;
+
+        System.out.print("Enter item name >> ");
+        itemName = sc.nextLine();
+
+        if (items.containsKey(itemName.toUpperCase().strip())) {
+            stock.removeItem(itemName);
+            System.out.println("Item removed: " + itemName);
+        } else {
+            System.out.println("Item not found: " + itemName);
+        }
+        System.out.println();
+    }
+
+    // TUI for changing the price of an item
+    public static void changePriceUI(Stock stock) {
+        HashMap<String, Item> items = stock.getItems();
+        String itemName;
+        double itemPrice;
+
+        System.out.print("Enter item name >> ");
+        itemName = sc.nextLine();
+
+        if (items.containsKey(itemName.toUpperCase().strip())) {
+            Item item = items.get(itemName.toUpperCase().strip());
+            System.out.print("Enter new price (Currently " + item.getPrice() + ") >> ");
+            itemPrice = sc.nextDouble();
+            sc.nextLine();
+
+            item.setPrice(itemPrice);
+            System.out.println("Price changed: " + itemName + " to " + itemPrice);
+        } else {
+            System.out.println("Item not found: " + itemName);
+        }
+        System.out.println();
+    }
+
+    // TUI for restocking an item (changing quantity)
+    public static void restockItemUI(Stock stock) {
+        HashMap<String, Item> items = stock.getItems();
+        String itemName;
+        int itemQuantity;
+
+        System.out.print("Enter item name >> ");
+        itemName = sc.nextLine();
+
+        if (items.containsKey(itemName.toUpperCase().strip())) {
+            Item item = items.get(itemName.toUpperCase().strip());
+            System.out.print("Enter amount to stock (Currently: " + item.getQuantity() + ") >> ");
+            itemQuantity = sc.nextInt();
+            sc.nextLine();
+
+            item.incQuantity(itemQuantity);
+            System.out.println("Increased amount of " + itemName + " by " + itemQuantity);
+        } else {
+            System.out.println("Item not found: " + itemName);
+        }
+        System.out.println();
+    }
+
+    // displays all items
+    public static void inventoryListUI(Stock stock) {
+        System.out.println("Inventory: " + stock.getItems().size() + " SKUs");
+        System.out.println(stock);
     }
 }
