@@ -1,6 +1,4 @@
 import classes.*;
-import ui.*;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -42,7 +40,7 @@ public class Main {
                 //Add data within the customer constructor
                     customer = new Customer(customerName, outstanding, days);
                 //Add instance of constructor within the hashset
-                    customers.add(customer);
+                    //customers.put(customer);
                     System.out.println();
                     break;
                 case '2':
