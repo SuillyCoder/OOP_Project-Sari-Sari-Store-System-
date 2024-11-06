@@ -12,6 +12,7 @@ public class Main {
     public static Stock stock = new Stock();
     public static ArrayList<Log> logs = new ArrayList<>();
     public static Customer customer;
+    public static int currentDay = 0;
 
     public static void main(String[] args) {
         char choice;
@@ -21,6 +22,7 @@ public class Main {
             System.out.println("[3] Store stocks"); // add, remove, change items (Inventory.java)
             System.out.println("[4] Store revenue"); // shows logs (Revenue.java)
             System.out.println("[5] Customer catalog"); // shows customer catalog (Profit.java)
+            System.out.println("[6] End day"); // shows customer catalog (Profit.java)
 
             System.out.println("[X] Exit");
             System.out.print(" >> ");
@@ -43,7 +45,7 @@ public class Main {
                 //Add data within the customer constructor
                     customer = new Customer(customerName, outstanding, days);
                 //Add instance of constructor within the hashset
-                    customers.put(customerName, customer);
+                    customers.put(customerName.toUpperCase().strip(), customer);
                     System.out.println();
                     break;
                 case '2':
@@ -58,6 +60,19 @@ public class Main {
                 case '5':
                     Profit.customerCatalogUI(customers);
                     break;
+
+                case '6': // proceed to next day
+                    currentDay++;
+
+                    // when customer has no outstanding balance, then set lastDays to currentDay
+                    for (String key : customers.keySet()) {
+                        Customer customer = customers.get(key);
+                        if (customer.getOutstanding() > 0) {
+                            customer.setLastDays(currentDay);;
+                        }
+                    }
+                    break;
+
                 case 'x':
                     choice = 'X';
                     break;
@@ -67,7 +82,5 @@ public class Main {
                     System.out.println("Invalid choice");
             }
         } while (choice != 'X');
-
-
     }
 }

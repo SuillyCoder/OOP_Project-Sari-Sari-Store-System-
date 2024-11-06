@@ -2,12 +2,12 @@ package classes;
 public class Customer {
     private String name;
     private double outstanding;
-    private int lastOutstandingDate;
+    private int lastDays;
 
-    public Customer(String name, double outstanding, int lastOutstandingDate) {
+    public Customer(String name, double outstanding, int lastDays) {
         this.name = name;
         this.outstanding = outstanding;
-        this.lastOutstandingDate = lastOutstandingDate;
+        this.lastDays = lastDays;
     }
 
     public String getName() {
@@ -18,8 +18,8 @@ public class Customer {
         return outstanding;
     }
 
-    public int getLastOutstandingDate() {
-        return lastOutstandingDate;
+    public int getLastDays() {
+        return lastDays;
     } 
 
     public void setName(String name) {
@@ -30,11 +30,15 @@ public class Customer {
         this.outstanding = outstanding;
     }
 
-    public void setLastOutstandingDate(int lastOutstandingDate) {
-        this.lastOutstandingDate = lastOutstandingDate;
+    public void setLastDays(int lastDays) {
+        this.lastDays = lastDays;
+    }
+
+    public void incLastDays() {
+        this.lastDays += 1;
     }
 
     public String toString() {
-        return "Name: " + name + "\t\tOutstanding: P" + String.format("%.2f", outstanding) + "\t\tLast Outstanding Date: " + lastOutstandingDate;
+        return "Name: " + name + "\t\tOutstanding: P" + String.format("%.2f", outstanding) + "\t\tLast Outstanding Date: " + lastDays;
     }
 }
