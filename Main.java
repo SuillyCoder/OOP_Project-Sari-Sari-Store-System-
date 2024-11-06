@@ -1,4 +1,6 @@
 import classes.*;
+import ui.Profit;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -18,6 +20,7 @@ public class Main {
             System.out.println("[2] New purchase"); // choice if new or existing customer (Purchase.java)
             System.out.println("[3] Store stocks"); // add, remove, change items (Inventory.java)
             System.out.println("[4] Store revenue"); // shows logs (Revenue.java)
+            System.out.println("[5] Customer catalog"); // shows customer catalog (Profit.java)
 
             System.out.println("[X] Exit");
             System.out.print(" >> ");
@@ -40,7 +43,7 @@ public class Main {
                 //Add data within the customer constructor
                     customer = new Customer(customerName, outstanding, days);
                 //Add instance of constructor within the hashset
-                    //customers.put(customer);
+                    customers.put(customerName, customer);
                     System.out.println();
                     break;
                 case '2':
@@ -52,8 +55,8 @@ public class Main {
                 case '4':
                     // implement code here
                     break;
-                case 5:
-                    // implement code here
+                case '5':
+                    Profit.customerCatalogUI(customers);
                     break;
                 case 'x':
                     choice = 'X';

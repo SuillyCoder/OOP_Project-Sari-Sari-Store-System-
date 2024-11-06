@@ -34,8 +34,7 @@ public class Customer {
         this.lastOutstandingDate = lastOutstandingDate;
     }
 
-    // modify if necessary
     public String toString() {
-        return "Name: " + name + "\nOutstanding: " + outstanding + "\nLast Outstanding Date: " + lastOutstandingDate + "\n";
+        return "Name: " + name + "\t\tOutstanding: P" + String.format("%.2f", outstanding) + "\t\tLast Outstanding Date: " + lastOutstandingDate;
     }
 }
