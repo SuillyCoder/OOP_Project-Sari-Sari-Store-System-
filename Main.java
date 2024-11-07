@@ -1,9 +1,10 @@
-import classes.*;
-import ui.*;
-
+import classes.Customer;
+import classes.Log;
+import classes.Stock;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import ui.*;
 
 
 public class Main {
@@ -23,7 +24,8 @@ public class Main {
             System.out.println("[3] Store stocks"); // add, remove, change items (Inventory.java)
             System.out.println("[4] Store revenue"); // shows logs (Revenue.java)
             System.out.println("[5] Customer catalog"); // shows customer catalog (Profit.java)
-            System.out.println("[6] End day"); // shows customer catalog (Profit.java)
+            System.out.println("[6] Update Outstanding Balance"); // shows customer catalog (Profit.java)
+            System.out.println("[7] End day"); // shows customer catalog (Profit.java)
 
             System.out.println("[X] Exit");
             System.out.print(" >> ");
@@ -45,10 +47,22 @@ public class Main {
                     sc.nextLine(); 
                 //Add data within the customer constructor
                     customer = new Customer(customerName, outstanding, days);
-                //Add instance of constructor within the hashset
-                    customers.put(customerName.toUpperCase().strip(), customer);
+                    //This is where we'll check and compare for duplicates
+
+                    //Check if the customer does not exist firsthand
+                    if (!customers.containsKey(customer.getName())) {
+                        if (customer.getCredit() != 0){
+                        customers.put(customer.getName(), customer); // Add the customer to the HashMap
+                        }
+                    } else {
+                        // Handle the case where a customer with the same name already exists
+                        System.out.println("Customer with name '" + customer.getName() + "' already exists.");
+                    }
                     System.out.println();
                     break;
+
+                    //I'LL TEMPORARILY PUT THE CODE FOR THIS RIGHT OVER HERE: 
+                    
                 case '2':
                     // implement code here
                     break;
@@ -61,8 +75,15 @@ public class Main {
                 case '5':
                     Profit.customerCatalogUI(customers);
                     break;
-
-                case '6': // proceed to next day
+                    
+                    //I'LL TEMPORARILY ADD THE CODE FOR THIS OVER HERE. JUST NO MODULARIZATION FOR THE MOMENT. 
+                case '6':
+                    //Ask for the name of the customer
+                    //Check the hashmap
+                    //Update the balance of the customter
+                    //Run through the entire hashmap and pop off any customers who have 0 outstanding balance. 
+                break;
+                case '7': // proceed to next day
                     nextDay();
                     break;
 
