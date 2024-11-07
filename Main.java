@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Main {
     public static Scanner sc = new Scanner(System.in);
-    public static NamedMap<String, Customer> customers = new NamedMap<>();
+    public static NamedMap<Customer> customers = new NamedMap<>();
     public static Stock stock = new Stock();
     public static ArrayList<Log> logs = new ArrayList<>();
     public static Customer customer;

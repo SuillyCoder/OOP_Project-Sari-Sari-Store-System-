@@ -51,7 +51,7 @@ public class Inventory {
 
     // TUI for adding an item
     public static void addItemUI(Stock stock) {
-        NamedMap<String, Item> items = stock.getItems();
+        NamedMap<Item> items = stock.getItems();
         String itemName;
         double itemPrice;
         int itemQuantity;
@@ -90,7 +90,7 @@ public class Inventory {
 
     // TUI for removing an item
     public static void removeItemUI(Stock stock) {
-        NamedMap<String, Item> items = stock.getItems();
+        NamedMap<Item> items = stock.getItems();
         String itemName;
 
         System.out.print("Enter item name >> ");
@@ -107,7 +107,7 @@ public class Inventory {
 
     // TUI for changing the price of an item
     public static void changePriceUI(Stock stock) {
-        NamedMap<String, Item> items = stock.getItems();
+        NamedMap<Item> items = stock.getItems();
         String itemName;
         double itemPrice;
 
@@ -130,7 +130,7 @@ public class Inventory {
 
     // TUI for restocking an item (changing quantity)
     public static void restockItemUI(Stock stock) {
-        NamedMap<String, Item> items = stock.getItems();
+        NamedMap<Item> items = stock.getItems();
         String itemName;
         int itemQuantity;
 
