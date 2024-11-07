@@ -3,25 +3,22 @@ package classes;
 import java.util.ArrayList;
 
 public class Log {
-    private ArrayList<Transaction> reciepts;
+    private ArrayList<Transaction> transactions;
     private int date;
-    private double cashOnHand;
-    private double revenue;
-    private double outstanding;
+    private double totalPayment;
+    private double totalWorth;
 
     public Log(int date) {
-        this.reciepts = new ArrayList<>();
+        this.transactions = new ArrayList<>();
         this.date = date;
-        this.cashOnHand = 0;
-        this.revenue = 0;
-        this.outstanding = 0;
+        this.totalPayment = 0;
+        this.totalWorth = 0;
     }
 
-    public void addReciept(Transaction reciept) {
-        this.reciepts.add((Transaction) reciept.clone());
-        this.revenue += reciept.getWorth();
-        this.cashOnHand += reciept.getPayment();
-        this.outstanding = this.cashOnHand - this.revenue;
+    public void addTransaction(Transaction transaction) {
+        this.transactions.add(transaction.clone());
+        this.totalPayment += transaction.getPayment();
+        this.totalWorth += transaction.getWorth();
     }
 
     public void fromFile(){
