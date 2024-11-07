@@ -81,14 +81,6 @@ public class Main {
         currentDay++;
         currentWeek = ((currentDay - 1) / 7) + 1;
         currentMonth = ((currentDay - 1) / 30) + 1; // assuming 30 days in a month
-
-        // when customer has no outstanding balance, then set lastDays to currentDay
-        for (String key : customers.keySet()) {
-            Customer customer = customers.get(key);
-            if (customer.getOutstanding() > 0) {
-                customer.setLastDays(currentDay);;
-            }
-        }
     }
 
     private static String getWeekday(int day) {

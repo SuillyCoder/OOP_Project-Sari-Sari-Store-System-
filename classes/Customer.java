@@ -1,44 +1,47 @@
+// Customer information class
+// the system will only keep track of customers with credit != 0
+
 package classes;
 public class Customer {
     private String name;
-    private double outstanding;
-    private int lastDays;
+    private double credit; // negative means debt, positive means advance
+    private int date; // date of last payment
 
-    public Customer(String name, double outstanding, int lastDays) {
+    public Customer(String name, double credit, int date) {
         this.name = name;
-        this.outstanding = outstanding;
-        this.lastDays = lastDays;
+        this.credit = credit;
+        this.date = date;
     }
 
     public String getName() {
         return name;
     }
 
-    public double getOutstanding() {
-        return outstanding;
+    public double getCredit() {
+        return credit;
     }
 
-    public int getLastDays() {
-        return lastDays;
+    public int getDate() {
+        return date;
     } 
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setOutstanding(double outstanding) {
-        this.outstanding = outstanding;
+    public void setCredit(double credit) {
+        this.credit = credit;
     }
 
-    public void setLastDays(int lastDays) {
-        this.lastDays = lastDays;
+    public void setDate(int date) {
+        this.date = date;
     }
 
-    public void incLastDays() {
-        this.lastDays += 1;
+    public void incDate() {
+        this.date += 1;
     }
 
     public String toString() {
-        return "Name: " + name + "\t\tOutstanding: P" + String.format("%.2f", outstanding) + "\t\tLast Outstanding Date: " + lastDays;
+        return "Name: " + name + "\t\tCredit: P" + String.format("%.2f", credit) + "\t\tLast Credit Date: " + date;
     }
 }

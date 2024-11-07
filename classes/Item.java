@@ -1,8 +1,11 @@
+// Single item information class
+
 package classes;
 public class Item implements Cloneable {
     private String name;
     private double price;
-    private int quantity;
+    private int quantity;   // for Reciept: amount sold to customer
+                            // for Stock: total amount available to be sold
 
     public Item(String name, double price, int quantity) {
         this.name = name;
@@ -42,18 +45,8 @@ public class Item implements Cloneable {
     }
 
     public void setQuantity(int quantity) { this.quantity = quantity; }
-    public void incQuantity(int quantity) {
-        this.quantity += quantity;
-        if (this.quantity < 0) {
-            this.quantity = 0;
-        }
-    }
-    public void decQuantity(int quantity) {
-        this.quantity -= quantity;
-        if (this.quantity < 0) {
-            this.quantity = 0;
-        }
-    }
+    public void incQuantity(int quantity) { this.quantity = Math.max(0, this.quantity + quantity); }
+    public void decQuantity(int quantity) { this.quantity = Math.min(0, this.quantity - quantity); }
 
     // modify if necessary
     public String toString() {

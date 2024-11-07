@@ -1,4 +1,5 @@
 package ui;
-public class Purchase {
+
+public class PointOfSale {
     // implement TUI here
 }

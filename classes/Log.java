@@ -3,7 +3,7 @@ package classes;
 import java.util.ArrayList;
 
 public class Log {
-    private ArrayList<Reciept> reciepts;
+    private ArrayList<Transaction> reciepts;
     private int date;
     private double cashOnHand;
     private double revenue;
@@ -17,10 +17,10 @@ public class Log {
         this.outstanding = 0;
     }
 
-    public void addReciept(Reciept reciept) {
-        this.reciepts.add((Reciept) reciept.clone());
-        this.revenue += reciept.getRevenue();
-        this.cashOnHand += reciept.getCashOnHand();
+    public void addReciept(Transaction reciept) {
+        this.reciepts.add((Transaction) reciept.clone());
+        this.revenue += reciept.getWorth();
+        this.cashOnHand += reciept.getPayment();
         this.outstanding = this.cashOnHand - this.revenue;
     }
 
