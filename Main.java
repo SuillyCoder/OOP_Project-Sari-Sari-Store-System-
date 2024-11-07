@@ -1,9 +1,8 @@
 import classes.*;
-import ui.*;
-
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.Optional;
+import java.util.Scanner;
+import ui.*;
 
 
 public class Main {
@@ -11,8 +10,9 @@ public class Main {
 
     public static NamedMap<Customer> customers = new NamedMap<>();
     public static Stock stock = new Stock();
-    public static ArrayList<Log> logs = new ArrayList<>();
+    public static ArrayList<Log> logHistory = new ArrayList<>();
     public static int currentDay = 1, currentWeek = 1, currentMonth = 1;
+    public static Log log;
 
     public static void main(String[] args) {
         char choice;
@@ -25,7 +25,7 @@ public class Main {
             System.out.println("[3] Store stocks"); // add, remove, change items (Inventory.java)
             System.out.println("[4] Store revenue"); // shows logs (Revenue.java)
             System.out.println("[5] Customer catalog"); // shows customer catalog (Profit.java)
-            System.out.println("[6] Update Outstanding Balance"); // shows customer catalog (Profit.java)
+            System.out.println("[6] View Profit Logs"); // shows customer catalog (Profit.java)
             System.out.println("[7] End day"); // shows customer catalog (Profit.java)
 
             System.out.println("[X] Exit");
@@ -81,16 +81,13 @@ public class Main {
                 case '5':
                     Profit.customerCatalogUI(customers);
                     break;
-                    
-                    //I'LL TEMPORARILY ADD THE CODE FOR THIS OVER HERE. JUST NO MODULARIZATION FOR THE MOMENT. 
                 case '6':
-                    //Ask for the name of the customer
-                    //Check the hashmap
-                    //Update the balance of the customter
-                    //Run through the entire hashmap and pop off any customers who have 0 outstanding balance. 
+                    Profit.profitLog(logHistory);
                 break;
                 case '7': // proceed to next day
+                    Profit.addLog(log.clone(),logHistory);
                     nextDay();
+                    dailyLog = new Log(currentDay); // Create a new daily log for next day
                     break;
 
                 case 'x':

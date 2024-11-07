@@ -1,7 +1,5 @@
 package classes;
 
-import java.util.ArrayList;
-
 public class Transaction implements Cloneable {
     private NamedMap<Item> items;
     private String customer;
