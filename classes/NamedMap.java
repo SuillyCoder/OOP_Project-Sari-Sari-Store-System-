@@ -19,5 +19,7 @@ public class NamedMap<V> extends HashMap<String , V> {
         return super.containsKey(key.toUpperCase().replace(" ", ""));
     }
 
+    
+
 
 }

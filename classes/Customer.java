@@ -13,6 +13,12 @@ public class Customer {
         this.date = date;
     }
 
+    public Customer(String name) {
+        this.name = name;
+        this.credit = 0;
+        this.date = 0;
+    }
+
     public String getName() {
         return name;
     }

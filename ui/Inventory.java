@@ -7,7 +7,7 @@ import classes.Item;
 import classes.NamedMap;
 
 public class Inventory {
-    public static Scanner sc = new Scanner(System.in);
+    private static Scanner sc = new Scanner(System.in);
 
     public static void inventoryManagerUI(Stock stock) {
         char choice;
