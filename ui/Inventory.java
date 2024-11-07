@@ -1,11 +1,10 @@
 package ui;
 
-import java.util.HashMap;
-
 import java.util.Scanner;
 
 import classes.Stock;
 import classes.Item;
+import classes.NamedMap;
 
 public class Inventory {
     public static Scanner sc = new Scanner(System.in);
@@ -52,7 +51,7 @@ public class Inventory {
 
     // TUI for adding an item
     public static void addItemUI(Stock stock) {
-        HashMap<String, Item> items = stock.getItems();
+        NamedMap<String, Item> items = stock.getItems();
         String itemName;
         double itemPrice;
         int itemQuantity;
@@ -61,8 +60,8 @@ public class Inventory {
         System.out.print("Enter item name >> ");
         itemName = sc.nextLine();
 
-        if (items.containsKey(itemName.toUpperCase().strip())) { // if the item already exists
-            Item item = items.get(itemName.toUpperCase().strip());
+        if (items.containsKey(itemName)) { // if the item already exists
+            Item item = items.get(itemName);
             System.out.println("Already existing product: " + itemName + "!");
 
             // change price
@@ -91,13 +90,13 @@ public class Inventory {
 
     // TUI for removing an item
     public static void removeItemUI(Stock stock) {
-        HashMap<String, Item> items = stock.getItems();
+        NamedMap<String, Item> items = stock.getItems();
         String itemName;
 
         System.out.print("Enter item name >> ");
         itemName = sc.nextLine();
 
-        if (items.containsKey(itemName.toUpperCase().strip())) {
+        if (items.containsKey(itemName)) {
             stock.removeItem(itemName);
             System.out.println("Item removed: " + itemName);
         } else {
@@ -108,15 +107,15 @@ public class Inventory {
 
     // TUI for changing the price of an item
     public static void changePriceUI(Stock stock) {
-        HashMap<String, Item> items = stock.getItems();
+        NamedMap<String, Item> items = stock.getItems();
         String itemName;
         double itemPrice;
 
         System.out.print("Enter item name >> ");
         itemName = sc.nextLine();
 
-        if (items.containsKey(itemName.toUpperCase().strip())) {
-            Item item = items.get(itemName.toUpperCase().strip());
+        if (items.containsKey(itemName)) {
+            Item item = items.get(itemName);
             System.out.print("Enter new price (Currently " + item.getPrice() + ") >> ");
             itemPrice = sc.nextDouble();
             sc.nextLine();
@@ -131,15 +130,15 @@ public class Inventory {
 
     // TUI for restocking an item (changing quantity)
     public static void restockItemUI(Stock stock) {
-        HashMap<String, Item> items = stock.getItems();
+        NamedMap<String, Item> items = stock.getItems();
         String itemName;
         int itemQuantity;
 
         System.out.print("Enter item name >> ");
         itemName = sc.nextLine();
 
-        if (items.containsKey(itemName.toUpperCase().strip())) {
-            Item item = items.get(itemName.toUpperCase().strip());
+        if (items.containsKey(itemName)) {
+            Item item = items.get(itemName);
             System.out.print("Enter amount to stock (Currently: " + item.getQuantity() + ") >> ");
             itemQuantity = sc.nextInt();
             sc.nextLine();

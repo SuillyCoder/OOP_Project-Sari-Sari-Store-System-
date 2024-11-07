@@ -1,20 +1,17 @@
 package classes;
 
-import java.util.HashMap;
-
 public class Stock {
-    private HashMap<String, Item> items;
+    private NamedMap<String, Item> items;
 
     public Stock() {
-        this.items = new HashMap<>();
+        this.items = new NamedMap<>();
     }
 
-    public HashMap<String, Item> getItems() {
+    public NamedMap<String, Item> getItems() {
         return this.items;
     }
 
     public void addItem(String name, Item item) {
-        name = name.toUpperCase().strip();
         if (!this.items.containsKey(name)) { // if the item does not exist
             this.items.put(name, item);
 
@@ -25,7 +22,6 @@ public class Stock {
     }
 
     public void removeItem(String name) {
-        name = name.toUpperCase().strip();
         if (this.items.containsKey(name)) {
             this.items.remove(name);
         }
