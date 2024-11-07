@@ -1,10 +1,10 @@
 package ui;
 
-import java.util.Scanner;
-
-import classes.Stock;
 import classes.Item;
 import classes.NamedMap;
+import classes.Stock;
+import java.util.Scanner;
+
 
 public class Inventory {
     public static Scanner sc = new Scanner(System.in);
