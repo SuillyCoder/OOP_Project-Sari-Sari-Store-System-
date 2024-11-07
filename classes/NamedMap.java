@@ -2,7 +2,7 @@ package classes;
 
 import java.util.HashMap;
 
-public class NamedMap<K, V> extends HashMap<String , V> {
+public class NamedMap<V> extends HashMap<String , V> {
     public V get(String key) {
         return super.get(key.toUpperCase().replace(" ", ""));
     }
@@ -18,6 +18,8 @@ public class NamedMap<K, V> extends HashMap<String , V> {
     public boolean containsKey(String key) {
         return super.containsKey(key.toUpperCase().replace(" ", ""));
     }
+
+    
 
 
 }

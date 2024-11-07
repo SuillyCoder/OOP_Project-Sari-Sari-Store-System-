@@ -1,13 +1,13 @@
 package classes;
 
 public class Stock {
-    private NamedMap<String, Item> items;
+    private NamedMap<Item> items;
 
     public Stock() {
         this.items = new NamedMap<>();
     }
 
-    public NamedMap<String, Item> getItems() {
+    public NamedMap<Item> getItems() {
         return this.items;
     }
 

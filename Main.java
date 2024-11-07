@@ -3,22 +3,25 @@ import ui.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Optional;
 
 
 public class Main {
     public static Scanner sc = new Scanner(System.in);
-    public static NamedMap<String, Customer> customers = new NamedMap<>();
+
+    public static NamedMap<Customer> customers = new NamedMap<>();
     public static Stock stock = new Stock();
     public static ArrayList<Log> logs = new ArrayList<>();
-    public static Customer customer;
     public static int currentDay = 1, currentWeek = 1, currentMonth = 1;
 
     public static void main(String[] args) {
         char choice;
+        Log dailyLog = new Log(currentDay);
+
         do {
-            System.out.println("Day " + currentDay + " (" + getWeekday(currentDay) + ") | Week " + currentWeek + " | Month " + currentMonth + " (" + getMonth(currentMonth) + ")");
+            System.out.println("Day " + currentDay + " (" + getWeekday(currentDay) + ") | Week " + currentWeek + " | Month " + currentMonth);
             System.out.println("[1] New customer"); // (Customer.java)
-            System.out.println("[2] New purchase"); // choice if new or existing customer (Purchase.java)
+            System.out.println("[2] New transaction"); // choice if new or existing customer (PointOfSale.java)
             System.out.println("[3] Store stocks"); // add, remove, change items (Inventory.java)
             System.out.println("[4] Store revenue"); // shows logs (Revenue.java)
             System.out.println("[5] Customer catalog"); // shows customer catalog (Profit.java)
@@ -44,7 +47,7 @@ public class Main {
                     int days = sc.nextInt();
                     sc.nextLine(); 
                 //Add data within the customer constructor
-                    customer = new Customer(customerName, outstanding, days);
+                    Customer customer = new Customer(customerName, outstanding, days);
                     //This is where we'll check and compare for duplicates
 
                     //Check if the customer does not exist firsthand
@@ -62,7 +65,12 @@ public class Main {
                     //I'LL TEMPORARILY PUT THE CODE FOR THIS RIGHT OVER HERE: 
                     
                 case '2':
-                    // implement code here
+                    Optional<Transaction> newTransaction = Optional.of(new Transaction("NO_NAME", currentDay));
+                    PointOfSale.transactionUI(newTransaction, customers, stock, currentDay);
+
+                    if (newTransaction.isPresent()) {
+                        dailyLog.addTransaction(newTransaction.get());
+                    }
                     break;
                 case '3':
                     Inventory.inventoryManagerUI(stock);
@@ -121,39 +129,6 @@ public class Main {
                 return "Sunday";
             default:
                 return "Invalid day";
-        }
-    }
-
-
-    private static String getMonth(int month) {
-        month = month % 12;
-        switch (month) {
-            case 1:
-                return "January";
-            case 2:
-                return "February";
-            case 3:
-                return "March";
-            case 4:
-                return "April";
-            case 5:
-                return "May";
-            case 6:
-                return "June";
-            case 7:
-                return "July";
-            case 8:
-                return "August";
-            case 9:
-                return "September";
-            case 10:
-                return "October";
-            case 11:
-                return "November";
-            case 0:
-                return "December";
-            default:
-                return "Invalid month";
         }
     }
 }
