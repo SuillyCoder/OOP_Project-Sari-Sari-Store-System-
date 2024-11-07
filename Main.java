@@ -1,9 +1,8 @@
-import classes.Customer;
-import classes.Log;
-import classes.Stock;
+import classes.*;
+import ui.*;
+
 import java.util.ArrayList;
 import java.util.Scanner;
-import ui.*;
 
 
 public class Main {
