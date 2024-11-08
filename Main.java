@@ -17,7 +17,7 @@ public class Main {
 
         Directory.customerCatalogUI(customers);
         Inventory.inventoryListUI(stock);
-        // daily profit log
+        Profit.daySummary(logHistory);
 
         System.out.println("=".repeat(20));
         System.out.println();

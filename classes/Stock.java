@@ -53,7 +53,7 @@ public class Stock {
             String line;
             while((line = br.readLine()) != null){
                 String[]parts = line.split(",");
-                    if (parts.length == 3){
+                    if (parts.length == 4){
                         String itemName = parts[0].trim();
                         String itemCategory = parts[1].trim();
                         double itemPrice = Double.parseDouble(parts[2].trim());
