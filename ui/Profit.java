@@ -35,34 +35,65 @@ public class Profit {
 
     switch (choice) {
         case 1: 
-            for (int i = logs.size() - 1; i >= 0; i--) {
-                Log log = logs.get(i);
-                int logNumber = logs.size() - inc;
-                System.out.print("Day: " + logNumber);
-                System.out.print("\tTotal Payment: " + log.getTotalPayment());
-                System.out.print("\tTotal Worth: " + log.getTotalWorth());
-                System.out.println("\n");
-                inc++;
-                }
+            daySummary(logs);
             break;
         case 2:
-            for (int i = logs.size() - 1; i >= 0; i-=7) {
-                int weekPay = 0, weekWorth = 0;
-                Log log = logs.get(i);
-                int logNumber = logs.size() - (6+inc);
-                System.out.print("Week: " + logNumber);
-                for (int j = 0; j < 7; j++) {
-                    weekPay += log.getTotalPayment();
-                    weekWorth += log.getTotalWorth();
-                }
-                System.out.print("\tTotal Payment: " + weekPay);
-                System.out.print("\tTotal Worth: " + weekWorth);
-                System.out.println("\n");
-                inc++;
-                }
+           weekSummary(logs);
             break;
         case 3: 
+            monthSummary(logs);
             break;
         }
     }
+
+    //These are the functions to print out the profits based on different time periods
+    public static void daySummary(ArrayList<Log> logs){
+        int inc = 0;
+        for (int i = logs.size() - 1; i >= 0; i--) {
+            Log log = logs.get(i);
+            int logNumber = logs.size() - inc;
+            System.out.print("Day: " + logNumber);
+            System.out.print("\tTotal Payment: " + log.getTotalPayment());
+            System.out.print("\tTotal Worth: " + log.getTotalWorth());
+            System.out.println("\n");
+            inc++;
+        }
+    }
+
+    public static void weekSummary(ArrayList<Log> logs){
+        int inc = 0;
+        for (int i = logs.size() - 1; i >= 0; i-=7) {
+            int weekPay = 0, weekWorth = 0;
+            Log log = logs.get(i);
+            int logNumber = logs.size() - (6+inc);
+            System.out.print("Week: " + logNumber);
+            for (int j = 0; j < 7; j++) {
+                weekPay += log.getTotalPayment();
+                weekWorth += log.getTotalWorth();
+            }
+            System.out.print("\tTotal Payment: " + weekPay);
+            System.out.print("\tTotal Worth: " + weekWorth);
+            System.out.println("\n");
+            inc++;
+            }
+    }
+
+    public static void monthSummary(ArrayList<Log> logs){
+        int inc = 0;
+        for (int i = logs.size() - 1; i >= 0; i-=30) {
+            int monthPay = 0, monthWorth = 0;
+            Log log = logs.get(i);
+            int logNumber = logs.size() - (29+inc);
+            System.out.print("Month: " + logNumber);
+            for (int j = 0; j < 30; j++) {
+                monthPay += log.getTotalPayment();
+                monthWorth += log.getTotalWorth();
+            }
+            System.out.print("\tTotal Payment: " + monthPay);
+            System.out.print("\tTotal Worth: " + monthWorth);
+            System.out.println("\n");
+            inc++;
+            }
+    }
+
 }
