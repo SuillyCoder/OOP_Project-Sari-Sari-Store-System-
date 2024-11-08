@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 
 public class Inventory {
+    private static final int LOW_INVENTORY_THRESHOLD = 5;
     private static Scanner sc = new Scanner(System.in);
 
     public static void inventoryManagerUI(Stock stock) {
@@ -158,5 +159,14 @@ public class Inventory {
     public static void inventoryListUI(Stock stock) {
         System.out.println("Inventory: " + stock.getItems().size() + " SKUs");
         System.out.println(stock);
+    }
+
+    public static void lowInventoryNotifier(Stock stock){
+        for (String key : stock.getItems().keySet()) {
+            Item item = stock.getItems().get(key);
+            if (item.getQuantity() < LOW_INVENTORY_THRESHOLD) {
+                System.out.println("Low inventory!\t" + item.getName() + " (" + item.getQuantity() + ")");
+            }
+        }
     }
 }
