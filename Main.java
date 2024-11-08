@@ -35,9 +35,10 @@ public class Main {
         char choice;
         
         // Load data from files
-        Customer.fromFile(customers);
-        stock.fromFile();
-        // Log.fromFile(logHistory);
+        Customer.fromFile(customers);   // (Customer.java)
+        stock.fromFile();               // (Stock.java)
+        // Log.fromFile(logHistory);    // (Log.java)
+        
         logHistory.add(new Log()); // A new log at the start of the day 1
 
         do {
