@@ -3,8 +3,10 @@ package ui;
 import classes.Item;
 import classes.NamedMap;
 import classes.Stock;
-
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -155,8 +157,28 @@ public class Inventory {
     }
 
     // displays all items
-    public static void inventoryListUI(Stock stock) {
-        System.out.println("Inventory: " + stock.getItems().size() + " SKUs");
-        System.out.println(stock);
+    
+public static void inventoryListUI(Stock stock) {
+    //NOTE: Will rework presentation of text later.
+    
+    System.out.println("Inventory: " + stock.getItems().size() + " SKUs\n");
+
+    // Temporary list to hold formatted item details with category
+    List<String> sortedItems = new ArrayList<>();
+
+    // Extract and sort by category
+    for (String itemName : stock.getItems().keySet()) {
+        Item item = stock.getItems().get(itemName);
+        String categoryDetails = String.format("%s, %s, %.2f, %d", itemName, item.getCategory(), item.getPrice(), item.getQuantity(), item);
+        sortedItems.add(categoryDetails);
     }
+
+    Collections.sort(sortedItems); // Sort by category using a custom comparator (optional)
+
+    // Print the sorted list
+    for (String itemDetails : sortedItems) {
+        System.out.println(itemDetails);
+    }
+    System.out.println();
+}
 }
