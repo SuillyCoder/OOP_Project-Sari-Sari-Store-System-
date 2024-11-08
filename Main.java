@@ -53,20 +53,20 @@ public class Main {
                         logHistory.get(currentDay-1).addTransaction(newTransaction.get());
                     }
                     break;
-                case '3':
+                case '2':
                     Inventory.inventoryManagerUI(stock);
                     break;
-                case '4':
+                case '3':
                     // implement code here
                     break;
-                case '5':
+                case '4':
                     Profit.customerCatalogUI(customers);
                     break;
-                case '6':
+                case '5':
                     System.out.println("PROFIT LOGS:\n\n");
                     Profit.profitLog(logHistory);
                 break;
-                case '7': // proceed to next day
+                case '6': // proceed to next day
                     
                     nextDay();
                     break;
