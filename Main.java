@@ -7,35 +7,44 @@ import ui.*;
 
 public class Main {
     public static Scanner sc = new Scanner(System.in);
-
     public static NamedMap<Customer> customers = new NamedMap<>();
     public static Stock stock = new Stock();
     public static ArrayList<Log> logHistory = new ArrayList<>();
     public static int currentDay = 1, currentWeek = 1, currentMonth = 1;
 
+    private static void generalMenu() {
+        System.out.println("=".repeat(20));
+
+
+
+
+        System.out.println("=".repeat(20));
+        System.out.println();
+
+        System.out.println("Day " + currentDay + " (" + getWeekday(currentDay) + ") | Week " + currentWeek + " | Month " + currentMonth);
+        System.out.println("[1] New transaction");      // (PointOfSale.java) make a transaction, either new or existing customer 
+        System.out.println("[2] Store inventory");      // (Inventory.java) add, remove, change price of items 
+        System.out.println("[3] Store ficanancials");   // (Profit.java) shows financial logs
+        System.out.println("[4] End day");              // Proceed to next day
+        System.out.println("[X] Exit");
+    }
+
     public static void main(String[] args) {
         char choice;
-        //A new log at the start of the day 1
-        logHistory.add(new Log());
+        
+        // Load data from files
+        Customer.fromFile(customers);
+        stock.fromFile();
+        // Log.fromFile(logHistory);
+        logHistory.add(new Log()); // A new log at the start of the day 1
 
         do {
-            System.out.println("Day " + currentDay + " (" + getWeekday(currentDay) + ") | Week " + currentWeek + " | Month " + currentMonth);
-            System.out.println("[1] New transaction"); // choice if new or existing customer (PointOfSale.java)
-            System.out.println("[2] Store stocks"); // add, remove, change items (Inventory.java)
-            System.out.println("[3] Store revenue"); // shows logs (Revenue.java)
-            System.out.println("[4] Customer catalog"); // shows customer catalog (Profit.java)
-            System.out.println("[5] View Profit Logs"); // shows customer catalog (Profit.java)
-            System.out.println("[6] End day"); // shows customer catalog (Profit.java)
-
-            System.out.println("[X] Exit");
+            generalMenu();
             System.out.print(" >> ");
-
             choice = Character.toUpperCase(sc.nextLine().strip().charAt(0));
 			System.out.println();
     
             switch (choice) {
-        
-                    
                 case '1':
                     Optional<Transaction> newTransaction = Optional.of(new Transaction("NO_NAME", currentDay));
                     PointOfSale.transactionUI(newTransaction, customers, stock, currentDay);
@@ -102,4 +111,6 @@ public class Main {
                 return "Invalid day";
         }
     }
+
+
 }

@@ -19,8 +19,6 @@ public class Inventory {
             System.out.println("[3] Change price");
             System.out.println("[4] Stock an item"); // increments quantity
             System.out.println("[5] Show all inventory");
-            System.out.println("[6] Loading");  //for testing
-            System.out.println("[7] Saving"); //for testing
 
             System.out.println("[X] Exit");
             System.out.print(" >> ");
@@ -48,24 +46,6 @@ public class Inventory {
                 case '5': // Show all inventory
                     inventoryListUI(stock);
                     break;
-
-                case '6':
-                    //make this modularize 
-                    System.out.print("Enter file path to load >> ");
-                    String loadPath = sc.nextLine();
-                    stock.fromFile(loadPath);
-                    System.out.println("Inventory loaded from " + loadPath);
-                    break;
-
-                case '7':
-                    //make this modularize 
-                    System.out.print("Enter file path to save >> ");
-                    String savePath = sc.nextLine();
-                    stock.toFile(savePath);
-                    System.out.println("Inventory saved to " + savePath);
-                    break;
-
-                
             }
         } while (choice != 'X');
     }

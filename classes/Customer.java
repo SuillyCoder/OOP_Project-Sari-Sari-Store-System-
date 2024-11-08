@@ -2,6 +2,7 @@
 // the system will only keep track of customers with credit != 0
 
 package classes;
+
 public class Customer {
     private String name;
     private double credit; // negative means debt, positive means advance
@@ -49,5 +50,13 @@ public class Customer {
 
     public String toString() {
         return "Name: " + name + "\t\tCredit: P" + String.format("%.2f", credit) + "\t\tLast Credit Date: " + date;
+    }
+
+    public static void fromFile(NamedMap<Customer> customers) {
+        // implement code here
+    }
+
+    public static void toFile(NamedMap<Customer> customers) {
+        // implement code here
     }
 }
