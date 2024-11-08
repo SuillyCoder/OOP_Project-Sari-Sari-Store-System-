@@ -3,6 +3,13 @@
 
 package classes;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Map;
+
 public class Customer {
     private String name;
     private double credit;  // negative means debt, positive means advance
@@ -39,10 +46,43 @@ public class Customer {
 
     // file read and write operations
     public static void fromFile(NamedMap<Customer> customers) {
-        // implement code here
+             try (BufferedReader br = new BufferedReader(new FileReader("customer.csv"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length == 3) {
+                    String name = parts[0].strip();
+                    double credit = Double.parseDouble(parts[1].strip());
+                    int date = Integer.parseInt(parts[2].strip());
+                    
+                    // Only add customers with credit != 0
+                    if (credit != 0) {
+                        customers.put(name, new Customer(name, credit, date));
+                    }
+                }
+            }
+            System.out.println("Items loaded from file");
+        } catch (IOException e) {
+            System.err.println("Error reading from file: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.err.println("Error parsing number: " + e.getMessage());
+        }
     }
 
     public static void toFile(NamedMap<Customer> customers) {
-        // implement code here
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter("customer.csv"))) {
+            for (Map.Entry<String, Customer> entry : customers.entrySet()) {
+                Customer customer = entry.getValue();
+                // Write only customers with credit != 0
+                if (customer.getCredit() != 0) {
+                    bw.write(customer.getName() + "," + customer.getCredit() + "," + customer.getDate());
+                    bw.newLine();
+                }
+            }
+            System.out.println("Items loaded from file");
+        } catch (IOException e) {
+            System.err.println("Error writing to file: " + e.getMessage());
+        }
     }
-}
+    }
+
