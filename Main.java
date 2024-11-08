@@ -22,6 +22,9 @@ public class Main {
         System.out.println("=".repeat(20));
         System.out.println();
 
+        Inventory.lowInventoryNotifier(stock);
+        System.out.println();
+
         System.out.println("Day " + currentDay + " (" + getWeekday(currentDay) + ") | Week " + currentWeek + " | Month " + currentMonth);
         System.out.println("[1] New transaction");      // (PointOfSale.java) make a transaction, either new or existing customer 
         System.out.println("[2] Store inventory");      // (Inventory.java) add, remove, change price of items 
@@ -35,12 +38,14 @@ public class Main {
         char choice;
         
         // Load data from files
-        Customer.fromFile(customers);
-        stock.fromFile();
-        // Log.fromFile(logHistory);
+        Customer.fromFile(customers);   // (Customer.java)
+        stock.fromFile();               // (Stock.java)
+        // Log.fromFile(logHistory);    // (Log.java)
+        
         logHistory.add(new Log()); // A new log at the start of the day 1
 
         do {
+            
             generalMenu();
 
             System.out.print(" >> ");

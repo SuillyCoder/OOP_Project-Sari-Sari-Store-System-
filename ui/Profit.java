@@ -1,14 +1,11 @@
 package ui;
 
-import classes.Customer;
 import classes.Log;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
-    // implement TUI here
+
 public class Profit {
-
-
     public static void addLog(Log log, ArrayList<Log> logHistory) {
         logHistory.add(log.clone()); // Add the cloned log to the logHistory
         if (logHistory.size() == 0) {
@@ -18,31 +15,31 @@ public class Profit {
             System.out.println("Log Added Successfully!\n");
         }
     }
+
     public static void profitLog(ArrayList<Log> logs) {
-    if (logs.size() == 0) {
-        System.out.println("No logs found!\n");
-        return;
-    }
+        if (logs.size() == 0) {
+            System.out.println("No logs found!\n");
+            return;
+        }
 
-    Scanner time = new Scanner(System.in);
-    int inc = 0;
+        Scanner time = new Scanner(System.in);
 
-    System.out.println("Select Time Period Viewing Mode\n");
-    System.out.println("[1] Day\n[2] Week\n[3] Month\n");
-    System.out.print(" >> ");
-    int choice = time.nextInt();
-    System.out.println();
+        System.out.println("Select Time Period Viewing Mode\n");
+        System.out.println("[1] Day\n[2] Week\n[3] Month\n");
+        System.out.print(" >> ");
+        int choice = time.nextInt();
+        System.out.println();
 
-    switch (choice) {
-        case 1: 
-            daySummary(logs);
-            break;
-        case 2:
-           weekSummary(logs);
-            break;
-        case 3: 
-            monthSummary(logs);
-            break;
+        switch (choice) {
+            case 1: 
+                daySummary(logs);
+                break;
+            case 2:
+                weekSummary(logs);
+                break;
+            case 3: 
+                monthSummary(logs);
+                break;
         }
     }
 

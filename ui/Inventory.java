@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 
 public class Inventory {
+    private static final int LOW_INVENTORY_THRESHOLD = 5;
     private static Scanner sc = new Scanner(System.in);
 
     public static void inventoryManagerUI(Stock stock) {
@@ -157,6 +158,15 @@ public class Inventory {
     }
 
     // displays all items
+ 
+    public static void lowInventoryNotifier(Stock stock){
+        for (String key : stock.getItems().keySet()) {
+            Item item = stock.getItems().get(key);
+            if (item.getQuantity() < LOW_INVENTORY_THRESHOLD) {
+                System.out.println("Low inventory!\t" + item.getName() + " (" + item.getQuantity() + ")");
+            }
+        }
+    }
     
 public static void inventoryListUI(Stock stock) {
     //NOTE: Will rework presentation of text later.
