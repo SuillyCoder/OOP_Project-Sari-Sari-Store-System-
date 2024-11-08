@@ -7,17 +7,7 @@ import java.util.HashMap;
 import java.util.Scanner;
     // implement TUI here
 public class Profit {
-    // prints the list of all customers
-    public static void customerCatalogUI(HashMap<String, Customer> customers) {
-        System.out.println("Customer Catalog: " + customers.size() + " customers");
 
-        for (String key : customers.keySet()) {
-            Customer customer = customers.get(key);
-            System.out.println(customer);
-        }
-
-        System.out.println();
-    }
 
     public static void addLog(Log log, ArrayList<Log> logHistory) {
         logHistory.add(log.clone()); // Add the cloned log to the logHistory
@@ -49,8 +39,8 @@ public class Profit {
                 Log log = logs.get(i);
                 int logNumber = logs.size() - inc;
                 System.out.print("Day: " + logNumber);
-                System.out.print("\tTotal Payment: " + log.getPayment());
-                System.out.print("\tTotal Worth: " + log.getWorth());
+                System.out.print("\tTotal Payment: " + log.getTotalPayment());
+                System.out.print("\tTotal Worth: " + log.getTotalWorth());
                 System.out.println("\n");
                 inc++;
                 }
@@ -62,8 +52,8 @@ public class Profit {
                 int logNumber = logs.size() - (6+inc);
                 System.out.print("Week: " + logNumber);
                 for (int j = 0; j < 7; j++) {
-                    weekPay += log.getPayment();
-                    weekWorth += log.getWorth();
+                    weekPay += log.getTotalPayment();
+                    weekWorth += log.getTotalWorth();
                 }
                 System.out.print("\tTotal Payment: " + weekPay);
                 System.out.print("\tTotal Worth: " + weekWorth);

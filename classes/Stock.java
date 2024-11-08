@@ -1,4 +1,7 @@
+// Class which stores all items
+
 package classes;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -8,24 +11,27 @@ import java.io.IOException;
 public class Stock {
     private NamedMap<Item> items;
 
+    // standard constructor
     public Stock() {
         this.items = new NamedMap<>();
     }
 
-    public NamedMap<Item> getItems() {
-        return this.items;
-    }
+    // accessors and mutators
+    public NamedMap<Item> getItems() { return this.items; }
 
+    // adding a single item in the stock
     public void addItem(String name, Item item) {
-        if (!this.items.containsKey(name)) { // if the item does not exist
+        // if the item does not exist, then add the item to the stock
+        if (!this.items.containsKey(name)) { 
             this.items.put(name, item);
 
-        } else { // if the item already exists
+        // if the item already exists, then increment only the amount specified
+        } else { 
             this.items.get(name).incQuantity(item.getQuantity());
         }
-
     }
 
+    // removing an item in the stock
     public void removeItem(String name) {
         if (this.items.containsKey(name)) {
             this.items.remove(name);
@@ -34,15 +40,14 @@ public class Stock {
 
     public String toString() {
         String output = "";
-
         for (String key : this.items.keySet()) {
             Item item = this.items.get(key);
             output += item;
         }
-
         return output;
     }
 
+    // file read and write operations
     public void fromFile() {
         try(BufferedReader br = new BufferedReader(new FileReader("data/items.csv"))){
             String line;
@@ -50,10 +55,11 @@ public class Stock {
                 String[]parts = line.split(",");
                     if (parts.length == 3){
                         String itemName = parts[0].trim();
-                        double itemPrice = Double.parseDouble(parts[1].trim());
-                        int itemQuantity = Integer.parseInt(parts[2].trim());
+                        String itemCategory = parts[1].trim();
+                        double itemPrice = Double.parseDouble(parts[2].trim());
+                        int itemQuantity = Integer.parseInt(parts[3].trim());
 
-                        Item item = new Item (itemName, itemPrice, itemQuantity);
+                        Item item = new Item (itemName, itemCategory, itemPrice, itemQuantity);
                         addItem(itemName, item);
                     }
                 }
@@ -70,7 +76,7 @@ public class Stock {
         try(BufferedWriter bw = new BufferedWriter(new FileWriter("data/items.csv"))){
             for (String key : this.items.keySet()) {
                 Item item = this.items.get(key);
-                String line = String.format("%s,%.2f,%d", item.getName(),item.getPrice(), item.getQuantity() );
+                String line = String.format("%s,%s,%.2f,%d", item.getName(),item.getCategory(),item.getPrice(), item.getQuantity() );
                 bw.write(line);
                 bw.newLine();
                 }

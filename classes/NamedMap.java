@@ -1,3 +1,6 @@
+// Convenience class which makes HashMap keys K strings that are automatically normalized
+// Otherwise, treat as an unmodified HashMap<String, V>
+
 package classes;
 
 import java.util.HashMap;
@@ -18,8 +21,4 @@ public class NamedMap<V> extends HashMap<String , V> {
     public boolean containsKey(String key) {
         return super.containsKey(key.toUpperCase().replace(" ", ""));
     }
-
-    
-
-
 }

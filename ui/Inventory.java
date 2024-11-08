@@ -3,8 +3,9 @@ package ui;
 import classes.Item;
 import classes.NamedMap;
 import classes.Stock;
-import java.util.Scanner;
 
+import java.util.HashMap;
+import java.util.Scanner;
 
 
 public class Inventory {
@@ -14,10 +15,10 @@ public class Inventory {
         char choice;
 
         do {
-            System.out.println("[1] Add item"); // Will also add quantity if already present
+            System.out.println("[1] Add item");             // Will also add quantity if already present
             System.out.println("[2] Remove item"); 
             System.out.println("[3] Change price");
-            System.out.println("[4] Stock an item"); // increments quantity
+            System.out.println("[4] Stock an item");        // increments quantity
             System.out.println("[5] Show all inventory");
 
             System.out.println("[X] Exit");
@@ -53,7 +54,7 @@ public class Inventory {
     // TUI for adding an item
     public static void addItemUI(Stock stock) {
         NamedMap<Item> items = stock.getItems();
-        String itemName;
+        String itemName, itemCategory;
         double itemPrice;
         int itemQuantity;
         Item newItem;
@@ -70,19 +71,20 @@ public class Inventory {
             itemQuantity = sc.nextInt();
             sc.nextLine();
 
-            newItem = new Item(itemName, item.getPrice(), itemQuantity);
+            newItem = new Item(itemName, item.getCategory(), item.getPrice(), itemQuantity);
 
         } else { // determines that the item is new
             System.out.println("New product " + itemName + "!");
 
+            System.out.print("Enter item category >> ");
+            itemCategory = sc.nextLine();
             System.out.print("Enter item price >> ");
             itemPrice = sc.nextDouble();
             System.out.print("Enter item quantity >> ");
             itemQuantity = sc.nextInt();
             sc.nextLine();
 
-            newItem = new Item(itemName, itemPrice, itemQuantity);
-
+            newItem = new Item(itemName, itemCategory, itemPrice, itemQuantity);
         }
 
         stock.addItem(itemName, newItem);
@@ -91,7 +93,7 @@ public class Inventory {
 
     // TUI for removing an item
     public static void removeItemUI(Stock stock) {
-        NamedMap<Item> items = stock.getItems();
+        HashMap<String, Item> items = stock.getItems();
         String itemName;
 
         System.out.print("Enter item name >> ");
@@ -108,7 +110,7 @@ public class Inventory {
 
     // TUI for changing the price of an item
     public static void changePriceUI(Stock stock) {
-        NamedMap<Item> items = stock.getItems();
+        HashMap<String, Item> items = stock.getItems();
         String itemName;
         double itemPrice;
 
@@ -131,7 +133,7 @@ public class Inventory {
 
     // TUI for restocking an item (changing quantity)
     public static void restockItemUI(Stock stock) {
-        NamedMap<Item> items = stock.getItems();
+        HashMap<String, Item> items = stock.getItems();
         String itemName;
         int itemQuantity;
 

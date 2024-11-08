@@ -1,23 +1,18 @@
+// A "reciept" class for a single transaction
+
 package classes;
 
 public class Transaction implements Cloneable {
-    private NamedMap<Item> items;
+    private NamedMap<Item> items;       // treat like a "cart" during a transaction
     private String customer;
     private int date;
-    private double payment;
-    private double worth;
+    private double payment;             // Payment made by the customer
+    private double worth;               // Worth of the cart
 
+    // constructor: provide customer name and date
     public Transaction(String customer, int date) {
-        this.items = new NamedMap<>();
+        this.items = new NamedMap<>();  // empty cart
         this.customer = customer;
-        this.date = date;
-        this.payment = 0;
-        this.worth = 0;
-    }
-
-    public Transaction(Customer customer, int date) {
-        this.items = new NamedMap<>();
-        this.customer = customer.getName();
         this.date = date;
         this.payment = 0;
         this.worth = 0;
@@ -34,62 +29,28 @@ public class Transaction implements Cloneable {
         return transaction;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer.getName();
-    }
+    public NamedMap<Item> getItems() { return items; }
+    // adding/removing items from the cart
+    public void addItem(Item item) { this.items.put(item.getName(), item); } // potential bug: if the item changes price in the middle
+    public void removeItem(Item item) { this.items.remove(item.getName()); } //  of a purchase, then removeItem() will not remove item
 
-    public void setCustomer(String name) {
-        this.customer = name;
-    }
+    public String getCustomer() { return this.customer; }
+    public void setCustomer(String name) { this.customer = name.strip(); }
 
-    public void setDate(int date) {
-        this.date = date;
-    }
+    public int getDate() { return this.date; }
+    public void setDate(int date) { this.date = Math.max(0, date); }
 
-    public void setPayment(double payment) {
-        this.payment = payment;
-    }
+    public double getPayment() { return this.payment; }
+    public void setPayment(double payment) { this.payment = payment; }
 
-    public String getCustomer() {
-        return customer;
-    }
+    public double getWorth() { return this.worth; }
+    public void incWorth(double worth) { this.worth += worth; }
+    public void decWorth(double worth) { this.worth -= worth; }
 
-    public int getDate() {
-        return date;
-    }
+    public double getRevenue() { return this.getPayment() - this.getWorth(); }
 
-    public NamedMap<Item> getItems() {
-        return items;
-    }
-
-    public double getPayment() {
-        return payment;
-    }
-
-    public double getWorth() {
-        return worth;
-    }
-
-    public void incWorth(double worth) {
-        this.worth += worth;
-    }
-
-    public void decWorth(double worth) {
-        this.worth -= worth;
-    }
-
-    // potential bug: if the item changes price in the middle of a purchase, then removeItem() will not remove item
-    public void addItem(Item item) {
-        this.items.put(item.getName(), item);
-    }
-
-    public void removeItem(Item item) {
-        this.items.remove(item.getName());
-    }
-
-    // modify if necessary
     public String toString() {
-        String output = "Customer: " + customer + "\nDate: " + date + "\nItems:\n";
+        String output = "Transaction Summary\nCustomer: " + this.getCustomer() + "\tDate: " + date + "\n";
         for (Item i : items.values()) {
             output += i.toString() + "\n";
         }

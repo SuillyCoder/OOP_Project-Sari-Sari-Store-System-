@@ -1,3 +1,6 @@
+// Class which contains a financial report / summary for a single day
+// Used ArrayList for keeping track of multiple reports
+
 package classes;
 
 import java.util.ArrayList;
@@ -5,6 +8,9 @@ import java.util.ArrayList;
 public class Log implements Cloneable {
     private double totalPayment;
     private double totalWorth;
+
+    public double getTotalPayment() { return this.totalPayment; }
+    public double getTotalWorth() { return this.totalWorth; }
 
     public void addTransaction(Transaction transaction) {
         this.totalPayment += transaction.getPayment();
@@ -20,15 +26,7 @@ public class Log implements Cloneable {
         return clonedLog;
     }
 
-
-    public double getPayment() {
-        return this.totalPayment;
-    }
-
-    public double getWorth() {
-        return this.totalWorth;
-    }
-
+    // file read and write operations
     public static void fromFile(ArrayList<Log> logHistory) {
         // implement code here
     }
