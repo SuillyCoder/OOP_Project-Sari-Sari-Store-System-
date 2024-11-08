@@ -12,15 +12,15 @@ public class Main {
     public static Stock stock = new Stock();
     public static ArrayList<Log> logHistory = new ArrayList<>();
     public static int currentDay = 1, currentWeek = 1, currentMonth = 1;
-    public static Log log;
 
     public static void main(String[] args) {
         char choice;
-        Log dailyLog = new Log(currentDay);
+        //A new log at the start of the day 1
+        logHistory.add(new Log());
 
         do {
             System.out.println("Day " + currentDay + " (" + getWeekday(currentDay) + ") | Week " + currentWeek + " | Month " + currentMonth);
-            System.out.println("[1] New customer"); // (Customer.java)
+            //System.out.println("[1] New customer"); // (Customer.java)
             System.out.println("[2] New transaction"); // choice if new or existing customer (PointOfSale.java)
             System.out.println("[3] Store stocks"); // add, remove, change items (Inventory.java)
             System.out.println("[4] Store revenue"); // shows logs (Revenue.java)
@@ -35,41 +35,14 @@ public class Main {
 			System.out.println();
     
             switch (choice) {
-                case '1':
-                //Enters customer name
-                    System.out.print("Enter customer name: ");
-                    String customerName = sc.nextLine();
-                //Enters their outstanding balance
-                    System.out.print("Enter outstanding balance: "); 
-                    double outstanding = sc.nextDouble();
-                //Enters days since outstanding balance was 0
-                    System.out.print("Enter no. of days since last outstanding: ");
-                    int days = sc.nextInt();
-                    sc.nextLine(); 
-                //Add data within the customer constructor
-                    Customer customer = new Customer(customerName, outstanding, days);
-                    //This is where we'll check and compare for duplicates
-
-                    //Check if the customer does not exist firsthand
-                    if (!customers.containsKey(customer.getName())) {
-                        if (customer.getCredit() != 0){
-                        customers.put(customer.getName(), customer); // Add the customer to the HashMap
-                        }
-                    } else {
-                        // Handle the case where a customer with the same name already exists
-                        System.out.println("Customer with name '" + customer.getName() + "' already exists.");
-                    }
-                    System.out.println();
-                    break;
-
-                    //I'LL TEMPORARILY PUT THE CODE FOR THIS RIGHT OVER HERE: 
+        
                     
                 case '2':
                     Optional<Transaction> newTransaction = Optional.of(new Transaction("NO_NAME", currentDay));
                     PointOfSale.transactionUI(newTransaction, customers, stock, currentDay);
 
                     if (newTransaction.isPresent()) {
-                        dailyLog.addTransaction(newTransaction.get());
+                        logHistory.get(currentDay-1).addTransaction(newTransaction.get());
                     }
                     break;
                 case '3':
@@ -82,12 +55,12 @@ public class Main {
                     Profit.customerCatalogUI(customers);
                     break;
                 case '6':
+                    System.out.println("PROFIT LOGS:\n\n");
                     Profit.profitLog(logHistory);
                 break;
                 case '7': // proceed to next day
-                    Profit.addLog(log.clone(),logHistory);
+                    
                     nextDay();
-                    dailyLog = new Log(currentDay); // Create a new daily log for next day
                     break;
 
                 case 'x':
@@ -105,9 +78,11 @@ public class Main {
         currentDay++;
         currentWeek = ((currentDay - 1) / 7) + 1;
         currentMonth = ((currentDay - 1) / 30) + 1; // assuming 30 days in a month
+        logHistory.add(new Log());
     }
-
+    
     private static String getWeekday(int day) {
+
         day = day % 7;
         switch (day) {
             case 1:

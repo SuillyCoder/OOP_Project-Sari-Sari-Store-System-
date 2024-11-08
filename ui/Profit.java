@@ -2,7 +2,6 @@ package ui;
 
 import classes.Customer;
 import classes.Log;
-import classes.Transaction;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -22,21 +21,28 @@ public class Profit {
 
     public static void addLog(Log log, ArrayList<Log> logHistory) {
         logHistory.add(log.clone()); // Add the cloned log to the logHistory
+        if (logHistory.size() == 0) {
+            System.out.println("Log Addition Unsuccessful!\n");
+        }
+        else{
+            System.out.println("Log Added Successfully!\n");
+        }
     }
     public static void profitLog(ArrayList<Log> logs) {
+    int inc = 0;
     if (logs.size() == 0) {
         System.out.println("No logs found!\n");
         return;
     }
 
-    for (Log log : logs) {
-        System.out.println("Log for Date: " + log.getDate());
-        for (Transaction transaction : log.getTransactions()) {
-            System.out.println(transaction);
+    for (int i = logs.size() - 1; i >= 0; i--) {
+        Log log = logs.get(i);
+        int logNumber = logs.size() - inc;
+        System.out.print("Day: " + logNumber);
+        System.out.print("\tTotal Payment: " + log.getPayment());
+        System.out.print("\tTotal Worth: " + log.getWorth());
+        System.out.println("\n");
+        inc++;
         }
-        System.out.println("Total Payment: " + log.getPayment());
-        System.out.println("Total Worth: " + log.getWorth());
-        System.out.println();
     }
-}
 }

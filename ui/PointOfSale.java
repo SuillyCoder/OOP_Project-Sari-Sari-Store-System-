@@ -1,13 +1,12 @@
 package ui;
 
-import java.util.Scanner;
-import java.util.Optional;
-
 import classes.Customer;
 import classes.Item;
 import classes.NamedMap;
 import classes.Stock;
 import classes.Transaction;
+import java.util.Optional;
+import java.util.Scanner;
 
 public class PointOfSale {
     private static Scanner sc = new Scanner(System.in);
