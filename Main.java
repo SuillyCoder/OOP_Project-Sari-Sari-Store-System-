@@ -20,13 +20,12 @@ public class Main {
 
         do {
             System.out.println("Day " + currentDay + " (" + getWeekday(currentDay) + ") | Week " + currentWeek + " | Month " + currentMonth);
-            //System.out.println("[1] New customer"); // (Customer.java)
-            System.out.println("[2] New transaction"); // choice if new or existing customer (PointOfSale.java)
-            System.out.println("[3] Store stocks"); // add, remove, change items (Inventory.java)
-            System.out.println("[4] Store revenue"); // shows logs (Revenue.java)
-            System.out.println("[5] Customer catalog"); // shows customer catalog (Profit.java)
-            System.out.println("[6] View Profit Logs"); // shows customer catalog (Profit.java)
-            System.out.println("[7] End day"); // shows customer catalog (Profit.java)
+            System.out.println("[1] New transaction"); // choice if new or existing customer (PointOfSale.java)
+            System.out.println("[2] Store stocks"); // add, remove, change items (Inventory.java)
+            System.out.println("[3] Store revenue"); // shows logs (Revenue.java)
+            System.out.println("[4] Customer catalog"); // shows customer catalog (Profit.java)
+            System.out.println("[5] View Profit Logs"); // shows customer catalog (Profit.java)
+            System.out.println("[6] End day"); // shows customer catalog (Profit.java)
 
             System.out.println("[X] Exit");
             System.out.print(" >> ");
@@ -37,7 +36,7 @@ public class Main {
             switch (choice) {
         
                     
-                case '2':
+                case '1':
                     Optional<Transaction> newTransaction = Optional.of(new Transaction("NO_NAME", currentDay));
                     PointOfSale.transactionUI(newTransaction, customers, stock, currentDay);
 
@@ -45,20 +44,20 @@ public class Main {
                         logHistory.get(currentDay-1).addTransaction(newTransaction.get());
                     }
                     break;
-                case '3':
+                case '2':
                     Inventory.inventoryManagerUI(stock);
                     break;
-                case '4':
+                case '3':
                     // implement code here
                     break;
-                case '5':
+                case '4':
                     Profit.customerCatalogUI(customers);
                     break;
-                case '6':
+                case '5':
                     System.out.println("PROFIT LOGS:\n\n");
                     Profit.profitLog(logHistory);
                 break;
-                case '7': // proceed to next day
+                case '6': // proceed to next day
                     
                     nextDay();
                     break;
