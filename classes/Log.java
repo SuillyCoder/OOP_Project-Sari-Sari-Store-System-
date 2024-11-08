@@ -1,5 +1,7 @@
 package classes;
 
+import java.util.ArrayList;
+
 public class Log implements Cloneable {
     private double totalPayment;
     private double totalWorth;
@@ -27,11 +29,11 @@ public class Log implements Cloneable {
         return this.totalWorth;
     }
 
-    public void fromFile(){
+    public static void fromFile(ArrayList<Log> logHistory) {
         // implement code here
     }
 
-    public void toFile(){
+    public void toFile(ArrayList<Log> logHistory){
         // implement code here
     }
 }

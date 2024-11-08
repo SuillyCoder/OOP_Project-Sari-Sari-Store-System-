@@ -43,9 +43,8 @@ public class Stock {
         return output;
     }
 
-    public void fromFile(String filePath) {
-    
-        try(BufferedReader br = new BufferedReader(new FileReader("items.csv"))){
+    public void fromFile() {
+        try(BufferedReader br = new BufferedReader(new FileReader("data/items.csv"))){
             String line;
             while((line = br.readLine()) != null){
                 String[]parts = line.split(",");
@@ -58,26 +57,26 @@ public class Stock {
                         addItem(itemName, item);
                     }
                 }
-            }catch (IOException e){
+                System.out.println("Items loaded from file");
+
+            } catch (IOException e){
                 System.err.println("Error reading from file: " + e.getMessage());
-            }catch (NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 System.err.println("Error parsing number: " + e.getMessage());
         }
-     
     }
 
-    public void toFile(String filePath) {
-        try(BufferedWriter bw = new BufferedWriter(new FileWriter("items.csv"))){
+    public void toFile() {
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter("data/items.csv"))){
             for (String key : this.items.keySet()) {
                 Item item = this.items.get(key);
                 String line = String.format("%s,%.2f,%d", item.getName(),item.getPrice(), item.getQuantity() );
                 bw.write(line);
                 bw.newLine();
                 }
+                System.out.println("Items saved to file");
             } catch (IOException e) {
-                System.err.println("Error writing to file: " + e.getMessage());
-            
+                System.err.println("Error writing to file: " + e.getMessage());  
         }
     }
-
 }
