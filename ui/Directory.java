@@ -1,6 +1,8 @@
 package ui;
 
 import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 import classes.Customer;
@@ -12,8 +14,10 @@ public class Directory {
     public static void customerCatalogUI(HashMap<String, Customer> customers) {
         System.out.println("Customer Catalog: " + customers.size() + " customers");
 
-        for (String key : customers.keySet()) {
-            Customer customer = customers.get(key);
+        ArrayList<Customer> sortedCustomers = new ArrayList<>(customers.values());
+        Collections.sort(sortedCustomers);
+
+        for (Customer customer : sortedCustomers) {
             System.out.println(customer);
         }
 

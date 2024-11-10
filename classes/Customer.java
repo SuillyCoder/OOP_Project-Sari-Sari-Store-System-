@@ -10,7 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 
-public class Customer {
+public class Customer implements Comparable<Customer> {
     private String name;
     private double credit;  // negative means debt, positive means advance
     private int date;       // date of last payment
@@ -43,6 +43,10 @@ public class Customer {
     public static double getMaxDebt() { return Customer.maxDebt; }
     public static void setMaxDebt(double newDebt) { Customer.maxDebt = Math.min(newDebt, -1 * newDebt); }
 
+    // comparison based on credit (most debt to least debt)
+    public int compareTo(Customer other) {
+        return Double.compare(this.credit, other.credit);
+    }
 
     public String toString() {
         return "Name: " + name + "\t\tCredit: P" + String.format("%.2f", credit) + "\t\tLast Credit Date: " + date;
