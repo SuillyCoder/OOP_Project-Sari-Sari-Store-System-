@@ -46,7 +46,7 @@ public class Customer {
 
     // file read and write operations
     public static void fromFile(NamedMap<Customer> customers) {
-             try (BufferedReader br = new BufferedReader(new FileReader("customer.csv"))) {
+             try (BufferedReader br = new BufferedReader(new FileReader("data/customer.csv"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
@@ -70,7 +70,7 @@ public class Customer {
     }
 
     public static void toFile(NamedMap<Customer> customers) {
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter("customer.csv"))) {
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter("data/customer.csv"))) {
             for (Map.Entry<String, Customer> entry : customers.entrySet()) {
                 Customer customer = entry.getValue();
                 // Write only customers with credit != 0
