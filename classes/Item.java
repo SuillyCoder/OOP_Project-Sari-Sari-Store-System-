@@ -3,7 +3,7 @@
 
 package classes;
 
-public class Item implements Cloneable {
+public class Item implements Cloneable, Comparable<Item> {
     private String name;
     private String category;
     private double price;
@@ -22,6 +22,11 @@ public class Item implements Cloneable {
     @Override
     public Item clone() {
         return new Item(this.name, this.category, this.price, this.quantity);
+    }
+    
+    // comparison based on name (alphabetical order sorting)
+    public int compareTo(Item other) {
+        return this.name.compareTo(other.name);
     }
 
     // accessors and mutators
