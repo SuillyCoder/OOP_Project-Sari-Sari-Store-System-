@@ -29,8 +29,9 @@ public class Main {
         System.out.println("[1] New transaction");      // (PointOfSale.java) make a transaction, either new or existing customer 
         System.out.println("[2] Store inventory");      // (Inventory.java) add, remove, change price of items 
         System.out.println("[3] Show store profit");    // (Profit.java) shows financial logs
-        System.out.println("[4] Debtors list");         // (Profit.java) shows list of customers with debts
-        System.out.println("[5] End day");              // Proceed to next day
+        System.out.println("[4] Debtors list");         // (Directory.java) shows list of customers with debts
+        System.out.println("[5] Change maximum debt");  // (Directory.java) change maximum allowable debt
+        System.out.println("[6] End day");              // Proceed to next day
         System.out.println("[X] Exit");
     }
 
@@ -76,7 +77,11 @@ public class Main {
                     Directory.customerCatalogUI(customers);
                     break;
 
-                case '5': // proceed to next day
+                case '5': // Change maximum debt
+                    Directory.changeMaxDebtUI();
+                    break;
+
+                case '6': // proceed to next day
                     nextDay();
                     break;
 

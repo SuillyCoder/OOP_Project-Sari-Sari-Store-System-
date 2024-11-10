@@ -14,6 +14,7 @@ public class Customer {
     private String name;
     private double credit;  // negative means debt, positive means advance
     private int date;       // date of last payment
+    private static double maxDebt = -200;
 
     // constructor: supply name only
     public Customer(String name) {
@@ -38,6 +39,9 @@ public class Customer {
     
     public int getDate() { return date; } 
     public void setDate(int date) { this.date = Math.max(0, date); }
+
+    public static double getMaxDebt() { return Customer.maxDebt; }
+    public static void setMaxDebt(double newDebt) { Customer.maxDebt = Math.min(newDebt, -1 * newDebt); }
 
 
     public String toString() {

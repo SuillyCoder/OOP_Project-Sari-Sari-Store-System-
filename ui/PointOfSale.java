@@ -34,7 +34,7 @@ public class PointOfSale {
                     break;
 
                 case 'F':
-                    finalizeTransactionUI(cart.get(), customers, date);
+                    finalizeTransactionUI(cart, customers, date);
                     break;
 
                 case 'X':
@@ -112,7 +112,7 @@ public class PointOfSale {
     }
 
     // TUI for customer payment
-    private static void finalizeTransactionUI(Transaction cart, NamedMap<Customer> customers, int date) {
+    private static void finalizeTransactionUI(Optional<Transaction> cart, NamedMap<Customer> customers, int date) {
         String customerName;
         Customer customer;
         double payment, outstanding, revenue;
@@ -131,11 +131,13 @@ public class PointOfSale {
         }
 
         // payment calculations
-        System.out.println("Cost of cart: " + cart.getWorth());
-        outstanding = customer.getCredit() - cart.getWorth();
+        System.out.println("Cost of cart: " + cart.get().getWorth());
+        outstanding = customer.getCredit() - cart.get().getWorth();
         if (customer.getCredit() != 0) {
             System.out.println("Pay P" + (-1 * outstanding) + " to clear outstanding balance.");
         }
+        System.out.println("Maxmimum allowable debt for the transaction: P" + (-1 * ((-1 * outstanding) + Customer.getMaxDebt())));
+        System.out.println();
 
         System.out.print("Enter payment amount >> ");
         payment = sc.nextDouble();
@@ -144,20 +146,31 @@ public class PointOfSale {
 
         revenue = outstanding + payment;
 
+        // if payment is not enough such that the customer exceeds the maximum allowable debt
+        if (Customer.getMaxDebt() > revenue) {
+            System.out.println("Current transaction will exceed maximum allowable debt!");
+            System.out.println("Transaction cancelled!\n");
+            cart = Optional.empty();
+            return;
+        }
+        // otherwise the transaction is approved
+
+        // if the customer has paid off the debt
         if (revenue == 0) {
             System.out.println("No more outstanding balance!");
             System.out.println("Removing record of " + customerName);
             customers.remove(customerName);
 
+        // if the customer has some remaining balance (either debt or advance)
         } else {
-            System.out.println("Remaining outstanding balance (as credit): P" + revenue);
+            System.out.println("Remaining outstanding balance: P" + revenue);
             customer.setCredit(revenue);
             customer.setDate(date);
 
         }
 
-        cart.setCustomer(customerName);
-        cart.setPayment(payment);
+        cart.get().setCustomer(customerName);
+        cart.get().setPayment(payment);
         
         System.out.println("\nTransaction finalized!\n");
     }
