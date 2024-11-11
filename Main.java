@@ -90,6 +90,8 @@ public class Main {
                 default : System.out.println("Invalid choice");
             }
         } while (choice != 'X');
+        stock.toFile();
+        Customer.toFile(customers);
     }
 
     public static void nextDay(){
