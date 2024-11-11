@@ -179,8 +179,8 @@ public static void inventoryListUI(Stock stock) {
     // Extract and sort by category
     for (String itemName : stock.getItems().keySet()) {
         Item item = stock.getItems().get(itemName);
-        String categoryDetails = String.format("%s, %s, %.2f, %d", itemName, item.getCategory(), item.getPrice(), item.getQuantity(), item);
-        sortedItems.add(categoryDetails);
+        //Add in the actual object itself
+        sortedItems.add(item.toString());
     }
 
     Collections.sort(sortedItems); // Sort by category using a custom comparator (optional)
