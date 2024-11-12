@@ -1,8 +1,9 @@
 import classes.*;
+import tui.*;
+
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Scanner;
-import ui.*;
 
 
 public class Main {

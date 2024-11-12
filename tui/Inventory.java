@@ -1,4 +1,4 @@
-package ui;
+package tui;
 
 import classes.Item;
 import classes.NamedMap;
