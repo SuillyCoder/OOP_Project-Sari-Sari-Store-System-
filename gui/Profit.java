@@ -36,48 +36,70 @@ public class Profit {
     //These are the functions to print out the profits based on different time periods
     public static void daySummary(ArrayList<Log> logs){
         int inc = 0;
+        double totalRevenue = 0;
         for (int i = logs.size() - 1; i >= 0; i--) {
             Log log = logs.get(i);
             int logNumber = logs.size() - inc;
-            System.out.print("Day: " + logNumber);
+            System.out.print("Day " + logNumber + ":");
             System.out.print("\tTotal Payment: " + log.getTotalPayment());
-            System.out.println("\tTotal Worth: " + log.getTotalWorth());
+            System.out.print("\tTotal Worth: " + log.getTotalWorth());
+            System.out.println("\tRevenue: " + log.getRevenue());
+            totalRevenue += log.getRevenue();
             inc++;
         }
+        System.out.println("\t\t\t\t\t\t\tTotal Revenue: " + totalRevenue);
     }
 
     public static void weekSummary(ArrayList<Log> logs){
-        int inc = 0;
-        for (int i = logs.size() - 1; i >= 0; i-=7) {
-            int weekPay = 0, weekWorth = 0;
-            Log log = logs.get(i);
-            int logNumber = logs.size() - (6+inc);
-            System.out.print("Week: " + logNumber);
-            for (int j = 0; j < 7; j++) {
-                weekPay += log.getTotalPayment();
-                weekWorth += log.getTotalWorth();
+        ArrayList<Log> weekLogs = new ArrayList<>();
+        double totalRevenue = 0;
+
+        // adds information per week
+        for (int i = 0; i < logs.size(); i++) {
+            if (i % 7 == 0) {
+                weekLogs.add(new Log());
             }
-            System.out.print("\tTotal Payment: " + weekPay);
-            System.out.println("\tTotal Worth: " + weekWorth);
-            inc++;
-            }
+
+            weekLogs.get(weekLogs.size() - 1).incTotalPayment(logs.get(i).getTotalPayment());
+            weekLogs.get(weekLogs.size() - 1).incTotalWorth(logs.get(i).getTotalWorth());
+        }
+
+        // displays information per week in reverse order
+        for (int i = weekLogs.size() - 1; i >= 0; i--) {
+            Log log = weekLogs.get(i);
+            System.out.print("Week " + (i + 1) + ":");
+            System.out.print("\tTotal Payment: " + log.getTotalPayment());
+            System.out.print("\tTotal Worth: " + log.getTotalWorth());
+            System.out.println("\tRevenue: " + log.getRevenue());
+            totalRevenue += log.getRevenue();
+        }
+        System.out.println("\t\t\t\t\t\t\tTotal Revenue: " + totalRevenue);
     }
 
     public static void monthSummary(ArrayList<Log> logs){
-        int inc = 0;
-        for (int i = logs.size() - 1; i >= 0; i-=30) {
-            int monthPay = 0, monthWorth = 0;
-            Log log = logs.get(i);
-            int logNumber = logs.size() - (29+inc);
-            System.out.print("Month: " + logNumber);
-            for (int j = 0; j < 30; j++) {
-                monthPay += log.getTotalPayment();
-                monthWorth += log.getTotalWorth();
+        ArrayList<Log> monthLogs = new ArrayList<>();
+        double totalRevenue = 0;
+
+        // adds information per month
+        for (int i = 0; i < logs.size(); i++) {
+            if (i % 30 == 0) {
+                monthLogs.add(new Log());
             }
-            System.out.print("\tTotal Payment: " + monthPay);
-            System.out.println("\tTotal Worth: " + monthWorth);
-            inc++;
-            }
+
+            monthLogs.get(monthLogs.size() - 1).incTotalPayment(logs.get(i).getTotalPayment());
+            monthLogs.get(monthLogs.size() - 1).incTotalWorth(logs.get(i).getTotalWorth());
+        }
+
+        // displays information per month in reverse order
+        for (int i = monthLogs.size() - 1; i >= 0; i--) {
+            Log log = monthLogs.get(i);
+            System.out.print("Month " + (i + 1) + ":");
+            System.out.print("\tTotal Payment: " + log.getTotalPayment());
+            System.out.print("\tTotal Worth: " + log.getTotalWorth());
+            System.out.println("\tRevenue: " + log.getRevenue());
+            totalRevenue += log.getRevenue();
+        }
+        System.out.println("\t\t\t\t\t\t\t\tTotal Revenue: " + totalRevenue);
     }
 
 }
