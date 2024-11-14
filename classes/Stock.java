@@ -35,9 +35,14 @@ public class Stock {
     // removing an item in the stock
     public void removeItem(String name) {
         String normalizedName = name.trim().toLowerCase();
-
+        System.out.println("Trying to remove item: " + normalizedName); // Added for debugging
+    
         if (this.items.containsKey(normalizedName)) {
             this.items.remove(normalizedName);
+            System.out.println("Item removed: " + normalizedName);
+        }
+        else{
+            System.out.println("Item not found: " + normalizedName);
         }
     }
 

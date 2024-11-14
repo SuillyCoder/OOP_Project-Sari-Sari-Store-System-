@@ -102,16 +102,9 @@ public class Inventory {
     public static void removeItemUI(Stock stock) {
         HashMap<String, Item> items = stock.getItems();
         String itemName;
-
         System.out.print("Enter item name >> ");
-        itemName = sc.nextLine().trim().toLowerCase(); // Normalize input
-
-        if (items.containsKey(itemName)) {
-            stock.removeItem(itemName);
-            System.out.println("Item removed: " + itemName);
-        } else {
-            System.out.println("Item not found: " + itemName);
-        }
+        itemName = sc.nextLine().trim();
+        stock.removeItem(itemName);
         System.out.println();
     }
 
