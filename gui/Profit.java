@@ -6,16 +6,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Profit {
-    public static void addLog(Log log, ArrayList<Log> logHistory) {
-        logHistory.add(log.clone()); // Add the cloned log to the logHistory
-        if (logHistory.size() == 0) {
-            System.out.println("Log Addition Unsuccessful!\n");
-        }
-        else{
-            System.out.println("Log Added Successfully!\n");
-        }
-    }
-
     public static void profitLog(ArrayList<Log> logs) {
         if (logs.size() == 0) {
             System.out.println("No logs found!\n");
@@ -51,8 +41,7 @@ public class Profit {
             int logNumber = logs.size() - inc;
             System.out.print("Day: " + logNumber);
             System.out.print("\tTotal Payment: " + log.getTotalPayment());
-            System.out.print("\tTotal Worth: " + log.getTotalWorth());
-            System.out.println("\n");
+            System.out.println("\tTotal Worth: " + log.getTotalWorth());
             inc++;
         }
     }
@@ -69,8 +58,7 @@ public class Profit {
                 weekWorth += log.getTotalWorth();
             }
             System.out.print("\tTotal Payment: " + weekPay);
-            System.out.print("\tTotal Worth: " + weekWorth);
-            System.out.println("\n");
+            System.out.println("\tTotal Worth: " + weekWorth);
             inc++;
             }
     }
@@ -87,8 +75,7 @@ public class Profit {
                 monthWorth += log.getTotalWorth();
             }
             System.out.print("\tTotal Payment: " + monthPay);
-            System.out.print("\tTotal Worth: " + monthWorth);
-            System.out.println("\n");
+            System.out.println("\tTotal Worth: " + monthWorth);
             inc++;
             }
     }

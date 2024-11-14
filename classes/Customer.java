@@ -69,7 +69,7 @@ public class Customer implements Comparable<Customer> {
                     }
                 }
             }
-            System.out.println("Items loaded from file");
+            System.out.println("Customers loaded from file!");
         } catch (IOException e) {
             System.err.println("Error reading from file: " + e.getMessage());
         } catch (NumberFormatException e) {

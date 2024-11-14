@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 
 public class Inventory {
@@ -87,7 +89,7 @@ public class Inventory {
             itemQuantity = sc.nextInt();
             sc.nextLine();
 
-            newItem = new Item(itemName, itemCategory, itemPrice, itemQuantity);
+            newItem = new Item(itemName.toLowerCase(), itemCategory.toLowerCase(), itemPrice, itemQuantity);
         }
 
         stock.addItem(itemName, newItem);
@@ -95,19 +97,14 @@ public class Inventory {
     }
 
     // TUI for removing an item
+
+    //This part needs fixing. Currently working on this.
     public static void removeItemUI(Stock stock) {
         HashMap<String, Item> items = stock.getItems();
         String itemName;
-
         System.out.print("Enter item name >> ");
-        itemName = sc.nextLine();
-
-        if (items.containsKey(itemName)) {
-            stock.removeItem(itemName);
-            System.out.println("Item removed: " + itemName);
-        } else {
-            System.out.println("Item not found: " + itemName);
-        }
+        itemName = sc.nextLine().trim();
+        stock.removeItem(itemName);
         System.out.println();
     }
 
@@ -169,25 +166,26 @@ public class Inventory {
     }
     
 public static void inventoryListUI(Stock stock) {
-    //NOTE: Will rework presentation of text later.
-    
-    System.out.println("Inventory: " + stock.getItems().size() + " SKUs\n");
+    System.out.println("Inventory: " + stock.getItems().size() + " SKUs");
 
-    // Temporary list to hold formatted item details with category
-    List<String> sortedItems = new ArrayList<>();
+    // Group items by category
+    Map<String, List<Item>> itemsByCategory = stock.getItems().values().stream()
+            .collect(Collectors.groupingBy(Item::getCategory));
 
-    // Extract and sort by category
-    for (String itemName : stock.getItems().keySet()) {
-        Item item = stock.getItems().get(itemName);
-        //Add in the actual object itself
-        sortedItems.add(item.toString());
-    }
+    // Sort categories alphabetically
+    List<String> sortedCategories = new ArrayList<>(itemsByCategory.keySet());
+    Collections.sort(sortedCategories);
 
-    Collections.sort(sortedItems); // Sort by category using a custom comparator (optional)
+    // Print items by category, each sorted alphabetically within the category
+    for (String category : sortedCategories) {
+        System.out.println(category.toUpperCase());
 
-    // Print the sorted list
-    for (String itemDetails : sortedItems) {
-        System.out.println(itemDetails);
+        List<Item> itemsInCategory = itemsByCategory.get(category);
+        itemsInCategory.sort((item1, item2) -> item1.getName().compareToIgnoreCase(item2.getName()));
+
+        for (Item item : itemsInCategory) {
+            System.out.print("  " + item.toString()); // Adjust to control item format if needed
+        }
     }
     System.out.println();
 }

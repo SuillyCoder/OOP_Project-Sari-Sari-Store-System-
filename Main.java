@@ -1,18 +1,17 @@
 import classes.*;
+import gui.*;
+
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Scanner;
 import javax.swing.*;
-import tui.*;
 
 public class Main {
     public static Scanner sc = new Scanner(System.in);
     public static NamedMap<Customer> customers = new NamedMap<>();
     public static Stock stock = new Stock();
     public static ArrayList<Log> logHistory = new ArrayList<>();
-    public static int currentDay = 1, currentWeek = 1, currentMonth = 1;
-    
 
     private static void generalMenu() {
         System.out.println("=".repeat(20));
@@ -27,7 +26,7 @@ public class Main {
         Inventory.lowInventoryNotifier(stock);
         System.out.println();
 
-        System.out.println("Day " + currentDay + " (" + getWeekday(currentDay) + ") | Week " + currentWeek + " | Month " + currentMonth);
+        printDay();
         System.out.println("[1] New transaction");      // (PointOfSale.java) make a transaction, either new or existing customer 
         System.out.println("[2] Store inventory");      // (Inventory.java) add, remove, change price of items 
         System.out.println("[3] Show store profit");    // (Profit.java) shows financial logs
@@ -58,16 +57,19 @@ public class Main {
         frame.setVisible(true);
 
         char choice;
+        int currentDay;
         
         // Load data from files
         Customer.fromFile(customers);   // (Customer.java)
         stock.fromFile();               // (Stock.java)
-        // Log.fromFile(logHistory);    // (Log.java)
+        Log.fromFile(logHistory);       // (Log.java)
         
-        logHistory.add(new Log()); // A new log at the start of the day 1
+        if (logHistory.isEmpty()) {     // If no logs are loaded, add a new log for the first day
+            logHistory.add(new Log());
+        }
 
         do {
-            
+            currentDay = logHistory.size();
             generalMenu();
 
             System.out.print(" >> ");
@@ -111,16 +113,30 @@ public class Main {
                 default : System.out.println("Invalid choice");
             }
         } while (choice != 'X');
+
+        // Remove the last log if no transactions were made
+        if (logHistory.get(currentDay-1).getTotalWorth() == 0 && logHistory.get(currentDay-1).getTotalPayment() == 0) {
+            logHistory.remove(currentDay-1);    // Remove the last log if no transactions were made
+        }
+
+        // Save data to files
         stock.toFile();
         Customer.toFile(customers);
+        Log.toFile(logHistory);
     }
 
     public static void nextDay(){
-        currentDay++;
-        currentWeek = ((currentDay - 1) / 7) + 1;
-        currentMonth = ((currentDay - 1) / 30) + 1; // assuming 30 days in a month
         logHistory.add(new Log());                  // A new log entry at the start of the day
     }
+
+    public static void printDay(){
+        int currentDay = logHistory.size();
+        int currentWeek = ((currentDay - 1) / 7) + 1;
+        int currentMonth = ((currentDay - 1) / 30) + 1; // assuming 30 days in a month
+        System.out.println("Day " + currentDay + " (" + getWeekday(currentDay) + ") | Week " + currentWeek + " | Month " + currentMonth);
+    }
+
+
     
     private static String getWeekday(int day) {
         day = day % 7;
@@ -135,6 +151,4 @@ public class Main {
             default:    return "Invalid day";
         }
     }
-
-
 }

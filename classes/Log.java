@@ -10,7 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Log implements Cloneable {
+public class Log {
     private double totalPayment;
     private double totalWorth;
 
@@ -35,22 +35,13 @@ public class Log implements Cloneable {
         this.totalWorth += transaction.getWorth();
     }
 
-    //Creating a clone of the log, to be remove
-    @Override
-    public Log clone() {
-        Log clonedLog = new Log();
-        clonedLog.totalPayment = this.totalPayment;
-        clonedLog.totalWorth = this.totalWorth;
-        return clonedLog;
-    }
-
     // file read and write operations
     public static void fromFile(ArrayList<Log> logHistory) {
         try(BufferedReader br = new BufferedReader(new FileReader("data/log.csv"))){
             String line;
             while((line = br.readLine()) != null){
                 String[] parts = line.split(",");
-                if(parts.length == 3){
+                if(parts.length == 2){
                     double totalPayment = Double.parseDouble(parts[0].strip());
                     double totalWorth = Double.parseDouble(parts[1].strip());
                     
@@ -58,20 +49,20 @@ public class Log implements Cloneable {
                     logHistory.add(log);
                 }
             }  
-            System.out.println("Items loaded from file (data/log.csv)");     
+            System.out.println("Logs loaded from file!");     
          }catch(IOException e){
              e.printStackTrace(); // Handle exceptions
          }
     }
 
-    public void toFile(ArrayList<Log> logHistory){
+    public static void toFile(ArrayList<Log> logHistory){
         try(BufferedWriter bw = new BufferedWriter(new FileWriter("data/log.csv"))){
             for(Log log : logHistory){
                 bw.write(log.getTotalPayment() + ","+ log.getTotalWorth());
                 bw.newLine();
             }
         
-            System.out.println("Items saved to file (data/log.csv)");
+            System.out.println("Logs saved to file!");
         }catch (IOException e){
             e.printStackTrace();
         }
