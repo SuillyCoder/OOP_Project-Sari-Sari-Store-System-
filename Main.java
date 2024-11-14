@@ -1,10 +1,10 @@
 import classes.*;
-import tui.*;
-
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Scanner;
-
+import javax.swing.*;
+import tui.*;
 
 public class Main {
     public static Scanner sc = new Scanner(System.in);
@@ -12,6 +12,7 @@ public class Main {
     public static Stock stock = new Stock();
     public static ArrayList<Log> logHistory = new ArrayList<>();
     public static int currentDay = 1, currentWeek = 1, currentMonth = 1;
+    
 
     private static void generalMenu() {
         System.out.println("=".repeat(20));
@@ -37,6 +38,25 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        //GUI COMPONENTS 
+        JFrame frame = new JFrame("INVENTORY SYSTEM: ONLINE");
+        JPanel buttonPanels = new JPanel();
+        JPanel logPanel = new JPanel();
+
+        //Panel Styling
+        buttonPanels.setBounds(0,50,100,500);
+        buttonPanels.setBackground(Color.yellow);
+        logPanel.setSize(310,500);
+
+        //Button Styling
+
+        //Adding eveyrthing to the frame
+        frame.add(buttonPanels);
+        frame.setLayout(null);
+        frame.setSize(600, 600);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+
         char choice;
         
         // Load data from files
