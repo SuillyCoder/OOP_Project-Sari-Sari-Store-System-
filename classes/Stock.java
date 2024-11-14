@@ -21,6 +21,7 @@ public class Stock {
 
     // adding a single item in the stock
     public void addItem(String name, Item item) {
+        name = name.trim().toLowerCase();
         // if the item does not exist, then add the item to the stock
         if (!this.items.containsKey(name)) { 
             this.items.put(name, item);
@@ -33,8 +34,10 @@ public class Stock {
 
     // removing an item in the stock
     public void removeItem(String name) {
-        if (this.items.containsKey(name)) {
-            this.items.remove(name);
+        String normalizedName = name.trim().toLowerCase();
+
+        if (this.items.containsKey(normalizedName)) {
+            this.items.remove(normalizedName);
         }
     }
 
