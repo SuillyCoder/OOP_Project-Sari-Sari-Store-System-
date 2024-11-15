@@ -1,10 +1,8 @@
 package gui;
 
-import classes.NamedMap;
 import classes.group.Stock;
 import classes.indiv.Item;
 
-import java.util.HashMap;
 import java.util.Scanner;
 
 
@@ -54,7 +52,6 @@ public class Inventory {
 
     // TUI for adding an item
     public static void addItemUI(Stock stock) {
-        NamedMap<Item> items = stock.getItems();
         String itemName, itemCategory;
         double itemPrice;
         int itemQuantity;
@@ -63,8 +60,8 @@ public class Inventory {
         System.out.print("Enter item name >> ");
         itemName = sc.nextLine();
 
-        if (items.containsKey(itemName)) { // if the item already exists
-            Item item = items.get(itemName);
+        if (stock.containsKey(itemName)) { // if the item already exists
+            Item item = stock.get(itemName);
             System.out.println("Already existing product: " + itemName + "!");
 
             // change price
@@ -96,7 +93,6 @@ public class Inventory {
 
     //This part needs fixing. Currently working on this.
     public static void removeItemUI(Stock stock) {
-        HashMap<String, Item> items = stock.getItems();
         String itemName;
         System.out.print("Enter item name >> ");
         itemName = sc.nextLine().trim();
@@ -106,15 +102,14 @@ public class Inventory {
 
     // TUI for changing the price of an item
     public static void changePriceUI(Stock stock) {
-        HashMap<String, Item> items = stock.getItems();
         String itemName;
         double itemPrice;
 
         System.out.print("Enter item name >> ");
         itemName = sc.nextLine();
 
-        if (items.containsKey(itemName)) {
-            Item item = items.get(itemName);
+        if (stock.containsKey(itemName)) {
+            Item item = stock.get(itemName);
             System.out.print("Enter new price (Currently " + item.getPrice() + ") >> ");
             itemPrice = sc.nextDouble();
             sc.nextLine();
@@ -129,15 +124,14 @@ public class Inventory {
 
     // TUI for restocking an item (changing quantity)
     public static void restockItemUI(Stock stock) {
-        HashMap<String, Item> items = stock.getItems();
         String itemName;
         int itemQuantity;
 
         System.out.print("Enter item name >> ");
         itemName = sc.nextLine();
 
-        if (items.containsKey(itemName)) {
-            Item item = items.get(itemName);
+        if (stock.containsKey(itemName)) {
+            Item item = stock.get(itemName);
             System.out.print("Enter amount to stock (Currently: " + item.getQuantity() + ") >> ");
             itemQuantity = sc.nextInt();
             sc.nextLine();
@@ -153,8 +147,8 @@ public class Inventory {
     // displays all items
  
     public static void lowInventoryNotifier(Stock stock){
-        for (String key : stock.getItems().keySet()) {
-            Item item = stock.getItems().get(key);
+        for (String key : stock.keySet()) {
+            Item item = stock.get(key);
             if (item.getQuantity() < LOW_INVENTORY_THRESHOLD) {
                 System.out.println("Low inventory!\t" + item.getName() + " (" + item.getQuantity() + ")");
             }

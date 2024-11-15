@@ -49,7 +49,6 @@ public class PointOfSale {
 
     // TUI for adding a singular item to the cart
     private static void addToCartUI(Transaction transaction, Stock stock) {
-        NamedMap<Item> items = stock.getItems();
         NamedMap<Item> cart = transaction.getItems();
         String itemName;
         Item stockedItem;
@@ -58,11 +57,11 @@ public class PointOfSale {
         System.out.print("Enter item name >> ");
         itemName = sc.nextLine();
 
-        if (!items.containsKey(itemName)) {
+        if (!stock.containsKey(itemName)) {
             System.out.println(itemName + " not found in stock!\n");
         
         } else {
-            stockedItem = items.get(itemName);                              // original item
+            stockedItem = stock.get(itemName);                              // original item
             newItem = stockedItem.clone();                                  // item to be added to cart
             boolean isAlreadyInCart = cart.containsKey(itemName);           // if item was in cart already
             

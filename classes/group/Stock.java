@@ -16,27 +16,17 @@ import java.util.stream.Collectors;
 import classes.NamedMap;
 import classes.indiv.Item;
 
-public class Stock {
-    private NamedMap<Item> items;
-
-    // standard constructor
-    public Stock() {
-        this.items = new NamedMap<>();
-    }
-
-    // accessors and mutators
-    public NamedMap<Item> getItems() { return this.items; }
-
+public class Stock extends NamedMap<Item> {
     // adding a single item in the stock
     public void addItem(String name, Item item) {
         name = name.trim().toLowerCase();
         // if the item does not exist, then add the item to the stock
-        if (!this.items.containsKey(name)) { 
-            this.items.put(name, item);
+        if (!this.containsKey(name)) { 
+            this.put(name, item);
 
         // if the item already exists, then increment only the amount specified
         } else { 
-            this.items.get(name).incQuantity(item.getQuantity());
+            this.get(name).incQuantity(item.getQuantity());
         }
     }
 
@@ -45,8 +35,8 @@ public class Stock {
         String normalizedName = name.trim().toLowerCase();
         System.out.println("Trying to remove item: " + normalizedName); // Added for debugging
     
-        if (this.items.containsKey(normalizedName)) {
-            this.items.remove(normalizedName);
+        if (this.containsKey(normalizedName)) {
+            this.remove(normalizedName);
             System.out.println("Item removed: " + normalizedName);
         }
         else{
@@ -55,10 +45,10 @@ public class Stock {
     }
 
     public String toString() {
-        String inventory = "Inventory: " + this.getItems().size() + " SKUs\n";
+        String inventory = "Inventory: " + this.size() + " SKUs\n";
     
         // Group items by category
-        Map<String, List<Item>> itemsByCategory = this.getItems().values().stream()
+        Map<String, List<Item>> itemsByCategory = this.values().stream()
                 .collect(Collectors.groupingBy(Item::getCategory));
     
         // Sort categories alphabetically
@@ -108,8 +98,8 @@ public class Stock {
 
     public void toFile() {
         try(BufferedWriter bw = new BufferedWriter(new FileWriter("data/items.csv"))){
-            for (String key : this.items.keySet()) {
-                Item item = this.items.get(key);
+            for (String key : this.keySet()) {
+                Item item = this.get(key);
                 String line = String.format("%s,%s,%.2f,%d", item.getName(),item.getCategory(),item.getPrice(), item.getQuantity() );
                 bw.write(line);
                 bw.newLine();
