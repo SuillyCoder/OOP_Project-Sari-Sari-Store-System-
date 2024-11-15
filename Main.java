@@ -1,6 +1,5 @@
 import classes.*;
 import gui.*;
-
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -51,9 +50,8 @@ public class Main {
 
         //Adding eveyrthing to the frame
         frame.add(buttonPanels);
-        frame.setLayout(null);
         frame.setSize(600, 600);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         frame.setVisible(true);
 
         char choice;
