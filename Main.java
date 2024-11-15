@@ -36,6 +36,9 @@ public class Main {
     public static void main(String[] args) {
         JMainMenu mainMenu = new JMainMenu();
         mainMenu.display();
+
+        JInventory inventory = new JInventory();
+        inventory.setVisible(true);
         
         char choice;
         int currentDay;
