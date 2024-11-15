@@ -14,7 +14,7 @@ public class Main {
         System.out.println("=".repeat(20));
 
         Directory.customerCatalogUI(customers);
-        Inventory.inventoryListUI(stock);
+        System.out.println(stock);
         Profit.daySummary(logHistory);
 
         System.out.println("=".repeat(20));
@@ -36,9 +36,6 @@ public class Main {
     public static void main(String[] args) {
         JMainMenu mainMenu = new JMainMenu();
         mainMenu.display();
-
-        JInventory inventory = new JInventory();
-        inventory.setVisible(true);
         
         char choice;
         int currentDay;
@@ -51,6 +48,10 @@ public class Main {
         if (logHistory.isEmpty()) {     // If no logs are loaded, add a new log for the first day
             logHistory.add(new Log());
         }
+
+        JInventory inventory = new JInventory();
+        inventory.updateText(stock);
+        inventory.setVisible(true);
 
         do {
             currentDay = logHistory.size();

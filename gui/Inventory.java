@@ -50,7 +50,7 @@ public class Inventory {
                     break;
 
                 case '5': // Show all inventory
-                    inventoryListUI(stock);
+                    System.out.println(stock);
                     break;
             }
         } while (choice != 'X');
@@ -164,29 +164,4 @@ public class Inventory {
             }
         }
     }
-    
-public static void inventoryListUI(Stock stock) {
-    System.out.println("Inventory: " + stock.getItems().size() + " SKUs");
-
-    // Group items by category
-    Map<String, List<Item>> itemsByCategory = stock.getItems().values().stream()
-            .collect(Collectors.groupingBy(Item::getCategory));
-
-    // Sort categories alphabetically
-    List<String> sortedCategories = new ArrayList<>(itemsByCategory.keySet());
-    Collections.sort(sortedCategories);
-
-    // Print items by category, each sorted alphabetically within the category
-    for (String category : sortedCategories) {
-        System.out.println(category.toUpperCase());
-
-        List<Item> itemsInCategory = itemsByCategory.get(category);
-        itemsInCategory.sort((item1, item2) -> item1.getName().compareToIgnoreCase(item2.getName()));
-
-        for (Item item : itemsInCategory) {
-            System.out.print("  " + item.toString()); // Adjust to control item format if needed
-        }
-    }
-    System.out.println();
-}
 }

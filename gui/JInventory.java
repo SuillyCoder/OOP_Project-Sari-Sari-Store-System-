@@ -11,7 +11,7 @@ public class JInventory extends JCustomFrame {
     private JButton restock = new JButton("Restock Item");
     private JButton exit = new JButton("Exit");
 
-    private JTextArea itemOut = new JTextArea(20, 30);
+    private JTextArea itemOut = new JTextArea();
 
     public JInventory(){
         super("Inventory Manager");
@@ -32,7 +32,13 @@ public class JInventory extends JCustomFrame {
         con.add(scrollPane, BorderLayout.CENTER);
 
         // Adding the data to the inventory window
-        itemOut.setText("Hello!\n".repeat(50));
+        itemOut.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 13));
+        itemOut.setColumns(50);
+        itemOut.setText("Empty Default\n".repeat(50));
         inventoryWindow.add(itemOut);
+    }
+
+    public void updateText(Stock stock){
+        itemOut.setText(stock.toString());
     }
 }

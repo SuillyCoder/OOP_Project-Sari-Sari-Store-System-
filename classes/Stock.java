@@ -7,6 +7,11 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Stock {
     private NamedMap<Item> items;
@@ -47,12 +52,30 @@ public class Stock {
     }
 
     public String toString() {
-        String output = "";
-        for (String key : this.items.keySet()) {
-            Item item = this.items.get(key);
-            output += item;
+        String inventory = "Inventory: " + this.getItems().size() + " SKUs\n";
+    
+        // Group items by category
+        Map<String, List<Item>> itemsByCategory = this.getItems().values().stream()
+                .collect(Collectors.groupingBy(Item::getCategory));
+    
+        // Sort categories alphabetically
+        List<String> sortedCategories = new ArrayList<>(itemsByCategory.keySet());
+        Collections.sort(sortedCategories);
+    
+        // Print items by category, each sorted alphabetically within the category
+        for (String category : sortedCategories) {
+            inventory += category.toUpperCase() + "\n";
+    
+            List<Item> itemsInCategory = itemsByCategory.get(category);
+            itemsInCategory.sort((item1, item2) -> item1.getName().compareToIgnoreCase(item2.getName()));
+    
+            for (Item item : itemsInCategory) {
+                inventory += "  " + item.toString() + "\n"; // Adjust to control item format if needed
+            }
         }
-        return output;
+        inventory += "\n";
+
+        return inventory;
     }
 
     // file read and write operations
