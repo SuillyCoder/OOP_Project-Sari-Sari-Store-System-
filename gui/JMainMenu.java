@@ -1,10 +1,13 @@
 package gui;
-
+import classes.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-public class JMainMenu extends JFrame implements ActionListener{
-  public void display(){
+public class JMainMenu extends JCustomFrame implements ActionListener{
+  
+  public JMainMenu(){
+    //Super Name
+    super("Main Menu");
     //Panel Declaration
     JPanel mainPanel = new JPanel();
     JPanel panelOne = new JPanel();
@@ -27,12 +30,6 @@ public class JMainMenu extends JFrame implements ActionListener{
     JLabel text1 = new JLabel("Log 1");
     JLabel text2 = new JLabel("Log 2");
     JLabel text3 = new JLabel("Log 3");
-
-
-    title.setAlignmentX(CENTER_ALIGNMENT);
-    text1.setAlignmentX(CENTER_ALIGNMENT);
-    text2.setAlignmentX(CENTER_ALIGNMENT);
-    text3.setAlignmentX(CENTER_ALIGNMENT);
 
     //Adding to Panels
     panelOne.setLayout(new GridLayout(4, 1));
@@ -61,11 +58,6 @@ public class JMainMenu extends JFrame implements ActionListener{
 
     //Adding to Frame
     add(mainPanel);
-
-    setTitle("Main Menu");
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setSize(600, 600);
-    setVisible(true);
   }
 
   //Code for setting up action listeners
