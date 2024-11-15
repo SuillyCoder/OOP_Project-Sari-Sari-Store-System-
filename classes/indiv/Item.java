@@ -1,7 +1,7 @@
 // Information for a single item class
 // Stock.java keeps track of all items stocked
 
-package classes;
+package classes.indiv;
 
 public class Item implements Cloneable, Comparable<Item> {
     private String name;

@@ -1,6 +1,8 @@
 package gui;
 
 import classes.*;
+import classes.group.Stock;
+
 import java.awt.*;
 import javax.swing.*;
 

@@ -1,7 +1,7 @@
 // Class which contains a financial report / summary for a single day
 // Used ArrayList for keeping track of multiple reports
 
-package classes;
+package classes.indiv;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

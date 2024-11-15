@@ -1,7 +1,7 @@
 // Customer information class
 // the system will only keep track of customers with credit != 0
 
-package classes;
+package classes.indiv;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -9,6 +9,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
+
+import classes.NamedMap;
 
 public class Customer implements Comparable<Customer> {
     private String name;

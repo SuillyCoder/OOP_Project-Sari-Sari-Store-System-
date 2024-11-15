@@ -1,9 +1,9 @@
 package gui;
 
-import classes.Log;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import classes.indiv.Log;
 
 public class Profit {
     public static void profitLog(ArrayList<Log> logs) {

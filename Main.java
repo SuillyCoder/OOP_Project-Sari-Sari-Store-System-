@@ -1,4 +1,8 @@
 import classes.*;
+import classes.group.Stock;
+import classes.indiv.Customer;
+import classes.indiv.Log;
+import classes.indiv.Transaction;
 import gui.*;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -35,7 +39,7 @@ public class Main {
 
     public static void main(String[] args) {
         JMainMenu mainMenu = new JMainMenu();
-        mainMenu.display();
+        // mainMenu.display();
         
         char choice;
         int currentDay;

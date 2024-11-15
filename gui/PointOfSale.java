@@ -1,10 +1,11 @@
 package gui;
 
-import classes.Customer;
-import classes.Item;
 import classes.NamedMap;
-import classes.Stock;
-import classes.Transaction;
+import classes.group.Stock;
+import classes.indiv.Customer;
+import classes.indiv.Item;
+import classes.indiv.Transaction;
+
 import java.util.Optional;
 import java.util.Scanner;
 

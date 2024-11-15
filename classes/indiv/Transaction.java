@@ -1,6 +1,8 @@
 // A "reciept" class for a single transaction
 
-package classes;
+package classes.indiv;
+
+import classes.NamedMap;
 
 public class Transaction implements Cloneable {
     private NamedMap<Item> items;       // treat like a "cart" during a transaction

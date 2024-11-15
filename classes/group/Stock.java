@@ -1,6 +1,6 @@
 // Class which stores all items
 
-package classes;
+package classes.group;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -12,6 +12,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import classes.NamedMap;
+import classes.indiv.Item;
 
 public class Stock {
     private NamedMap<Item> items;

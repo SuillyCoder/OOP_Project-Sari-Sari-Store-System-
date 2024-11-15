@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-import classes.Customer;
+import classes.indiv.Customer;
 
 public class Directory {
     private static Scanner sc = new Scanner(System.in);

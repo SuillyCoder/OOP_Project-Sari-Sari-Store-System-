@@ -1,8 +1,9 @@
 package gui;
 
-import classes.Item;
 import classes.NamedMap;
-import classes.Stock;
+import classes.group.Stock;
+import classes.indiv.Item;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
