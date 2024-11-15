@@ -1,14 +1,7 @@
 // Class which contains a financial report / summary for a single day
-// Used ArrayList for keeping track of multiple reports
+// History.java keeps track of all logs
 
 package classes.indiv;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class Log {
     private double totalPayment;
@@ -39,36 +32,5 @@ public class Log {
         this.totalWorth += transaction.getWorth();
     }
 
-    // file read and write operations
-    public static void fromFile(ArrayList<Log> logHistory) {
-        try(BufferedReader br = new BufferedReader(new FileReader("data/log.csv"))){
-            String line;
-            while((line = br.readLine()) != null){
-                String[] parts = line.split(",");
-                if(parts.length == 2){
-                    double totalPayment = Double.parseDouble(parts[0].strip());
-                    double totalWorth = Double.parseDouble(parts[1].strip());
-                    
-                    Log log = new Log(totalPayment, totalWorth);
-                    logHistory.add(log);
-                }
-            }  
-            System.out.println("Logs loaded from file!");     
-         }catch(IOException e){
-             e.printStackTrace(); // Handle exceptions
-         }
-    }
 
-    public static void toFile(ArrayList<Log> logHistory){
-        try(BufferedWriter bw = new BufferedWriter(new FileWriter("data/log.csv"))){
-            for(Log log : logHistory){
-                bw.write(log.getTotalPayment() + ","+ log.getTotalWorth());
-                bw.newLine();
-            }
-        
-            System.out.println("Logs saved to file!");
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-    }
 }

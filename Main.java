@@ -1,10 +1,10 @@
 import classes.*;
+import classes.group.History;
 import classes.group.Stock;
 import classes.indiv.Customer;
 import classes.indiv.Log;
 import classes.indiv.Transaction;
 import gui.*;
-import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -12,14 +12,14 @@ public class Main {
     public static Scanner sc = new Scanner(System.in);
     public static NamedMap<Customer> customers = new NamedMap<>();
     public static Stock stock = new Stock();
-    public static ArrayList<Log> logHistory = new ArrayList<>();
+    public static History history = new History();
 
     private static void generalMenu() {
         System.out.println("=".repeat(20));
 
         Directory.customerCatalogUI(customers);
         System.out.println(stock);
-        Profit.daySummary(logHistory);
+        System.out.println(history);
 
         System.out.println("=".repeat(20));
         System.out.println();
@@ -47,10 +47,10 @@ public class Main {
         // Load data from files
         Customer.fromFile(customers);   // (Customer.java)
         stock.fromFile();               // (Stock.java)
-        Log.fromFile(logHistory);       // (Log.java)
+        history.fromFile();             // (Log.java)
         
-        if (logHistory.isEmpty()) {     // If no logs are loaded, add a new log for the first day
-            logHistory.add(new Log());
+        if (history.isEmpty()) {     // If no logs are loaded, add a new log for the first day
+            history.add(new Log());
         }
 
         JInventory inventory = new JInventory();
@@ -58,7 +58,7 @@ public class Main {
         inventory.setVisible(true);
 
         do {
-            currentDay = logHistory.size();
+            currentDay = history.size();
             generalMenu();
 
             System.out.print(" >> ");
@@ -71,7 +71,7 @@ public class Main {
                     PointOfSale.transactionUI(newTransaction, customers, stock, currentDay);
 
                     if (newTransaction.isPresent()) {
-                        logHistory.get(currentDay-1).addTransaction(newTransaction.get());
+                        history.get(currentDay-1).addTransaction(newTransaction.get());
                     }
 
                     break;
@@ -82,7 +82,7 @@ public class Main {
 
                 case '3':  // Profit checking 
                     System.out.println("PROFIT LOGS:\n\n");
-                    Profit.profitLog(logHistory);
+                    Profit.profitLog(history);
                     break;
 
                 case '4': // Debtors list
@@ -104,22 +104,22 @@ public class Main {
         } while (choice != 'X');
 
         // Remove the last log if no transactions were made
-        if (logHistory.get(currentDay-1).getTotalWorth() == 0 && logHistory.get(currentDay-1).getTotalPayment() == 0) {
-            logHistory.remove(currentDay-1);    // Remove the last log if no transactions were made
+        if (history.get(currentDay-1).getTotalWorth() == 0 && history.get(currentDay-1).getTotalPayment() == 0) {
+            history.remove(currentDay-1);    // Remove the last log if no transactions were made
         }
 
         // Save data to files
         stock.toFile();
         Customer.toFile(customers);
-        Log.toFile(logHistory);
+        history.toFile();
     }
 
     public static void nextDay(){
-        logHistory.add(new Log());                  // A new log entry at the start of the day
+        history.add(new Log());                  // A new log entry at the start of the day
     }
 
     public static void printDay(){
-        int currentDay = logHistory.size();
+        int currentDay = history.size();
         int currentWeek = ((currentDay - 1) / 7) + 1;
         int currentMonth = ((currentDay - 1) / 30) + 1; // assuming 30 days in a month
         System.out.println("Day " + currentDay + " (" + getWeekday(currentDay) + ") | Week " + currentWeek + " | Month " + currentMonth);
