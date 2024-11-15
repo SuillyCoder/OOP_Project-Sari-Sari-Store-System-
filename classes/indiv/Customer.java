@@ -1,16 +1,8 @@
 // Customer information class
 // the system will only keep track of customers with credit != 0
+// Contacts.java keeps track of all customers 
 
 package classes.indiv;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Map;
-
-import classes.NamedMap;
 
 public class Customer implements Comparable<Customer> {
     private String name;
@@ -26,7 +18,7 @@ public class Customer implements Comparable<Customer> {
     }
 
     // constructor used in file reading
-    private Customer(String name, double credit, int date) {
+    public Customer(String name, double credit, int date) {
         this.setName(name);
         this.setCredit(credit);
         this.setDate(date);
@@ -53,46 +45,4 @@ public class Customer implements Comparable<Customer> {
     public String toString() {
         return "Name: " + name + "\t\tCredit: P" + String.format("%.2f", credit) + "\t\tLast Credit Date: " + date;
     }
-
-    // file read and write operations
-    public static void fromFile(NamedMap<Customer> customers) {
-             try (BufferedReader br = new BufferedReader(new FileReader("data/customer.csv"))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] parts = line.split(",");
-                if (parts.length == 3) {
-                    String name = parts[0].strip();
-                    double credit = Double.parseDouble(parts[1].strip());
-                    int date = Integer.parseInt(parts[2].strip());
-                    
-                    // Only add customers with credit != 0
-                    if (credit != 0) {
-                        customers.put(name, new Customer(name, credit, date));
-                    }
-                }
-            }
-            System.out.println("Customers loaded from file!");
-        } catch (IOException e) {
-            System.err.println("Error reading from file: " + e.getMessage());
-        } catch (NumberFormatException e) {
-            System.err.println("Error parsing number: " + e.getMessage());
-        }
-    }
-
-    public static void toFile(NamedMap<Customer> customers) {
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter("data/customer.csv"))) {
-            for (Map.Entry<String, Customer> entry : customers.entrySet()) {
-                Customer customer = entry.getValue();
-                // Write only customers with credit != 0
-                if (customer.getCredit() != 0) {
-                    bw.write(customer.getName() + "," + customer.getCredit() + "," + customer.getDate());
-                    bw.newLine();
-                }
-            }
-            System.out.println("Items loaded from file");
-        } catch (IOException e) {
-            System.err.println("Error writing to file: " + e.getMessage());
-        }
-    }
-    }
-
+}

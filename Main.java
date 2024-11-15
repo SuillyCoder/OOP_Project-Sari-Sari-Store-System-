@@ -1,23 +1,22 @@
-import classes.*;
-import classes.group.History;
-import classes.group.Stock;
-import classes.indiv.Customer;
-import classes.indiv.Log;
-import classes.indiv.Transaction;
+
+import classes.indiv.*;
+import classes.group.*;
 import gui.*;
+
+
 import java.util.Optional;
 import java.util.Scanner;
 
 public class Main {
     public static Scanner sc = new Scanner(System.in);
-    public static NamedMap<Customer> customers = new NamedMap<>();
+    public static Contacts contacts = new Contacts();
     public static Stock stock = new Stock();
     public static History history = new History();
 
     private static void generalMenu() {
         System.out.println("=".repeat(20));
 
-        Directory.customerCatalogUI(customers);
+        System.out.println(contacts);
         System.out.println(stock);
         System.out.println(history);
 
@@ -44,8 +43,7 @@ public class Main {
         char choice;
         int currentDay;
         
-        // Load data from files
-        Customer.fromFile(customers);   // (Customer.java)
+        contacts.fromFile();   // (Customer.java)
         stock.fromFile();               // (Stock.java)
         history.fromFile();             // (Log.java)
         
@@ -68,7 +66,7 @@ public class Main {
             switch (choice) {
                 case '1': // Make a new transaction
                     Optional<Transaction> newTransaction = Optional.of(new Transaction("NO_NAME", currentDay));
-                    PointOfSale.transactionUI(newTransaction, customers, stock, currentDay);
+                    PointOfSale.transactionUI(newTransaction, contacts, stock, currentDay);
 
                     if (newTransaction.isPresent()) {
                         history.get(currentDay-1).addTransaction(newTransaction.get());
@@ -86,7 +84,7 @@ public class Main {
                     break;
 
                 case '4': // Debtors list
-                    Directory.customerCatalogUI(customers);
+                    System.out.println(contacts);
                     break;
 
                 case '5': // Change maximum debt
@@ -110,7 +108,7 @@ public class Main {
 
         // Save data to files
         stock.toFile();
-        Customer.toFile(customers);
+        contacts.toFile();
         history.toFile();
     }
 

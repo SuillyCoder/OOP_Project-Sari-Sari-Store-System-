@@ -1,6 +1,7 @@
 package gui;
 
 import classes.NamedMap;
+import classes.group.Contacts;
 import classes.group.Stock;
 import classes.indiv.Customer;
 import classes.indiv.Item;
@@ -12,7 +13,7 @@ import java.util.Scanner;
 public class PointOfSale {
     private static Scanner sc = new Scanner(System.in);
 
-    public static void transactionUI(Optional<Transaction> cart, NamedMap<Customer> customers, Stock stock, int date) {
+    public static void transactionUI(Optional<Transaction> cart, Contacts contacts, Stock stock, int date) {
         char choice;
 
         do {
@@ -35,7 +36,7 @@ public class PointOfSale {
                     break;
 
                 case 'F':
-                    finalizeTransactionUI(cart, customers, date);
+                    finalizeTransactionUI(cart, contacts, date);
                     break;
 
                 case 'X':
@@ -113,7 +114,7 @@ public class PointOfSale {
     }
 
     // TUI for customer payment
-    private static void finalizeTransactionUI(Optional<Transaction> cart, NamedMap<Customer> customers, int date) {
+    private static void finalizeTransactionUI(Optional<Transaction> cart, Contacts contacts, int date) {
         String customerName;
         Customer customer;
         double payment, outstanding, revenue;
@@ -122,12 +123,12 @@ public class PointOfSale {
         customerName = sc.nextLine();
 
         // customer from customerName, either existing or new
-        if (customers.containsKey(customerName)) {
-            customer = customers.get(customerName);
+        if (contacts.containsKey(customerName)) {
+            customer = contacts.get(customerName);
             System.out.println(customerName + " has P" + customer.getCredit() + " of outstanding balance!\n"); 
         } else {
             customer = new Customer(customerName);
-            customers.put(customerName, customer);
+            contacts.put(customerName, customer);
             System.out.println("Created new customer record! " + customerName + "!\n");
         }
 
@@ -160,7 +161,7 @@ public class PointOfSale {
         if (revenue == 0) {
             System.out.println("No more outstanding balance!");
             System.out.println("Removing record of " + customerName);
-            customers.remove(customerName);
+            contacts.remove(customerName);
 
         // if the customer has some remaining balance (either debt or advance)
         } else {
