@@ -35,7 +35,7 @@ public class Main {
 
     public static void main(String[] args) {
         JMainMenu mainMenu = new JMainMenu();
-        mainMenu.display();
+        mainMenu.setVisible(true);
 
         JInventory inventory = new JInventory();
         inventory.setVisible(true);
