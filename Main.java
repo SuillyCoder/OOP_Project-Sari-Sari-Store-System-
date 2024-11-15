@@ -1,10 +1,8 @@
 import classes.*;
 import gui.*;
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Scanner;
-import javax.swing.*;
 
 public class Main {
     public static Scanner sc = new Scanner(System.in);
@@ -36,24 +34,9 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        //GUI COMPONENTS 
-        JFrame frame = new JFrame("INVENTORY SYSTEM: ONLINE");
-        JPanel buttonPanels = new JPanel();
-        JPanel logPanel = new JPanel();
-
-        //Panel Styling
-        buttonPanels.setBounds(0,50,100,500);
-        buttonPanels.setBackground(Color.yellow);
-        logPanel.setSize(310,500);
-
-        //Button Styling
-
-        //Adding eveyrthing to the frame
-        frame.add(buttonPanels);
-        frame.setSize(600, 600);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-
+        JMainMenu mainMenu = new JMainMenu();
+        mainMenu.display();
+        
         char choice;
         int currentDay;
         
