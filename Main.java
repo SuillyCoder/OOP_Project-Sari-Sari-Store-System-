@@ -51,7 +51,7 @@ public class Main {
         //Adding eveyrthing to the frame
         frame.add(buttonPanels);
         frame.setSize(600, 600);
-        frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
         char choice;
