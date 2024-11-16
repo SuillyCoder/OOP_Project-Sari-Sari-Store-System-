@@ -12,6 +12,7 @@ public class JCustomFrame extends JFrame {
         super("Sari-sari Store Management System");
         setSize(WIDTH, HEIGHT);
         setResizable(false);
+        setAlwaysOnTop(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         // Set layout of frame as BorderLayout
