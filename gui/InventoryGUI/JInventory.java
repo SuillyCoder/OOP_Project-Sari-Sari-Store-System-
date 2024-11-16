@@ -16,9 +16,10 @@ import classes.group.Stock;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.event.*;
 
 
-public class JInventory extends JCustomFrame implements ActionListener {
+public class JInventory extends JCustomFrame implements ActionListener, DocumentListener  {
     private JButton addItem = new JButton("Add Item");
     private JButton remItem = new JButton("Remove Item");
     private JButton changePrice = new JButton("Change Price");
@@ -26,10 +27,12 @@ public class JInventory extends JCustomFrame implements ActionListener {
     private JButton exit = new JButton("Return to Main Menu");
 
     private JTextArea inventoryList = new JTextArea();
+    private JTextField searchItem = new JTextField(20);
 
     private Stock stock;
 
     // Constructor for the inventory management window
+    // Creates the look and feel for the window
     // Must call setStock after instantiation
     public JInventory(){
         super("Inventory Manager");
@@ -50,19 +53,29 @@ public class JInventory extends JCustomFrame implements ActionListener {
         // Inventory list at the center of the window
         JPanel inventoryWindow = new JPanel(new BorderLayout());
 
+            // Header for the inventory list
             JLabel header = new JLabel("Current Inventory");
                 header.setFont(new Font("Arial", Font.BOLD, 20));
 
+            // Scrollable inventory list
             JPanel itemWindow = new JPanel();
-                JScrollPane scroll = new JScrollPane(itemWindow, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+            JScrollPane scroll = new JScrollPane(itemWindow, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
                 inventoryList.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 13));
                 inventoryList.setColumns(50);
                 inventoryList.setText("Empty Default\n".repeat(50));
 
                 itemWindow.add(inventoryList);
 
+            // Field for searching items at the bottom of the frame
+            JPanel searchField = new JPanel(new FlowLayout(FlowLayout.LEFT));
+                JLabel searchLabel = new JLabel("Search Item:");
+
+                searchField.add(searchLabel);
+                searchField.add(searchItem);
+
             inventoryWindow.add(header, BorderLayout.NORTH);
             inventoryWindow.add(scroll, BorderLayout.CENTER);
+            inventoryWindow.add(searchField, BorderLayout.SOUTH);
             
         con.add(inventoryWindow, BorderLayout.CENTER);
 
@@ -72,6 +85,7 @@ public class JInventory extends JCustomFrame implements ActionListener {
         changePrice.addActionListener(this);
         restock.addActionListener(this);
         exit.addActionListener(this);
+        searchItem.getDocument().addDocumentListener(this);
     }
 
     @Override
@@ -99,17 +113,41 @@ public class JInventory extends JCustomFrame implements ActionListener {
             submenu.updateText();
             submenu.setVisible(true);
             this.setVisible(false);
-
+        
         } else if (e.getSource() == exit) {
             this.dispose();
         }
+    }
+
+    @Override
+    public void insertUpdate(DocumentEvent e) {
+        handleTextChange();
+    }
+
+    @Override
+    public void changedUpdate(DocumentEvent e) {
+        handleTextChange();
+    }
+
+    @Override
+    public void removeUpdate(DocumentEvent e) {
+        handleTextChange();
+    }
+
+    private void handleTextChange(){
+        String search = searchItem.getText();
+        inventoryList.setText(stock.search(search));
     }
 
     public void updateText(){
         inventoryList.setText(stock.toString());
     }
 
+
+
     public void setStock(Stock stock){
         this.stock = stock;
     }
+
+
 }
