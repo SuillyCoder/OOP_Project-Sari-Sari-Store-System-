@@ -48,7 +48,7 @@ public class Main {
         //INTERFACE INITIALISATIONS
 
         JMainMenu mainMenu = new JMainMenu();
-        mainMenu.updateText(contacts,stock);
+        mainMenu.updateText(printDay(),contacts,stock);
         mainMenu.setVisible(true);
 
         JInventory inventory = new JInventory();
@@ -116,11 +116,14 @@ public class Main {
         history.add(new Log());                  // A new log entry at the start of the day
     }
 
-    public static void printDay(){
+    public static String printDay(){
         int currentDay = history.size();
         int currentWeek = ((currentDay - 1) / 7) + 1;
         int currentMonth = ((currentDay - 1) / 30) + 1; // assuming 30 days in a month
-        System.out.println("Day " + currentDay + " (" + getWeekday(currentDay) + ") | Week " + currentWeek + " | Month " + currentMonth);
+        String dayLabel = ("Day " + currentDay + " (" + getWeekday(currentDay) + ") | Week " + currentWeek + " | Month " + currentMonth);
+        System.out.println(dayLabel);
+
+        return dayLabel;
     }
 
 
