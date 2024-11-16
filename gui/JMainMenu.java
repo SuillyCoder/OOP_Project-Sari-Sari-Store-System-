@@ -1,13 +1,11 @@
 package gui;
 import classes.*;
+import classes.group.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 public class JMainMenu extends JCustomFrame implements ActionListener{
-  
-  public JMainMenu(){
-    //Super Name
-    super("Main Menu");
+
     //Panel Declaration
     JPanel mainPanel = new JPanel();
     JPanel panelOne = new JPanel();
@@ -24,48 +22,70 @@ public class JMainMenu extends JCustomFrame implements ActionListener{
     JButton day = new JButton("Daily Logs");
     JButton week = new JButton("Weekly Logs");
     JButton month = new JButton("Monthly Logs");
-    
+  
     //Label Declaration (these pieces of text are temporary)
-    JLabel title = new JLabel("Log Entries");
-    JLabel text1 = new JLabel("Log 1");
-    JLabel text2 = new JLabel("Log 2");
-    JLabel text3 = new JLabel("Log 3");
+    JTextArea inventoryList = new JTextArea();
+    JTextArea customerList = new JTextArea();
 
-    //Adding to Panels
-    panelOne.setLayout(new GridLayout(4, 1));
-    panelOne.add(transaction);
-    panelOne.add(inventory);
-    panelOne.add(customerDirectory);
-    panelOne.add(nextDay);
+  
+    public JMainMenu(){
+      //Super Name
+      super("Main Menu");
+      //Adding to Panels
+      panelOne.setLayout(new GridLayout(4, 1));
+      panelOne.add(transaction);
+      panelOne.add(inventory);
+      panelOne.add(customerDirectory);
+      panelOne.add(nextDay);
 
-    panelTwo.setLayout(new BorderLayout());
-    panelTwo.add(panelTwoLogs, BorderLayout.CENTER);
-    panelTwo.add(panelTwoButtons, BorderLayout.NORTH);
-    panelTwoButtons.add(day);
-    panelTwoButtons.add(week);
-    panelTwoButtons.add(month);
+      panelTwo.setLayout(new BorderLayout());
+      panelTwo.add(panelTwoLogs, BorderLayout.CENTER);
+      panelTwo.add(panelTwoButtons, BorderLayout.NORTH);
+      panelTwoButtons.add(day);
+      panelTwoButtons.add(week);
+      panelTwoButtons.add(month);
 
-    panelTwoLogs.setBackground(Color.cyan);
-    panelTwoLogs.setLayout(new GridLayout(3, 1));
-    panelTwoLogs.add(title);
-    panelTwoLogs.add(text1);
-    panelTwoLogs.add(text2);
-    panelTwoLogs.add(text3);
+      //Adding Inventory and Customer Data to the Logs
+      JScrollPane scrollPane = new JScrollPane(customerList, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+      JPanel logPanel = new JPanel(new GridLayout(2, 1));
 
-    mainPanel.setLayout(new BorderLayout());
-    mainPanel.add(panelOne, BorderLayout.WEST);
-    mainPanel.add(panelTwo, BorderLayout.CENTER);
+         // Adding the data to the customer window
+         customerList.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 13));
+         customerList.setColumns(50);
+         customerList.setText("Empty Default\n".repeat(50));
+         panelTwoLogs.add(customerList);
 
-    //Adding to Frame
-    add(mainPanel);
-  }
+        // Adding the data to the inventory window
+        inventoryList.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 13));
+        inventoryList.setColumns(50);
+        inventoryList.setText("Empty Default\n".repeat(50));
+        panelTwoLogs.add(inventoryList);
 
-  //Code for setting up action listeners
+      logPanel.add(customerList);
+      logPanel.add(inventoryList);
+  
+      scrollPane.setViewportView(logPanel);
+      panelTwoLogs.add(scrollPane, BorderLayout.CENTER);
 
-@Override
-public void actionPerformed(ActionEvent e) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
-}
+      mainPanel.setLayout(new BorderLayout());
+      mainPanel.add(panelOne, BorderLayout.WEST);
+      mainPanel.add(panelTwo, BorderLayout.CENTER);
+
+      //Adding to Frame
+      add(mainPanel);
+    }
+
+    //Updating Data 
+    public void updateText(Contacts contacts, Stock stock){
+      customerList.setText(contacts.toString());
+      inventoryList.setText(stock.toString());
+    }
+
+    //Code for setting up action listeners
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+    }
 }
 

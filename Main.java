@@ -1,9 +1,7 @@
 
-import classes.indiv.*;
 import classes.group.*;
+import classes.indiv.*;
 import gui.*;
-
-
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -36,10 +34,7 @@ public class Main {
         System.out.println("[X] Exit");
     }
 
-    public static void main(String[] args) {
-        JMainMenu mainMenu = new JMainMenu();
-        // mainMenu.display();
-        
+    public static void main(String[] args) {   
         char choice;
         int currentDay;
         
@@ -50,6 +45,11 @@ public class Main {
         if (history.isEmpty()) {     // If no logs are loaded, add a new log for the first day
             history.add(new Log());
         }
+        //INTERFACE INITIALISATIONS
+
+        JMainMenu mainMenu = new JMainMenu();
+        mainMenu.updateText(contacts,stock);
+        mainMenu.setVisible(true);
 
         JInventory inventory = new JInventory();
         inventory.updateText(stock);

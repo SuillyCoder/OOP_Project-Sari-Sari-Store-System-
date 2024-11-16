@@ -4,7 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 
 public class JCustomFrame extends JFrame {
-    private static final int WIDTH = 600;
+    private static final int WIDTH = 800;
     private static final int HEIGHT = 600;
 
     public JCustomFrame(String menuTitle) {
