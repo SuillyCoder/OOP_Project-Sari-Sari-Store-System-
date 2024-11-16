@@ -1,4 +1,5 @@
 
+import classes.*;
 import classes.group.*;
 import classes.indiv.*;
 import gui.*;
@@ -51,9 +52,14 @@ public class Main {
         mainMenu.updateText(printDay(),contacts,stock);
         mainMenu.setVisible(true);
 
-        JInventory inventory = new JInventory();
-        inventory.updateText(stock);
-        inventory.setVisible(true);
+        // JInventory inventory = new JInventory();
+        // inventory.updateText(stock);
+        // inventory.setVisible(true);
+
+        JItemSelector test = new JItemSelector("Add Item");
+        test.updateText(stock);
+        test.setVisible(true);
+
 
         do {
             currentDay = history.size();

@@ -10,6 +10,7 @@ import javax.swing.*;
 public class JInventory extends JCustomFrame {
     private JButton addItem = new JButton("Add Item");
     private JButton remItem = new JButton("Remove Item");
+    private JButton changePrice = new JButton("Change Price");
     private JButton restock = new JButton("Restock Item");
     private JButton exit = new JButton("Exit");
 
@@ -21,10 +22,11 @@ public class JInventory extends JCustomFrame {
 
         // Add buttons to the left of the window
         JPanel buttons = new JPanel();
-        buttons.setLayout(new GridLayout(4, 1));
+        buttons.setLayout(new GridLayout(5, 1));
         con.add(buttons, BorderLayout.WEST);
         buttons.add(addItem);
         buttons.add(remItem);
+        buttons.add(changePrice);
         buttons.add(restock);
         buttons.add(exit);
 
