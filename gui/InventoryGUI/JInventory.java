@@ -34,8 +34,9 @@ public class JInventory extends JCustomFrame implements ActionListener, Document
     // Constructor for the inventory management window
     // Creates the look and feel for the window
     // Must call setStock after instantiation
-    public JInventory(){
+    public JInventory(Stock stock){
         super("Inventory Manager");
+        this.stock = stock;
         Container con = getContentPane();
 
         // Add buttons to the left of the window
@@ -119,21 +120,10 @@ public class JInventory extends JCustomFrame implements ActionListener, Document
         }
     }
 
-    @Override
-    public void insertUpdate(DocumentEvent e) {
-        handleTextChange();
-    }
-
-    @Override
-    public void changedUpdate(DocumentEvent e) {
-        handleTextChange();
-    }
-
-    @Override
-    public void removeUpdate(DocumentEvent e) {
-        handleTextChange();
-    }
-
+    // Update the inventory list at all times (any time the search field is changed in some way)
+    @Override public void insertUpdate(DocumentEvent e) { handleTextChange(); }
+    @Override public void changedUpdate(DocumentEvent e) { handleTextChange(); }
+    @Override public void removeUpdate(DocumentEvent e) { handleTextChange(); }
     private void handleTextChange(){
         String search = searchItem.getText();
         inventoryList.setText(stock.search(search));
@@ -143,11 +133,7 @@ public class JInventory extends JCustomFrame implements ActionListener, Document
         inventoryList.setText(stock.toString());
     }
 
-
-
     public void setStock(Stock stock){
         this.stock = stock;
     }
-
-
 }

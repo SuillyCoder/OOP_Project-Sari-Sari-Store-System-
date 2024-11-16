@@ -9,10 +9,10 @@ import javax.swing.*;
 
 public class JItemSelector extends JCustomFrame implements ActionListener {
 
-    private JTextField itemName = new JTextField(20);
-    private JTextField itemCategory = new JTextField(20);
-    private JTextField itemQuantity = new JTextField(20);
-    private JTextField itemPrice = new JTextField(20);
+    protected JTextField itemName = new JTextField(20);
+    protected JTextField itemCategory = new JTextField(20);
+    protected JTextField itemQuantity = new JTextField(20);
+    protected JTextField itemPrice = new JTextField(20);
 
     protected JButton confirmButton = new JButton("Confirm");
     protected JButton cancelButton = new JButton("Return");
@@ -102,17 +102,34 @@ public class JItemSelector extends JCustomFrame implements ActionListener {
         con.add(itemSelection, BorderLayout.SOUTH);
 
         // Add action listeners
+        itemName.addActionListener(this);
+        itemCategory.addActionListener(this);
+        itemQuantity.addActionListener(this);
+        itemPrice.addActionListener(this);
         confirmButton.addActionListener(this);
         cancelButton.addActionListener(this);
     }
 
+    // should be overridden
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == confirmButton) {
-            JOptionPane.showMessageDialog(this, "Confirm button pressed");
+        if (e.getSource() == itemName) {
+            JOptionPane.showMessageDialog(this, "Item name field confirmed");
 
+        } else if (e.getSource() == itemCategory) {
+            JOptionPane.showMessageDialog(this, "Item category field confirmed");
+
+        } else if (e.getSource() == itemQuantity) {
+            JOptionPane.showMessageDialog(this, "Item quantity field confirmed");
+            
+        } else if (e.getSource() == itemPrice) {
+            JOptionPane.showMessageDialog(this, "Item price field confirmed");
+        
+        } else if (e.getSource() == confirmButton) {
+            JOptionPane.showMessageDialog(this, "Confirm button pressed");
 
         } else if (e.getSource() == cancelButton) {
             JOptionPane.showMessageDialog(this, "Cancel button pressed");
+
         }
     }
 

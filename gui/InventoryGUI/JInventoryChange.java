@@ -17,7 +17,13 @@ public class JInventoryChange extends JItemSelector {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == confirmButton) {
+        if (e.getSource() == itemName) {
+            confirm();
+            
+        } else if (e.getSource() == itemPrice) {
+            confirm();
+
+        } else if (e.getSource() == confirmButton) {
             confirm();
 
         } else if (e.getSource() == cancelButton) {

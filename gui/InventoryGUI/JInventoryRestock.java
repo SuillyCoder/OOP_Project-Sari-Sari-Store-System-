@@ -17,7 +17,13 @@ public class JInventoryRestock extends JItemSelector {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == confirmButton) {
+        if (e.getSource() == itemName) {
+            confirm();
+
+        } else if (e.getSource() == itemQuantity) {
+            confirm();
+
+        } else if (e.getSource() == confirmButton) {
             confirm();
 
         } else if (e.getSource() == cancelButton) {

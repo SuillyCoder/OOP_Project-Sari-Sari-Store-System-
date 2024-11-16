@@ -83,8 +83,7 @@ public class Main {
                     break;
 
                 case '2': // Manage inventory
-                    JInventory inventory = new JInventory();
-                    inventory.setStock(stock);
+                    JInventory inventory = new JInventory(stock);
                     inventory.updateText();
                     inventory.setVisible(true);
                     break;
