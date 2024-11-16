@@ -126,7 +126,7 @@ public class JItemSelector extends JCustomFrame implements ActionListener {
 
         } catch (Exception e) {
             e.printStackTrace();
-            return "Default";
+            return "";
         }
     }
 
@@ -136,7 +136,7 @@ public class JItemSelector extends JCustomFrame implements ActionListener {
 
         } catch (Exception e) {
             e.printStackTrace();
-            return "Default";
+            return "";
         }
     }
 

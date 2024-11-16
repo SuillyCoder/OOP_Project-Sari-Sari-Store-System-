@@ -1,3 +1,13 @@
+// Main submenu for inventory management
+
+// Functionally cribbed from the TUI interface:
+// [1] Add item             // Will also add quantity if already present
+// [2] Remove item
+// [3] Change price
+// [4] Stock an item
+// [D] Show all inventory   // Always present at the side of the screen
+// [5] Exit
+
 package gui.InventoryGUI;
 
 import classes.*;
@@ -19,6 +29,8 @@ public class JInventory extends JCustomFrame implements ActionListener {
 
     private Stock stock;
 
+    // Constructor for the inventory management window
+    // Must call setStock after instantiation
     public JInventory(){
         super("Inventory Manager");
         Container con = getContentPane();
@@ -65,25 +77,28 @@ public class JInventory extends JCustomFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == addItem) {
-            JInventoryAdd itemSelector = new JInventoryAdd(stock, this);
-            itemSelector.updateText();
-            itemSelector.setVisible(true);
+            JInventoryAdd submenu = new JInventoryAdd(stock, this);
+            submenu.updateText();
+            submenu.setVisible(true);
             this.setVisible(false);
 
-            
-
         } else if (e.getSource() == remItem) {
-            JItemSelector itemSelector = new JItemSelector("Remove Item", stock, false, false, false);
-            itemSelector.setVisible(true);
+            JInventoryRemove submenu = new JInventoryRemove(stock, this);
+            submenu.updateText();
+            submenu.setVisible(true);
+            this.setVisible(false);
 
         } else if (e.getSource() == changePrice) {
-
-            JItemSelector itemSelector = new JItemSelector("Change Price", stock, false, false, true);
-            itemSelector.setVisible(true);
+            JInventoryChange submenu = new JInventoryChange(stock, this);
+            submenu.updateText();
+            submenu.setVisible(true);
+            this.setVisible(false);
 
         } else if (e.getSource() == restock) {
-            JItemSelector itemSelector = new JItemSelector("Restock Item", stock, false, true, false);
-            itemSelector.setVisible(true);
+            JInventoryRestock submenu = new JInventoryRestock(stock, this);
+            submenu.updateText();
+            submenu.setVisible(true);
+            this.setVisible(false);
 
         } else if (e.getSource() == exit) {
             this.dispose();
@@ -92,11 +107,6 @@ public class JInventory extends JCustomFrame implements ActionListener {
 
     public void updateText(){
         inventoryList.setText(stock.toString());
-    }
-
-    public void display(Stock stock){
-        this.setVisible(true);
-        this.updateText();
     }
 
     public void setStock(Stock stock){

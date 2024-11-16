@@ -1,3 +1,5 @@
+// Submenu for adding items to the inventory (stock)
+
 package gui.InventoryGUI;
 
 import java.awt.event.ActionEvent;
@@ -34,8 +36,8 @@ public class JInventoryAdd extends JItemSelector {
 
         Item newItem;
 
-        if (itemName.equals("Default") || itemCategory.equals("Default") || itemQuantity == 0 || itemPrice == 0.0) {
-            JOptionPane.showMessageDialog(this, "Enter all fields first!");
+        if (itemName.equals("") || itemCategory.equals("") || itemQuantity == 0 || itemPrice == 0.0) {
+            JOptionPane.showMessageDialog(this, "Enter all fields properly first!");
             return;
         }
 
@@ -43,14 +45,16 @@ public class JInventoryAdd extends JItemSelector {
         if (stock.containsKey(itemName)) {
             Item item = stock.get(itemName);
             newItem = new Item(itemName, item.getCategory(), item.getPrice(), itemQuantity + item.getQuantity());
+            stock.put(itemName, newItem);
+            this.updateText();
             JOptionPane.showMessageDialog(this, "Item restocked successfully");
+        
+        // otherwise, create new item
         } else {
-            // if item does not exist, create new item
             newItem = new Item(itemName, itemCategory, itemPrice, itemQuantity);
+            stock.put(itemName, newItem);
+            this.updateText();
             JOptionPane.showMessageDialog(this, "Item added successfully");
         }
-
-        stock.put(itemName, newItem);
-        this.updateText();
     }
 }
