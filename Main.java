@@ -3,6 +3,8 @@ import classes.*;
 import classes.group.*;
 import classes.indiv.*;
 import gui.*;
+import gui.InventoryGUI.JInventory;
+
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -48,17 +50,17 @@ public class Main {
         }
         //INTERFACE INITIALISATIONS
 
-        JMainMenu mainMenu = new JMainMenu();
-        mainMenu.updateText(printDay(),contacts,stock);
-        mainMenu.setVisible(true);
+        // JMainMenu mainMenu = new JMainMenu();
+        // mainMenu.updateText(printDay(),contacts,stock);
+        // mainMenu.setVisible(true);
 
         // JInventory inventory = new JInventory();
         // inventory.updateText(stock);
         // inventory.setVisible(true);
 
-        JItemSelector test = new JItemSelector("Add Item");
-        test.updateText(stock);
-        test.setVisible(true);
+        // JItemSelector test = new JItemSelector("Add Item");
+        // test.updateText(stock);
+        // test.setVisible(true);
 
 
         do {
@@ -81,7 +83,10 @@ public class Main {
                     break;
 
                 case '2': // Manage inventory
-                    Inventory.inventoryManagerUI(stock);
+                    JInventory inventory = new JInventory();
+                    inventory.setStock(stock);
+                    inventory.updateText();
+                    inventory.setVisible(true);
                     break;
 
                 case '3':  // Profit checking 
