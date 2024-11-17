@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 import classes.JItemSelector;
 import classes.group.Stock;
+import gui.JInventory;
 
 public class JInventoryRemove extends JItemSelector {
     private JInventory parentFrame;

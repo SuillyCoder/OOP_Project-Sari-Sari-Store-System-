@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import classes.JItemSelector;
 import classes.group.Stock;
 import classes.indiv.Item;
+import gui.JInventory;
 
 public class JInventoryAdd extends JItemSelector {
     private JInventory parentFrame;

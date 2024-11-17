@@ -2,7 +2,7 @@
 import classes.group.*;
 import classes.indiv.*;
 import gui.*;
-import gui.InventoryGUI.JInventory;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Optional;

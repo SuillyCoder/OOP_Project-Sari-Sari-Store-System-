@@ -8,10 +8,14 @@
 // [D] Show all inventory   // Always present at the side of the screen
 // [5] Exit
 
-package gui.InventoryGUI;
+package gui;
 import classes.*;
 import classes.group.*;
-import gui.*;
+import gui.InventoryGUI.JInventoryAdd;
+import gui.InventoryGUI.JInventoryChange;
+import gui.InventoryGUI.JInventoryRemove;
+import gui.InventoryGUI.JInventoryRestock;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -29,7 +33,6 @@ public class JInventory extends JCustomFrame implements ActionListener, Document
     private JTextField searchItem = new JTextField(20);
 
     private Stock stock;
-    private Contacts contacts;
 
     // Constructor for the inventory management window
     // Creates the look and feel for the window
