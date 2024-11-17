@@ -4,6 +4,8 @@ import classes.group.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
+//NOTICE: WILL BE DELETING THIS FILE LATER ON ONCE REFACTORING IS COMPLETE
 public class JMainMenu extends JCustomFrame implements ActionListener{
 
     //Panel Declaration
@@ -77,6 +79,15 @@ public class JMainMenu extends JCustomFrame implements ActionListener{
 
       //Adding to Frame
       add(mainPanel);
+
+      //Adding action listeners to buttons
+      transaction.addActionListener(this);
+      inventory.addActionListener(this);
+      customerDirectory.addActionListener(this);
+      nextDay.addActionListener(this);
+      day.addActionListener(this);
+      week.addActionListener(this);
+      month.addActionListener(this);
     }
 
     //Updating Data 
@@ -89,8 +100,15 @@ public class JMainMenu extends JCustomFrame implements ActionListener{
     //Code for setting up action listeners
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+       if(e.getSource() == transaction){
+        //Transaction button clicked
+       }
+       else if(e.getSource() == inventory){
+        //Inventory button clicked
+        //setVisible(false);
+        //inventoryPage.updateText();
+        //inventoryPage.setVisible(true);
+       }
     }
 }
 

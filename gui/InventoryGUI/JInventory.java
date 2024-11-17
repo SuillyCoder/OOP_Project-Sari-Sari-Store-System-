@@ -9,10 +9,9 @@
 // [5] Exit
 
 package gui.InventoryGUI;
-
 import classes.*;
-import classes.group.Stock;
-
+import classes.group.*;
+import gui.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -30,6 +29,7 @@ public class JInventory extends JCustomFrame implements ActionListener, Document
     private JTextField searchItem = new JTextField(20);
 
     private Stock stock;
+    private Contacts contacts;
 
     // Constructor for the inventory management window
     // Creates the look and feel for the window
@@ -37,6 +37,7 @@ public class JInventory extends JCustomFrame implements ActionListener, Document
     public JInventory(Stock stock){
         super("Inventory Manager");
         this.stock = stock;
+        //this.contacts = ;
         Container con = getContentPane();
 
         // Add buttons to the left of the window
@@ -116,6 +117,9 @@ public class JInventory extends JCustomFrame implements ActionListener, Document
             this.setVisible(false);
         
         } else if (e.getSource() == exit) {
+            JMainMenu mainMenu = new JMainMenu();
+            //mainMenu.updateText(printDay(), contacts, stock);
+            mainMenu.setVisible(true);
             this.dispose();
         }
     }
