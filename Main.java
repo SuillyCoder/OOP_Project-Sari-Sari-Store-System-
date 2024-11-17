@@ -257,8 +257,9 @@ public void initializeUI() {
         //Transaction button clicked
        }
        else if(e.getSource() == inventory){
-        //Inventory button clicked
-        mainMenu.setVisible(false);
+        JInventory inventoryPage = new JInventory(stock);
+        System.out.println("Test!");
+        this.setVisible(false);
         inventoryPage.updateText();
         inventoryPage.setVisible(true);
        }

@@ -120,7 +120,7 @@ public class JInventory extends JCustomFrame implements ActionListener, Document
             JMainMenu mainMenu = new JMainMenu();
             //mainMenu.updateText(printDay(), contacts, stock);
             mainMenu.setVisible(true);
-            this.dispose();
+            this.setVisible(false);
         }
     }
 
