@@ -172,12 +172,15 @@ public void initializeUI() {
     
             switch (choice) {
                 case '1': // Make a new transaction
-                    Optional<Transaction> newTransaction = Optional.of(new Transaction("NO_NAME", currentDay));
-                    PointOfSale.transactionUI(newTransaction, contacts, stock, currentDay);
+                    JPoS transactionPage = new JPoS(history, contacts, stock);
+                    transactionPage.setVisible(true);
 
-                    if (newTransaction.isPresent()) {
-                        history.get(currentDay-1).addTransaction(newTransaction.get());
-                    }
+                    // Optional<Transaction> newTransaction = Optional.of(new Transaction("NO_NAME", currentDay));
+                    // PointOfSale.transactionUI(newTransaction, contacts, stock, currentDay);
+
+                    // if (newTransaction.isPresent()) {
+                    //     history.get(currentDay-1).addTransaction(newTransaction.get());
+                    // }
 
                     break;
 
