@@ -15,6 +15,10 @@ import classes.NamedMap;
 import classes.indiv.Customer;
 
 public class Contacts extends NamedMap<Customer> {
+    private static double maxDebt = -200; // maximum debt allowed
+
+    public static double getMaxDebt() { return Contacts.maxDebt; }
+    public static void setMaxDebt(double newDebt) { Contacts.maxDebt = Math.min(newDebt, -1 * newDebt); }
 
     // prints the list of all customers
     public String toString() {

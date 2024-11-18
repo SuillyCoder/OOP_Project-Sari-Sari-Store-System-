@@ -2,6 +2,7 @@ package gui;
 
 import java.util.Scanner;
 
+import classes.group.Contacts;
 import classes.indiv.Customer;
 
 public class Directory {
@@ -10,13 +11,13 @@ public class Directory {
     public static void changeMaxDebtUI(){
         double newMaxDebt;
         
-        System.out.println("Set the maximum amount a person can borrow to (currently: " + -1 * Customer.getMaxDebt() + ") >> ");
+        System.out.println("Set the maximum amount a person can borrow to (currently: " + -1 * Contacts.getMaxDebt() + ") >> ");
 
         newMaxDebt = sc.nextDouble();
         sc.nextLine();
 
-        Customer.setMaxDebt(newMaxDebt);
-        System.out.println("Maximum debt changed to " + -1 * Customer.getMaxDebt());
+        Contacts.setMaxDebt(newMaxDebt);
+        System.out.println("Maximum debt changed to " + -1 * Contacts.getMaxDebt());
         System.out.println();
     }
 }

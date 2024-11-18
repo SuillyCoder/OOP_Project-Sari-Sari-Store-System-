@@ -166,7 +166,7 @@ public class JPoSFinalize extends JCustomFrame implements ActionListener, Docume
         revenue = outstanding + payment;
 
         // if payment is not enough such that the customer exceeds the maximum allowable debt
-        if (Customer.getMaxDebt() > revenue) {
+        if (Contacts.getMaxDebt() > revenue) {
             JOptionPane.showMessageDialog(this, "Current transaction will exceed maximum allowable debt!\nCannot Finalize transaction!");
             return;
         }
