@@ -18,6 +18,7 @@ public class JDirectory extends JCustomFrame implements ActionListener {
         JButton back = new JButton("Back");
 
         JTextArea directoryList = new JTextArea();
+        JLabel customerSize = new JLabel("Blank default");
         JLabel maxDebtLabel = new JLabel("Blank default");
 
         private JMainMenu parentFrame;
@@ -31,10 +32,18 @@ public class JDirectory extends JCustomFrame implements ActionListener {
 
         // Contacts list at the center of the window, with current max debt at the bottom
         JPanel center = new JPanel(new BorderLayout());
-            // header
-            JLabel header = new JLabel ("Debtor list");
-                header.setFont(new Font("Arial", Font.BOLD, 20));
-                header.setForeground(Color.black);
+            // Header for the contacts list
+            JPanel headerPanel = new JPanel(new BorderLayout());
+                JLabel header = new JLabel ("Debtors list");
+                    header.setFont(new Font("Arial", Font.BOLD, 20));
+                
+                JPanel customerInfo = new JPanel(new FlowLayout(FlowLayout.LEFT));
+                    JLabel customerHeader = new JLabel("Number of Customers: ");
+                    customerInfo.add(customerHeader);
+                    customerInfo.add(customerSize);
+                
+                headerPanel.add(header, BorderLayout.NORTH);
+                headerPanel.add(customerInfo, BorderLayout.SOUTH);
 
             // Scrollable contacts list
             JPanel directoryWindow = new JPanel();
@@ -42,6 +51,7 @@ public class JDirectory extends JCustomFrame implements ActionListener {
                 directoryList.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 13));
                 directoryList.setColumns(50);
                 directoryList.setText("Empty Default\n".repeat(50));
+                directoryList.setEditable(false);
                 directoryWindow.add(directoryList);
             
             // Current max debt at the bottom
@@ -51,7 +61,7 @@ public class JDirectory extends JCustomFrame implements ActionListener {
                 debtInfo.add(debtHeader);
                 debtInfo.add(maxDebtLabel);
             
-            center.add(header, BorderLayout.NORTH);
+            center.add(headerPanel, BorderLayout.NORTH);
             center.add(scroll, BorderLayout.CENTER);
             center.add(debtInfo, BorderLayout.SOUTH);
             center.setBackground(Color.cyan);
@@ -69,7 +79,6 @@ public class JDirectory extends JCustomFrame implements ActionListener {
 
                 back.setPreferredSize(new Dimension(150, 50));
 
-
             bottom.add(changePanel);
             bottom.add(back);
             bottom.setBackground(navyBlue);
@@ -78,11 +87,34 @@ public class JDirectory extends JCustomFrame implements ActionListener {
         this.add(bottom, BorderLayout.SOUTH);
 
         // Add action listeners
+        changeField.addActionListener(this);
         back.addActionListener(this);
+
+        updateText();
     }
     
     public void actionPerformed(ActionEvent e) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+        if (e.getSource() == changeField) {
+            try {
+                double newDebt = Double.parseDouble(changeField.getText());
+                Contacts.setMaxDebt(newDebt);
+                updateText();
+                JOptionPane.showMessageDialog(this, "Max debt changed to P" + (-1 * Contacts.getMaxDebt()) + " successfully!");
+
+            } catch (NumberFormatException ex) {
+                changeField.setText("Invalid input");
+            }
+
+        } else if (e.getSource() == back) {
+            this.dispose();
+            parentFrame.updateText();
+            parentFrame.setVisible(true);
+        }
+    }
+
+    public void updateText() {
+        directoryList.setText(contacts.toString());
+        customerSize.setText(contacts.size() + "");
+        maxDebtLabel.setText("P" + (-1 * Contacts.getMaxDebt()));
     }
 }
