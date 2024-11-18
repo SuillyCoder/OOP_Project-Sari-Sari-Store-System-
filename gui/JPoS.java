@@ -14,6 +14,7 @@ public class JPoS extends JCustomFrame implements ActionListener {
     private JButton finalize = new JButton("Finalize transaction");
     private JButton cancel = new JButton("Cancel transaction");
 
+    private JMainMenu parentFrame;
     private Transaction cart;
     private Stock stock;
     private Contacts contacts;
@@ -22,7 +23,7 @@ public class JPoS extends JCustomFrame implements ActionListener {
     private JTextArea cartList = new JTextArea();
     private JLabel priceTicker = new JLabel();
 
-    public JPoS(History history, Contacts contacts, Stock stock){
+    public JPoS(JMainMenu parentFrame, History history, Contacts contacts, Stock stock){
         super("Transaction");
         this.stock = stock;
         this.contacts = contacts;
@@ -127,6 +128,7 @@ public class JPoS extends JCustomFrame implements ActionListener {
 
     public void returnToMenu(){
         this.dispose();
-        this.setVisible(false);
+
+        parentFrame.setVisible(true);
     }
 }

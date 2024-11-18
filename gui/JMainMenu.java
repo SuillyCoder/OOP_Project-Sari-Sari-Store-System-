@@ -8,10 +8,11 @@ import javax.swing.*;
 public class JMainMenu extends JCustomFrame implements ActionListener{
 
    // GUI components
-private JPanel mainPanel, panelOne, panelTwo, panelTwoButtons, panelTwoLogs;
-private JButton transaction, inventory, customerDirectory, nextDay, dailyLogs, weeklyLogs, monthlyLogs;
-private JTextArea inventoryList, customerList, dayIndicatorLabel;
+    private JPanel mainPanel, panelOne, panelTwo, panelTwoButtons, panelTwoLogs;
+    private JButton transaction, inventory, customerDirectory, nextDay, dailyLogs, weeklyLogs, monthlyLogs;
+    private JTextArea inventoryList, customerList, dayIndicatorLabel;
 
+    // GUI pages
 private JInventory inventoryPage; 
 public static Contacts contacts;
 public static Stock stock;
@@ -19,9 +20,11 @@ public static History history;
 
 public JMainMenu(History history, Stock stock, Contacts contacts) {
     super("Main Menu");
+    this.history = history;
+    this.stock = stock;
+    this.contacts = contacts;
 
     initializeUI(); // Set up GUI components
-    inventoryPage = new JInventory(new Stock());
 
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setSize(800, 600);
@@ -104,8 +107,8 @@ public void initializeUI() {
 }
 
  //Updating Data 
- public void updateText(String day, Contacts contacts, Stock stock){
-    dayIndicatorLabel.setText(day);
+ public void updateText(){
+    dayIndicatorLabel.setText(history.toString());
     customerList.setText(contacts.toString());
     inventoryList.setText(stock.toString());
   }
@@ -115,11 +118,13 @@ public void initializeUI() {
     @Override
     public void actionPerformed(ActionEvent e) {
        if(e.getSource() == transaction){
-        JPoS transactionPage = new JPoS(history, contacts, stock);
+        JPoS transactionPage = new JPoS(this, history, contacts, stock);
         this.setVisible(false);
         transactionPage.setVisible(true);
        }
        else if(e.getSource() == inventory){
+        JInventory inventoryPage = new JInventory(this, stock);
+        System.out.println("Test!");
         this.setVisible(false);
         inventoryPage.updateText();
         inventoryPage.setVisible(true);
