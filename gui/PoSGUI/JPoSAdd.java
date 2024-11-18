@@ -18,7 +18,7 @@ public class JPoSAdd extends JItemSelector implements DocumentListener {
     private JPoS parentFrame;
     
     
-    public JPoSAdd(Stock stock, Transaction cart, JPoS parentFrame) {
+    public JPoSAdd(JPoS parentFrame, Stock stock, Transaction cart) {
         super("Add Item to cart", stock, false, true, false);
         this.cart = cart;
         this.stock = stock;

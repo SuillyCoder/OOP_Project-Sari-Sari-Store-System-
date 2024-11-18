@@ -11,7 +11,7 @@ import gui.JInventory;
 public class JInventoryRemove extends JItemSelector {
     private JInventory parentFrame;
 
-    public JInventoryRemove(Stock stock, JInventory parentFrame) {
+    public JInventoryRemove(JInventory parentFrame, Stock stock) {
         super("Remove Item", stock, false, false, false);
         this.parentFrame = parentFrame;
     }

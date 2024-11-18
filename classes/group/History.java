@@ -8,8 +8,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import classes.indiv.Log;
+import classes.indiv.Transaction;
 
 public class History extends ArrayList<Log> {
+    public void addTransaction(Transaction cart) {
+        this.get(this.size() - 1).addTransaction(cart);
+    }
+
     // file read and write operations
     public void fromFile() {
         try(BufferedReader br = new BufferedReader(new FileReader("data/log.csv"))){
@@ -117,5 +122,4 @@ public class History extends ArrayList<Log> {
         res += "\t\t\t\t\t\t\tTotal Revenue: " + totalRevenue;
         return res;
     }
-    
 }

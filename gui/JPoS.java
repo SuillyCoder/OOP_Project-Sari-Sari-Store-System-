@@ -86,37 +86,47 @@ public class JPoS extends JCustomFrame implements ActionListener {
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == addCart){
             // Add item to cart
-            JPoSAdd submenu = new JPoSAdd(stock, cart, this);
+            JPoSAdd submenu = new JPoSAdd(this, stock, cart);
             submenu.updateText();
             submenu.setVisible(true);
             this.setVisible(false);
 
         } else if(e.getSource() == remCart){
             // Remove item from cart
-            JPoSRemove submenu = new JPoSRemove(stock, cart, this);
+            JPoSRemove submenu = new JPoSRemove(this, stock, cart);
             submenu.updateText();
             submenu.setVisible(true);
             this.setVisible(false);
 
         } else if(e.getSource() == finalize){
             // Finalize transaction
-            // String customer = JOptionPane.showInputDialog("Enter customer name: ");
-            // if(customer != null){
-            //     cart.setCustomer(customer);
-            //     cart.setDate(cart.getDate());
-            //     cart.setPayment(cart.getWorth());
-            //     JOptionPane.showMessageDialog(this, "Transaction finalized.");
-            // }
+            JPoSFinalize submenu = new JPoSFinalize(this, history, contacts, cart);
+            submenu.updateText();
+            submenu.setVisible(true);
+            this.setVisible(false);
+
         } else if(e.getSource() == cancel){
-            // // Cancel transaction
-            // cart = new Transaction("NO_NAME", cart.getDate());
-            // this.updateText();
-            // JOptionPane.showMessageDialog(this, "Transaction cancelled.");
+            // Cancel transaction
+            int choice = JOptionPane.showConfirmDialog(this, "Are you sure you want to cancel this transaction?", "Cancel Transaction", JOptionPane.YES_NO_OPTION);
+
+            if (choice == JOptionPane.YES_OPTION) {
+                for (Item item : cart.getItems().values()) {
+                    stock.get(item.getName()).incQuantity(item.getQuantity());
+                }
+                returnToMenu();
+                JOptionPane.showMessageDialog(this, "Transaction cancelled!");
+                
+            }
         }
     }
 
     public void updateText(){
         cartList.setText(cart.toString());
         priceTicker.setText("P" + cart.getWorth());
+    }
+
+    public void returnToMenu(){
+        this.dispose();
+        this.setVisible(false);
     }
 }

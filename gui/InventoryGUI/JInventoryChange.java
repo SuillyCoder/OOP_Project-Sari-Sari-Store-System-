@@ -11,7 +11,7 @@ import gui.JInventory;
 public class JInventoryChange extends JItemSelector {
     private JInventory parentFrame;
 
-    public JInventoryChange(Stock stock, JInventory parentFrame) {
+    public JInventoryChange(JInventory parentFrame, Stock stock) {
         super("Change price of item", stock, false, false, true);
         this.parentFrame = parentFrame;
     }
