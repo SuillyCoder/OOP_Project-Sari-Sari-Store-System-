@@ -12,12 +12,11 @@ public class JMainMenu extends JCustomFrame implements ActionListener{
     private JButton transaction, inventory, customerDirectory, nextDay, dailyLogs, weeklyLogs, monthlyLogs;
     private JTextArea inventoryList, customerList, dayIndicatorLabel;
 
-    private JInventory inventoryPage; 
-
-    // Data
-    private History history;
-    private Stock stock;
-    private Contacts contacts;
+    // GUI pages
+private JInventory inventoryPage; 
+public static Contacts contacts;
+public static Stock stock;
+public static History history;
 
 public JMainMenu(History history, Stock stock, Contacts contacts) {
     super("Main Menu");

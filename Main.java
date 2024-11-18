@@ -1,5 +1,5 @@
 import classes.group.*;
-import classes.indiv.*;
+import classes.indiv.Log;
 import gui.*;
 
 public class Main{
@@ -23,6 +23,10 @@ public class Main{
         JMainMenu mainMenu = new JMainMenu(history, stock, contacts);
         mainMenu.updateText();
         mainMenu.setVisible(true);
+
+        //JItemSelector test = new JItemSelector("Add Item");
+        //test.updateText(stock);
+        //test.setVisible(true);
 
         // debug code
         System.out.println(contacts);
