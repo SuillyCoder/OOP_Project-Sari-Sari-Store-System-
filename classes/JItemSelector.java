@@ -1,6 +1,7 @@
 package classes;
 
 import classes.group.Stock;
+import classes.indiv.Transaction;
 
 import java.awt.*;
 import java.awt.event.*;

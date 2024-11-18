@@ -8,7 +8,7 @@ import javax.swing.event.*;
 import classes.JCustomFrame;
 import classes.group.*;
 import classes.indiv.*;
-import gui.PoSGUI.JPoSAdd;
+import gui.PoSGUI.*;
 
 public class JPoS extends JCustomFrame implements ActionListener {
     private JButton addCart = new JButton("Add to cart");
@@ -92,17 +92,12 @@ public class JPoS extends JCustomFrame implements ActionListener {
             this.setVisible(false);
 
         } else if(e.getSource() == remCart){
-            // // Remove item from cart
-            // String itemName = JOptionPane.showInputDialog("Enter item name: ");
-            // if(itemName != null){
-            //     Item item = stock.getItem(itemName);
-            //     if(item != null){
-            //         cart.removeItem(item);
-            //         this.updateText();
-            //     } else {
-            //         JOptionPane.showMessageDialog(this, "Item not found in cart.");
-            //     }
-            // }
+            // Remove item from cart
+            JPoSRemove submenu = new JPoSRemove(stock, cart, this);
+            submenu.updateText();
+            submenu.setVisible(true);
+            this.setVisible(false);
+
         } else if(e.getSource() == finalize){
             // Finalize transaction
             // String customer = JOptionPane.showInputDialog("Enter customer name: ");

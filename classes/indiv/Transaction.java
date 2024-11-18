@@ -3,6 +3,7 @@
 package classes.indiv;
 
 import classes.NamedMap;
+import classes.group.Stock;
 
 public class Transaction implements Cloneable {
     private NamedMap<Item> items;       // treat like a "cart" during a transaction
@@ -58,5 +59,13 @@ public class Transaction implements Cloneable {
         }
         output += "Worth: " + worth + "\n";
         return output;
+    }
+
+    public Stock toStock() {
+        Stock stock = new Stock();
+        for (Item i : items.values()) {
+            stock.addItem(i.getName(), i);
+        }
+        return stock;
     }
 }
