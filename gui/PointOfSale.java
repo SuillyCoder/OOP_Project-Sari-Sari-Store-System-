@@ -137,7 +137,7 @@ public class PointOfSale {
         if (customer.getCredit() != 0) {
             System.out.println("Pay P" + (-1 * outstanding) + " to clear outstanding balance.");
         }
-        System.out.println("Maxmimum allowable debt for the transaction: P" + (-1 * ((-1 * outstanding) + Customer.getMaxDebt())));
+        System.out.println("Maxmimum allowable debt for the transaction: P" + (-1 * ((-1 * outstanding) + Contacts.getMaxDebt())));
         System.out.println();
 
         System.out.print("Enter payment amount >> ");
@@ -148,7 +148,7 @@ public class PointOfSale {
         revenue = outstanding + payment;
 
         // if payment is not enough such that the customer exceeds the maximum allowable debt
-        if (Customer.getMaxDebt() > revenue) {
+        if (Contacts.getMaxDebt() > revenue) {
             System.out.println("Current transaction will exceed maximum allowable debt!");
             System.out.println("Transaction cancelled!\n");
             cart = Optional.empty();

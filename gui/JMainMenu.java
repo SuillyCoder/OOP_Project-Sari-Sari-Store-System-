@@ -129,6 +129,14 @@ public void initializeUI() {
         this.setVisible(false);
         inventoryPage.updateText();
         inventoryPage.setVisible(true);
+       } else if (e.getSource() == customerDirectory) {
+        JDirectory customerDirectoryPage = new JDirectory(this, contacts);
+        this.setVisible(false);
+        // customerDirectoryPage.updateText();
+        customerDirectoryPage.setVisible(true);
+       } else if (e.getSource() == nextDay) {
+        // Main.nextDay();
+        // this.updateText();
        }
 
        //Log Displays

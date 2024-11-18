@@ -1,7 +1,6 @@
 package gui.PoSGUI;
 
 import java.awt.event.ActionEvent;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
