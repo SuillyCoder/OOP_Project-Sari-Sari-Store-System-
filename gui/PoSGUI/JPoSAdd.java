@@ -1,7 +1,6 @@
 package gui.PoSGUI;
 
 import java.awt.event.ActionEvent;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -24,9 +23,6 @@ public class JPoSAdd extends JItemSelector implements DocumentListener {
         this.cart = cart;
         this.stock = stock;
         this.parentFrame = parentFrame;
-
-        this.updateText();
-        this.setVisible(true);
 
         itemName.getDocument().addDocumentListener(this);
     }

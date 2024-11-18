@@ -87,19 +87,10 @@ public class JPoS extends JCustomFrame implements ActionListener {
         if(e.getSource() == addCart){
             // Add item to cart
             JPoSAdd submenu = new JPoSAdd(stock, cart, this);
-            // submenu.updateText();
-            // submenu.setVisible(true);
+            submenu.updateText();
+            submenu.setVisible(true);
             this.setVisible(false);
-            // String itemName = JOptionPane.showInputDialog("Enter item name: ");
-            // if(itemName != null){
-            //     Item item = stock.getItem(itemName);
-            //     if(item != null){
-            //         cart.addItem(item);
-            //         this.updateText();
-            //     } else {
-            //         JOptionPane.showMessageDialog(this, "Item not found in stock.");
-            //     }
-            // }
+
         } else if(e.getSource() == remCart){
             // // Remove item from cart
             // String itemName = JOptionPane.showInputDialog("Enter item name: ");
