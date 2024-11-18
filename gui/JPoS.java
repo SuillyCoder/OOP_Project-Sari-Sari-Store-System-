@@ -1,14 +1,12 @@
 package gui;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.event.*;
-
 import classes.JCustomFrame;
 import classes.group.*;
 import classes.indiv.*;
 import gui.PoSGUI.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
 public class JPoS extends JCustomFrame implements ActionListener {
     private JButton addCart = new JButton("Add to cart");
@@ -106,6 +104,7 @@ public class JPoS extends JCustomFrame implements ActionListener {
             this.setVisible(false);
 
         } else if(e.getSource() == cancel){
+            JMainMenu mainMenu = new JMainMenu(history, stock, contacts);
             // Cancel transaction
             int choice = JOptionPane.showConfirmDialog(this, "Are you sure you want to cancel this transaction?", "Cancel Transaction", JOptionPane.YES_NO_OPTION);
 
@@ -115,6 +114,7 @@ public class JPoS extends JCustomFrame implements ActionListener {
                 }
                 returnToMenu();
                 JOptionPane.showMessageDialog(this, "Transaction cancelled!");
+                mainMenu.setVisible(true);
                 
             }
         }

@@ -1,6 +1,6 @@
 
 import classes.group.*;
-import classes.indiv.*;
+import classes.indiv.Log;
 import gui.*;
 import java.util.Scanner;
 
@@ -50,6 +50,7 @@ public class Main{
         JMainMenu mainMenu = new JMainMenu(history, stock, contacts);
         mainMenu.updateText(printDay(), contacts, stock);
         mainMenu.setVisible(true);
+
         //JItemSelector test = new JItemSelector("Add Item");
         //test.updateText(stock);
         //test.setVisible(true);

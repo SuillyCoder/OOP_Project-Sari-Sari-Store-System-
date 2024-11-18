@@ -13,9 +13,9 @@ private JButton transaction, inventory, customerDirectory, nextDay, dailyLogs, w
 private JTextArea inventoryList, customerList, dayIndicatorLabel;
 
 private JInventory inventoryPage; 
-public static Contacts contacts = new Contacts();
-public static Stock stock = new Stock();
-public static History history = new History();
+public static Contacts contacts;
+public static Stock stock;
+public static History history;
 
 public JMainMenu(History history, Stock stock, Contacts contacts) {
     super("Main Menu");
@@ -120,8 +120,6 @@ public void initializeUI() {
         transactionPage.setVisible(true);
        }
        else if(e.getSource() == inventory){
-        JInventory inventoryPage = new JInventory(stock);
-        System.out.println("Test!");
         this.setVisible(false);
         inventoryPage.updateText();
         inventoryPage.setVisible(true);
