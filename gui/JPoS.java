@@ -9,25 +9,27 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class JPoS extends JCustomFrame implements ActionListener {
-    private JButton addCart = new JButton("Add to cart");
-    private JButton remCart = new JButton("Remove item from cart");
-    private JButton finalize = new JButton("Finalize transaction");
-    private JButton cancel = new JButton("Cancel transaction");
-
     private JMainMenu parentFrame;
     private Transaction cart;
     private Stock stock;
     private Contacts contacts;
     private History history;
 
+    private JButton addCart = new JButton("Add to cart");
+    private JButton remCart = new JButton("Remove item from cart");
+    private JButton finalize = new JButton("Finalize transaction");
+    private JButton cancel = new JButton("Cancel transaction");
+
     private JTextArea cartList = new JTextArea();
     private JLabel priceTicker = new JLabel();
 
-    public JPoS(JMainMenu parentFrame, History history, Contacts contacts, Stock stock){
+    public JPoS(JMainMenu parentFrame, Contacts contacts, History history, Stock stock){
         super("Transaction");
-        this.stock = stock;
+        this.parentFrame = parentFrame;
         this.contacts = contacts;
         this.history = history;
+        this.stock = stock;
+        
         this.cart = new Transaction("NO_NAME", history.size());
         Container con = getContentPane();
 
@@ -105,7 +107,6 @@ public class JPoS extends JCustomFrame implements ActionListener {
             this.setVisible(false);
 
         } else if(e.getSource() == cancel){
-            JMainMenu mainMenu = new JMainMenu(history, stock, contacts);
             // Cancel transaction
             int choice = JOptionPane.showConfirmDialog(this, "Are you sure you want to cancel this transaction?", "Cancel Transaction", JOptionPane.YES_NO_OPTION);
 
@@ -113,6 +114,7 @@ public class JPoS extends JCustomFrame implements ActionListener {
                 for (Item item : cart.getItems().values()) {
                     stock.get(item.getName()).incQuantity(item.getQuantity());
                 }
+
                 returnToMenu();
                 JOptionPane.showMessageDialog(this, "Transaction cancelled!");
             }

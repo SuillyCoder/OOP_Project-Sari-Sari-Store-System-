@@ -144,7 +144,6 @@ public class JPoSFinalize extends JCustomFrame implements ActionListener, Docume
         Customer customer;
         double outstanding, revenue;
 
-
         // Failure cases
         // if any field is empty
             if (customerName.equals("") || payment == 0.0) {
@@ -188,12 +187,10 @@ public class JPoSFinalize extends JCustomFrame implements ActionListener, Docume
 
         history.addTransaction(cart);
 
-        JOptionPane.showMessageDialog(this, "Transaction finalized.");
-
         // return to parent frame
         this.dispose();
-        parentFrame.updateText();
-        parentFrame.setVisible(true); // Make the parent frame visible again
+        parentFrame.returnToMenu();
+        JOptionPane.showMessageDialog(this, "Transaction finalized.");
     }
 
     public String getCustomerName() {

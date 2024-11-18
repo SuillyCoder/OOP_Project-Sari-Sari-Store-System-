@@ -68,14 +68,21 @@ public class JPoSRemove extends JItemSelector implements DocumentListener {
         // otherwise, remove item from cart
         cartItem = cartItems.get(itemName);
 
+        // value clamping
         if (cartItem.getQuantity() < itemQuantity) {
             itemQuantity = cartItem.getQuantity();
         }
 
+        // reduce relevant values
         cartItem.setQuantity(cartItem.getQuantity() - itemQuantity);
+        cart.decWorth(itemQuantity * cartItem.getPrice());
+
+        // if quantity is 0, remove item from cart
         if (cartItem.getQuantity() == 0) {
             cartItems.remove(itemName);
         }
+
+        // add removed quantites back to stock
         if (stock.containsKey(itemName)) {
             Item stockItem = stock.get(itemName);
             stockItem.setQuantity(stockItem.getQuantity() + itemQuantity);
@@ -84,7 +91,6 @@ public class JPoSRemove extends JItemSelector implements DocumentListener {
         }
 
         this.handleTextChange();
-
         JOptionPane.showMessageDialog(this, "Item removed from cart successfully");
     }
 

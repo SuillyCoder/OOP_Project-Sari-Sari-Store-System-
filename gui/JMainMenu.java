@@ -118,7 +118,7 @@ public void initializeUI() {
     @Override
     public void actionPerformed(ActionEvent e) {
        if(e.getSource() == transaction){
-        JPoS transactionPage = new JPoS(this, history, contacts, stock);
+        JPoS transactionPage = new JPoS(this, contacts, history, stock);
         this.setVisible(false);
         transactionPage.setVisible(true);
        }
