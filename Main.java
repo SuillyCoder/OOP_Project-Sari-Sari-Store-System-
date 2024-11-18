@@ -2,10 +2,8 @@
 import classes.group.*;
 import classes.indiv.*;
 import gui.*;
-
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Optional;
 import java.util.Scanner;
 import javax.swing.*;
 
@@ -258,7 +256,9 @@ public void initializeUI() {
     @Override
     public void actionPerformed(ActionEvent e) {
        if(e.getSource() == transaction){
-        //Transaction button clicked
+        JPoS transactionPage = new JPoS(history, contacts, stock);
+        this.setVisible(false);
+        transactionPage.setVisible(true);
        }
        else if(e.getSource() == inventory){
         JInventory inventoryPage = new JInventory(stock);
