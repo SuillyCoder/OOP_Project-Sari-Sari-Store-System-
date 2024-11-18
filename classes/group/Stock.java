@@ -70,6 +70,19 @@ public class Stock extends NamedMap<Item> {
 
         return inventory;
     }
+    
+    public String search(String search) {
+        Stock filteredStock = new Stock();
+
+        for (String key : this.keySet()) {
+            Item item = this.get(key);
+            if (item.getName().toLowerCase().contains(search.toLowerCase())) {
+                filteredStock.addItem(key, item);
+            }
+        }
+    
+        return filteredStock.toString();
+    }
 
     // file read and write operations
     public void fromFile() {
