@@ -86,14 +86,14 @@ public class JPoS extends JCustomFrame implements ActionListener {
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == addCart){
             // Add item to cart
-            JPoSAdd submenu = new JPoSAdd(stock, cart, this);
+            JPoSAdd submenu = new JPoSAdd(this, stock, cart);
             submenu.updateText();
             submenu.setVisible(true);
             this.setVisible(false);
 
         } else if(e.getSource() == remCart){
             // Remove item from cart
-            JPoSRemove submenu = new JPoSRemove(stock, cart, this);
+            JPoSRemove submenu = new JPoSRemove(this, stock, cart);
             submenu.updateText();
             submenu.setVisible(true);
             this.setVisible(false);

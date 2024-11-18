@@ -96,25 +96,25 @@ public class JInventory extends JCustomFrame implements ActionListener, Document
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == addItem) {
-            JInventoryAdd submenu = new JInventoryAdd(stock, this);
+            JInventoryAdd submenu = new JInventoryAdd(this, stock);
             submenu.updateText();
             submenu.setVisible(true);
             this.setVisible(false);
 
         } else if (e.getSource() == remItem) {
-            JInventoryRemove submenu = new JInventoryRemove(stock, this);
+            JInventoryRemove submenu = new JInventoryRemove(this, stock);
             submenu.updateText();
             submenu.setVisible(true);
             this.setVisible(false);
 
         } else if (e.getSource() == changePrice) {
-            JInventoryChange submenu = new JInventoryChange(stock, this);
+            JInventoryChange submenu = new JInventoryChange(this, stock);
             submenu.updateText();
             submenu.setVisible(true);
             this.setVisible(false);
 
         } else if (e.getSource() == restock) {
-            JInventoryRestock submenu = new JInventoryRestock(stock, this);
+            JInventoryRestock submenu = new JInventoryRestock(this, stock);
             submenu.updateText();
             submenu.setVisible(true);
             this.setVisible(false);

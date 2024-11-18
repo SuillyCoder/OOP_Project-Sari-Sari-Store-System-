@@ -19,7 +19,7 @@ public class JPoSRemove extends JItemSelector implements DocumentListener {
     private JPoS parentFrame;
     
     
-    public JPoSRemove(Stock stock, Transaction cart, JPoS parentFrame) {
+    public JPoSRemove(JPoS parentFrame, Stock stock, Transaction cart) {
         super("Remove Item from cart", cart.toStock(), false, true, false);
         this.cart = cart;
         this.stock = stock;
