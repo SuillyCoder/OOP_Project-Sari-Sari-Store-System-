@@ -140,13 +140,22 @@ public void initializeUI() {
        //Log Displays
        else if(e.getSource() == dailyLogs){
         dayIndicatorLabel.setText(history.toString());
+        dailyLogs.setEnabled(false);
+        weeklyLogs.setEnabled(true);
+        monthlyLogs.setEnabled(true);
         this.updateText();
        }
        else if(e.getSource() == weeklyLogs){
+        dailyLogs.setEnabled(true);
+        weeklyLogs.setEnabled(false);
+        monthlyLogs.setEnabled(true);
         this.updateText();
         dayIndicatorLabel.setText(history.weekSummary().toString());
        }
        else if(e.getSource() == monthlyLogs){
+        dailyLogs.setEnabled(true);
+        weeklyLogs.setEnabled(true);
+        monthlyLogs.setEnabled(false);
         this.updateText();
         dayIndicatorLabel.setText(history.monthSummary().toString());
        }
