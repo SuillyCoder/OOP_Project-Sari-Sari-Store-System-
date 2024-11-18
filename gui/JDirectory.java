@@ -4,7 +4,6 @@ import java.awt.event.*;
 import java.awt.*;
 
 import javax.swing.*;
-import javax.swing.event.*;
 
 import classes.JCustomFrame;
 import classes.group.Contacts;
@@ -12,7 +11,7 @@ import classes.group.Contacts;
 public class JDirectory extends JCustomFrame implements ActionListener {
         //because I'm quirky and I want color
         Color navyBlue = new Color(0,0,128);
-    
+
         JTextField changeField = new JTextField(15);
 
         JButton back = new JButton("Back");
@@ -20,10 +19,9 @@ public class JDirectory extends JCustomFrame implements ActionListener {
         JTextArea directoryList = new JTextArea();
         JLabel customerSize = new JLabel("Blank default");
         JLabel maxDebtLabel = new JLabel("Blank default");
-
+        
         private JMainMenu parentFrame;
         private Contacts contacts;
-
 
     public JDirectory(JMainMenu parentFrame, Contacts contacts) {
         super("Directory");
