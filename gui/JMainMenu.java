@@ -25,7 +25,7 @@ public JMainMenu(History history, Stock stock, Contacts contacts) {
     this.contacts = contacts;
 
     initializeUI(); // Set up GUI components
-
+    dailyLogs.setEnabled(false);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setSize(800, 600);
     setVisible(true);
