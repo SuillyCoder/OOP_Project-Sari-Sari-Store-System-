@@ -29,6 +29,17 @@ public class Contacts extends NamedMap<Customer> {
 
         return res + "\n";
     }
+
+    public String search(String name) {
+        Contacts filteredContacts = new Contacts();
+        for (String key : this.keySet()) {
+            if (key.toLowerCase().contains(name.toLowerCase())) {
+                filteredContacts.put(key, this.get(key));
+            }
+        }
+
+        return filteredContacts.toString();
+    }
     
     // file read and write operations
     public void fromFile() {
