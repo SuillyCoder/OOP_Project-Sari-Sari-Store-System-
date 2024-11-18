@@ -2,10 +2,8 @@
 import classes.group.*;
 import classes.indiv.*;
 import gui.*;
-
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Optional;
 import java.util.Scanner;
 import javax.swing.*;
 
@@ -172,8 +170,8 @@ public void initializeUI() {
     
             switch (choice) {
                 case '1': // Make a new transaction
-                    JPoS transactionPage = new JPoS(history, contacts, stock);
-                    transactionPage.setVisible(true);
+                    //JPoS transactionPage = new JPoS(history, contacts, stock);
+                   // transactionPage.setVisible(true);
 
                     // Optional<Transaction> newTransaction = Optional.of(new Transaction("NO_NAME", currentDay));
                     // PointOfSale.transactionUI(newTransaction, contacts, stock, currentDay);
@@ -257,7 +255,9 @@ public void initializeUI() {
     @Override
     public void actionPerformed(ActionEvent e) {
        if(e.getSource() == transaction){
-        //Transaction button clicked
+        JPoS transactionPage = new JPoS(history, contacts, stock);
+        this.setVisible(false);
+        transactionPage.setVisible(true);
        }
        else if(e.getSource() == inventory){
         JInventory inventoryPage = new JInventory(stock);
