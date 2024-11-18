@@ -31,13 +31,15 @@ public class JInventory extends JCustomFrame implements ActionListener, Document
     private JTextArea inventoryList = new JTextArea();
     private JTextField searchItem = new JTextField(20);
 
+    private JMainMenu parentFrame;
     private Stock stock;
 
     // Constructor for the inventory management window
     // Creates the look and feel for the window
     // Must call setStock after instantiation
-    public JInventory( Stock stock){
+    public JInventory(JMainMenu parentFrame, Stock stock){
         super("Inventory Manager");
+        this.parentFrame = parentFrame;
         this.stock = stock;
         //this.contacts = ;
         Container con = getContentPane();
@@ -119,10 +121,10 @@ public class JInventory extends JCustomFrame implements ActionListener, Document
             this.setVisible(false);
         
         } else if (e.getSource() == exit) {
-            JMainMenu mainMenu = new JMainMenu(null, stock, null);
-            //mainMenu.updateText(printDay(), contacts, stock);
-            mainMenu.setVisible(true);
-            this.setVisible(false);
+            this.dispose();
+            parentFrame.updateText();
+            parentFrame.setVisible(true);
+            
         }
     }
 
