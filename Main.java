@@ -173,6 +173,7 @@ public void initializeUI() {
             switch (choice) {
                 case '1': // Make a new transaction
                     JPoS transactionPage = new JPoS(history, contacts, stock);
+                    transactionPage.updateText();
                     transactionPage.setVisible(true);
 
                     // Optional<Transaction> newTransaction = Optional.of(new Transaction("NO_NAME", currentDay));

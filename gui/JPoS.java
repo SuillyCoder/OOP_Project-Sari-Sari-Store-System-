@@ -8,20 +8,27 @@ import javax.swing.event.*;
 import classes.JCustomFrame;
 import classes.group.*;
 import classes.indiv.*;
+import gui.PoSGUI.JPoSAdd;
 
-public class JPoS extends JCustomFrame {
+public class JPoS extends JCustomFrame implements ActionListener {
     private JButton addCart = new JButton("Add to cart");
     private JButton remCart = new JButton("Remove item from cart");
     private JButton finalize = new JButton("Finalize transaction");
     private JButton cancel = new JButton("Cancel transaction");
 
     private Transaction cart;
+    private Stock stock;
+    private Contacts contacts;
+    private History history;
 
     private JTextArea cartList = new JTextArea();
     private JLabel priceTicker = new JLabel();
 
     public JPoS(History history, Contacts contacts, Stock stock){
         super("Transaction");
+        this.stock = stock;
+        this.contacts = contacts;
+        this.history = history;
         this.cart = new Transaction("NO_NAME", history.size());
         Container con = getContentPane();
 
@@ -65,5 +72,65 @@ public class JPoS extends JCustomFrame {
             cartWindow.add(subtotalPane, BorderLayout.SOUTH);
         
         con.add(cartWindow, BorderLayout.CENTER);
+
+        // Add action listeners
+        addCart.addActionListener(this);
+        remCart.addActionListener(this);
+        finalize.addActionListener(this);
+        cancel.addActionListener(this);
+
+        this.updateText();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e){
+        if(e.getSource() == addCart){
+            // Add item to cart
+            JPoSAdd submenu = new JPoSAdd(stock, cart, this);
+            // submenu.updateText();
+            // submenu.setVisible(true);
+            this.setVisible(false);
+            // String itemName = JOptionPane.showInputDialog("Enter item name: ");
+            // if(itemName != null){
+            //     Item item = stock.getItem(itemName);
+            //     if(item != null){
+            //         cart.addItem(item);
+            //         this.updateText();
+            //     } else {
+            //         JOptionPane.showMessageDialog(this, "Item not found in stock.");
+            //     }
+            // }
+        } else if(e.getSource() == remCart){
+            // // Remove item from cart
+            // String itemName = JOptionPane.showInputDialog("Enter item name: ");
+            // if(itemName != null){
+            //     Item item = stock.getItem(itemName);
+            //     if(item != null){
+            //         cart.removeItem(item);
+            //         this.updateText();
+            //     } else {
+            //         JOptionPane.showMessageDialog(this, "Item not found in cart.");
+            //     }
+            // }
+        } else if(e.getSource() == finalize){
+            // Finalize transaction
+            // String customer = JOptionPane.showInputDialog("Enter customer name: ");
+            // if(customer != null){
+            //     cart.setCustomer(customer);
+            //     cart.setDate(cart.getDate());
+            //     cart.setPayment(cart.getWorth());
+            //     JOptionPane.showMessageDialog(this, "Transaction finalized.");
+            // }
+        } else if(e.getSource() == cancel){
+            // // Cancel transaction
+            // cart = new Transaction("NO_NAME", cart.getDate());
+            // this.updateText();
+            // JOptionPane.showMessageDialog(this, "Transaction cancelled.");
+        }
+    }
+
+    public void updateText(){
+        cartList.setText(cart.toString());
+        priceTicker.setText("P" + cart.getWorth());
     }
 }

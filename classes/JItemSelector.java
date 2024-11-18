@@ -17,7 +17,7 @@ public class JItemSelector extends JCustomFrame implements ActionListener {
     protected JButton confirmButton = new JButton("Confirm");
     protected JButton cancelButton = new JButton("Return");
 
-    private JTextArea inventoryList = new JTextArea();
+    protected JTextArea inventoryList = new JTextArea();
 
     protected Stock stock;
 
