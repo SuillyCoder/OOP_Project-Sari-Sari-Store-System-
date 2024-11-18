@@ -2,109 +2,9 @@
 import classes.group.*;
 import classes.indiv.*;
 import gui.*;
-import java.awt.*;
-import java.awt.event.*;
 import java.util.Scanner;
-import javax.swing.*;
 
-public class Main extends JFrame implements ActionListener{
-// GUI components
-private JPanel mainPanel, panelOne, panelTwo, panelTwoButtons, panelTwoLogs;
-private JButton transaction, inventory, customerDirectory, nextDay;
-private JTextArea inventoryList, customerList, dayIndicatorLabel;
-
-private Main mainMenu; 
-private JInventory inventoryPage; 
-
-public Main() {
-    super("Main Menu");
-
-    initializeUI(); // Set up GUI components
-
-    // Initialize mainMenu and inventoryPage
-    mainMenu = this; // Refers to the current Main instance
-    inventoryPage = new JInventory(new Stock()); // Pass stock or other dependencies
-
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setSize(800, 600);
-    setVisible(true);
-}
-
-public void initializeUI() {
-    // Initialize panels, buttons, etc.
-    mainPanel = new JPanel(new BorderLayout());
-    panelOne = new JPanel(new GridLayout(4, 1));
-    panelTwo = new JPanel(new BorderLayout());
-    panelTwoButtons = new JPanel();
-    panelTwoLogs = new JPanel(new BorderLayout());
-
-    transaction = new JButton("Transaction");
-    inventory = new JButton("Inventory");
-    customerDirectory = new JButton("Customer Directory");
-    nextDay = new JButton("Next Day");
-
-    inventoryList = new JTextArea();
-    customerList = new JTextArea();
-    dayIndicatorLabel = new JTextArea();
-
-    // Configure components
-    panelOne.add(transaction);
-    panelOne.add(inventory);
-    panelOne.add(customerDirectory);
-    panelOne.add(nextDay);
-
-    panelTwoButtons.add(new JButton("Daily Logs"));
-    panelTwoButtons.add(new JButton("Weekly Logs"));
-    panelTwoButtons.add(new JButton("Monthly Logs"));
-
-    //Adding Inventory and Customer Data to the Logs
-      JScrollPane scrollPane = new JScrollPane(customerList, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-      JPanel logPanel = new JPanel(new GridLayout(3, 1));
-
-        // Adding the data to the customer window
-         customerList.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 13));
-         customerList.setColumns(50);
-         customerList.setText("Empty Default\n".repeat(50));
-         panelTwoLogs.add(customerList);
-
-        // Adding the data to the inventory window
-        inventoryList.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 13));
-        inventoryList.setColumns(50);
-        inventoryList.setText("Empty Default\n".repeat(50));
-        panelTwoLogs.add(inventoryList);
-
-        panelTwoLogs.add(dayIndicatorLabel);
-
-        logPanel.add(dayIndicatorLabel);
-        logPanel.add(customerList);
-        logPanel.add(inventoryList);
-  
-      scrollPane.setViewportView(logPanel);
-      panelTwoLogs.add(scrollPane, BorderLayout.CENTER);
-
-    panelTwo.add(panelTwoButtons, BorderLayout.NORTH);
-    panelTwo.add(panelTwoLogs, BorderLayout.CENTER);
-
-
-    mainPanel.add(panelOne, BorderLayout.WEST);
-    mainPanel.add(panelTwo, BorderLayout.CENTER);
-
-    add(mainPanel);
-
-    // Add action listeners
-    transaction.addActionListener(this);
-    inventory.addActionListener(this);
-    customerDirectory.addActionListener(this);
-    nextDay.addActionListener(this);
-}
-
- //Updating Data 
- public void updateText(String day, Contacts contacts, Stock stock){
-    dayIndicatorLabel.setText(day);
-    customerList.setText(contacts.toString());
-    inventoryList.setText(stock.toString());
-  }
-
+public class Main{
 
     public static Scanner sc = new Scanner(System.in);
     public static Contacts contacts = new Contacts();
@@ -147,14 +47,9 @@ public void initializeUI() {
         }
         //INTERFACE INITIALISATIONS
 
-        Main mainMenu = new Main();
-        mainMenu.updateText(printDay(),contacts,stock);
+        JMainMenu mainMenu = new JMainMenu(history, stock, contacts);
+        mainMenu.updateText(printDay(), contacts, stock);
         mainMenu.setVisible(true);
-
-        //JInventory inventory = new JInventory(stock);
-        //inventory.updateText();
-        //inventory.setVisible(true);
-
         //JItemSelector test = new JItemSelector("Add Item");
         //test.updateText(stock);
         //test.setVisible(true);
@@ -231,14 +126,31 @@ public void initializeUI() {
         int currentDay = history.size();
         int currentWeek = ((currentDay - 1) / 7) + 1;
         int currentMonth = ((currentDay - 1) / 30) + 1; // assuming 30 days in a month
+        //Currently unsure with this formatting
         String dayLabel = ("Day " + currentDay + " (" + getWeekday(currentDay) + ") | Week " + currentWeek + " | Month " + currentMonth);
         System.out.println(dayLabel);
 
         return dayLabel;
     }
 
+    public static String printWeek(){
+        int currentDay = history.size();
+        int currentWeek = ((currentDay - 1) / 7) + 1;
+        String weekLabel = ("Week " + currentWeek);
+        System.out.println(weekLabel);
 
-    
+        return weekLabel;
+    }
+
+    public static String printMonth(){
+        int currentDay = history.size();
+        int currentMonth = ((currentDay - 1) / 30) + 1; // assuming 30 days in a month
+        String monthLabel = ("Month " + currentMonth);
+        System.out.println(monthLabel);
+        return monthLabel;
+    }
+
+
     private static String getWeekday(int day) {
         day = day % 7;
         switch (day) {
@@ -251,21 +163,5 @@ public void initializeUI() {
             case 0:     return "Sunday";
             default:    return "Invalid day";
         }
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-       if(e.getSource() == transaction){
-        JPoS transactionPage = new JPoS(history, contacts, stock);
-        this.setVisible(false);
-        transactionPage.setVisible(true);
-       }
-       else if(e.getSource() == inventory){
-        JInventory inventoryPage = new JInventory(stock);
-        System.out.println("Test!");
-        this.setVisible(false);
-        inventoryPage.updateText();
-        inventoryPage.setVisible(true);
-       }
     }
 }

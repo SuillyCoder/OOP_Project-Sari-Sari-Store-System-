@@ -15,7 +15,6 @@ import gui.InventoryGUI.JInventoryAdd;
 import gui.InventoryGUI.JInventoryChange;
 import gui.InventoryGUI.JInventoryRemove;
 import gui.InventoryGUI.JInventoryRestock;
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -37,7 +36,7 @@ public class JInventory extends JCustomFrame implements ActionListener, Document
     // Constructor for the inventory management window
     // Creates the look and feel for the window
     // Must call setStock after instantiation
-    public JInventory(Stock stock){
+    public JInventory( Stock stock){
         super("Inventory Manager");
         this.stock = stock;
         //this.contacts = ;
@@ -120,7 +119,7 @@ public class JInventory extends JCustomFrame implements ActionListener, Document
             this.setVisible(false);
         
         } else if (e.getSource() == exit) {
-            JMainMenu mainMenu = new JMainMenu();
+            JMainMenu mainMenu = new JMainMenu(null, stock, null);
             //mainMenu.updateText(printDay(), contacts, stock);
             mainMenu.setVisible(true);
             this.setVisible(false);
