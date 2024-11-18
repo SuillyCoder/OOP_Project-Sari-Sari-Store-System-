@@ -124,25 +124,24 @@ public void initializeUI() {
        }
        else if(e.getSource() == inventory){
         JInventory inventoryPage = new JInventory(this, stock);
-        System.out.println("Test!");
         this.setVisible(false);
         inventoryPage.updateText();
         inventoryPage.setVisible(true);
        }
 
        //Log Displays
-       /*else if(e.getSource() == dailyLogs){
-        this.updateText(printDay(),contacts,stock);
-        this.setVisible(true);
+       else if(e.getSource() == dailyLogs){
+        dayIndicatorLabel.setText(history.toString());
+        this.updateText();
        }
        else if(e.getSource() == weeklyLogs){
-        System.out.println("WEEK!");
-        this.updateText(printWeek(),contacts,stock);
+        this.updateText();
+        dayIndicatorLabel.setText(history.weekSummary().toString());
        }
        else if(e.getSource() == monthlyLogs){
-        System.out.println("MONTH!");
-        this.updateText(printMonth(),contacts,stock);
-       }*/
+        this.updateText();
+        dayIndicatorLabel.setText(history.monthSummary().toString());
+       }
     }
 }
 

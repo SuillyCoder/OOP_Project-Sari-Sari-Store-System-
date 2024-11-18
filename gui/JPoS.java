@@ -115,8 +115,6 @@ public class JPoS extends JCustomFrame implements ActionListener {
                 }
                 returnToMenu();
                 JOptionPane.showMessageDialog(this, "Transaction cancelled!");
-                mainMenu.setVisible(true);
-                
             }
         }
     }
@@ -128,7 +126,7 @@ public class JPoS extends JCustomFrame implements ActionListener {
 
     public void returnToMenu(){
         this.dispose();
-
+        parentFrame.updateText();
         parentFrame.setVisible(true);
     }
 }
