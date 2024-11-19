@@ -45,6 +45,6 @@ public class Customer implements Comparable<Customer> {
     }
 
     public String toString() {
-        return "Name: " + name + "\t\tCredit: P" + String.format("%.2f", credit) + "\t\tLast Credit Date: " + date;
+        return String.format(" %-10s %-15s %10.2f %7d", this.getName(), this.getContactNo(), this.getCredit(), this.getDate());
     }
 }
