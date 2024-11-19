@@ -1,6 +1,10 @@
-package classes;
+// Template frame for all JInventory submenus
 
+package gui.InventoryGUI;
+
+import classes.JCustomFrame;
 import classes.group.Stock;
+import gui.JInventory;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -19,12 +23,13 @@ public class JItemSelector extends JCustomFrame implements ActionListener {
 
     protected JTextArea inventoryList = new JTextArea();
 
+    protected JInventory parentFrame;
     protected Stock stock;
 
-    public JItemSelector(String description, Stock stock, boolean enableCategory, boolean enableQuantity, boolean enablePrice) {
+    public JItemSelector(JInventory parentFrame, String description, Stock stock, boolean enableCategory, boolean enableQuantity, boolean enablePrice) {
         super("Inventory List");
         Container con = getContentPane();
-
+        this.parentFrame = parentFrame;
         this.stock = stock;
 
         // Inventory list at the center of the window

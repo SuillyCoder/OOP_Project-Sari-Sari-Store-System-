@@ -4,7 +4,7 @@ package gui.InventoryGUI;
 
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
-import classes.JItemSelector;
+
 import classes.group.Stock;
 import gui.JInventory;
 

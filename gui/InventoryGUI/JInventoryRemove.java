@@ -4,7 +4,7 @@ package gui.InventoryGUI;
 
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
-import classes.JItemSelector;
+
 import classes.group.Stock;
 import gui.JInventory;
 
@@ -18,12 +18,14 @@ public class JInventoryRemove extends JItemSelector {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == itemName) {
-            confirm();
+        // When user confirms of adding the item
+        // By pressing enter on any field
+        if (e.getSource() == itemName) { confirm();
 
-        } else if (e.getSource() == confirmButton) {
-            confirm();
+        // By pressing the confirm button
+        } else if (e.getSource() == confirmButton) { confirm();
 
+        // Return to Inventory submenu
         } else if (e.getSource() == cancelButton) {
             this.dispose();
             parentFrame.updateText();
