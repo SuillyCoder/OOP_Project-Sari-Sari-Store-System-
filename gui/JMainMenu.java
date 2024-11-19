@@ -106,6 +106,7 @@ public void initializeUI() {
     dailyLogs.addActionListener(this);
     weeklyLogs.addActionListener(this);
     monthlyLogs.addActionListener(this);
+    saveButton.addActionListener(this);
 
     // Decorate the frame
     dayIndicatorLabel.setEditable(false);
