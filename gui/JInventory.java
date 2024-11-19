@@ -33,8 +33,6 @@ public class JInventory extends JCustomFrame implements ActionListener, Document
 
     private JMainMenu parentFrame;
     private Stock stock;
-    private Contacts contacts;
-    private History history;
 
     // Constructor for the inventory management window
     // Creates the look and feel for the window

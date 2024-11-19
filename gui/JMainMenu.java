@@ -7,16 +7,15 @@ import javax.swing.*;
 
 public class JMainMenu extends JCustomFrame implements ActionListener{
 
-   // GUI components
+    // GUI components
     private JPanel mainPanel, panelOne, panelTwo, panelTwoButtons, panelTwoLogs;
     private JButton transaction, inventory, customerDirectory, nextDay, dailyLogs, weeklyLogs, monthlyLogs;
     private JTextArea inventoryList, customerList, dayIndicatorLabel;
 
     // GUI pages
-private JInventory inventoryPage; 
-public static Contacts contacts;
-public static Stock stock;
-public static History history;
+    public Contacts contacts;
+    public Stock stock;
+    public History history;
 
 public JMainMenu(History history, Stock stock, Contacts contacts) {
     super("Main Menu");

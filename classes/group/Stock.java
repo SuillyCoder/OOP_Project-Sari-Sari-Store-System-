@@ -17,6 +17,8 @@ import classes.NamedMap;
 import classes.indiv.Item;
 
 public class Stock extends NamedMap<Item> {
+    private static final int LOW_INVENTORY_THRESHOLD = 5;
+
     // adding a single item in the stock
     public void addItem(String name, Item item) {
         name = name.trim().toLowerCase();
@@ -82,6 +84,17 @@ public class Stock extends NamedMap<Item> {
         }
     
         return filteredStock.toString();
+    }
+
+    public String lowInventoryNotifier(){
+        String res = "";	
+        for (String key : this.keySet()) {
+            Item item = this.get(key);
+            if (item.getQuantity() < LOW_INVENTORY_THRESHOLD) {
+                res += "Stock of " + item.getName() + " is low (" + item.getQuantity() + " remaining)!\n";
+            }
+        }
+        return res;
     }
 
     // file read and write operations

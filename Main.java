@@ -32,7 +32,7 @@ public class Main{
         System.out.println(contacts);
         System.out.println(stock);
         System.out.println(history);
-        Inventory.lowInventoryNotifier(stock);
+        System.out.println(stock.lowInventoryNotifier());
 
         // // Remove the last log if no transactions were made
         // if (history.get(currentDay-1).getTotalWorth() == 0 && history.get(currentDay-1).getTotalPayment() == 0) {
