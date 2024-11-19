@@ -6,15 +6,15 @@ import classes.NamedMap;
 import classes.group.Stock;
 
 public class Transaction {
-    private NamedMap<Item> items;       // treat like a "cart" during a transaction
+    private Stock items;       // treat like a "cart" during a transaction
     private String customer;
     private int date;
-    private double payment;             // Payment made by the customer
-    private double worth;               // Worth of the cart
+    private double payment;    // Payment made by the customer
+    private double worth;      // Worth of the cart
 
     // constructor for date only
     public Transaction(int date) {
-        this.items = new NamedMap<>();  // empty cart
+        this.items = new Stock();  // empty cart
         this.setCustomer("NO_NAME");
         this.setDate(date);
         this.setPayment(0);
@@ -43,19 +43,10 @@ public class Transaction {
     public double getRevenue() { return this.getPayment() - this.getWorth(); }
 
     public String toString() {
-        String output = "Transaction Summary\nCustomer: " + this.getCustomer() + "\tDate: " + date + "\n";
+        String output = String.format(" %-15s %-15s %10s %5s %10s\n", "Name", "Category", "Price", "Qty", "");
         for (Item i : items.values()) {
-            output += i.toString() + "\n";
+            output += i.totalizedString() + "\n";
         }
-        output += "Worth: " + worth + "\n";
         return output;
-    }
-
-    public Stock toStock() {
-        Stock stock = new Stock();
-        for (Item i : items.values()) {
-            stock.addItem(i.getName(), i);
-        }
-        return stock;
     }
 }

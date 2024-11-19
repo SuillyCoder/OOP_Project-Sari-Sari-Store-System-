@@ -2,16 +2,9 @@
 
 package classes.group;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.io.*;
+import java.util.*;
+import java.util.stream.*;
 
 import classes.NamedMap;
 import classes.indiv.Item;
@@ -47,7 +40,7 @@ public class Stock extends NamedMap<Item> {
     }
 
     public String toString() {
-        String inventory = "Inventory: " + this.size() + " SKUs\n";
+        String inventory = String.format("  %-15s %-15s %10s %5s %10s", "Name", "Category", "Price", "Qty", "");
     
         // Group items by category
         Map<String, List<Item>> itemsByCategory = this.values().stream()
@@ -59,13 +52,13 @@ public class Stock extends NamedMap<Item> {
     
         // Print items by category, each sorted alphabetically within the category
         for (String category : sortedCategories) {
-            inventory += category.toUpperCase() + "\n";
+            inventory += "\n " + category.toUpperCase() + "\n";
     
             List<Item> itemsInCategory = itemsByCategory.get(category);
             itemsInCategory.sort((item1, item2) -> item1.getName().compareToIgnoreCase(item2.getName()));
     
             for (Item item : itemsInCategory) {
-                inventory += "  " + item.toString() + "\n"; // Adjust to control item format if needed
+                inventory += " " + item.toString() + "\n"; // Adjust to control item format if needed
             }
         }
         inventory += "\n";
@@ -75,15 +68,16 @@ public class Stock extends NamedMap<Item> {
     
     public String search(String search) {
         Stock filteredStock = new Stock();
-
         for (String key : this.keySet()) {
             Item item = this.get(key);
-            if (item.getName().toLowerCase().contains(search.toLowerCase())) {
+            if (item.getName().contains(search)) {
                 filteredStock.addItem(key, item);
             }
         }
     
-        return filteredStock.toString();
+        return " " + (search.equals("") ? filteredStock.size() + " SKUs\n\n"
+                : "Search results for " + search + "\n " + filteredStock.size() + " SKUs\n\n") + 
+                filteredStock.toString();
     }
 
     public String lowInventoryNotifier(){

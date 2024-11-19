@@ -123,7 +123,7 @@ public class JItemSelector extends JCustomFrame implements ActionListener {
     // Accessors
     public String getItemName() {
         try {
-            return itemName.getText();
+            return itemName.getText().strip();
         } catch (Exception e) {
             e.printStackTrace();
             return "";
@@ -131,7 +131,7 @@ public class JItemSelector extends JCustomFrame implements ActionListener {
     }
     public String getItemCategory() {
         try {
-            return itemCategory.getText();
+            return itemCategory.getText().strip();
         } catch (Exception e) {
             e.printStackTrace();
             return "";

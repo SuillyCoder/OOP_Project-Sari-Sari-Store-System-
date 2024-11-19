@@ -99,7 +99,7 @@ public class JCartSelector extends JCustomFrame implements ActionListener, Docum
     // Accessors
     public String getItemName() {
         try {
-            return itemName.getText();
+            return itemName.getText().strip();
         } catch (Exception e) {
             e.printStackTrace();
             return "";
@@ -149,7 +149,7 @@ public class JCartSelector extends JCustomFrame implements ActionListener, Docum
             String search = getItemName();
             itemList.setText(stock.search(search));
         } else if (displayMode == DISPLAY_CART){
-            itemList.setText(cart.toStock().toString());
+            itemList.setText(cart.toString());
         }
     }
 }

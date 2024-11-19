@@ -45,10 +45,10 @@ public class Item implements Cloneable, Comparable<Item> {
     public void decQuantity(int quantity) { this.quantity = Math.max(0, this.quantity - quantity); }
 
     public String toString() {
+        return String.format(" %-15s %-15s %10.2f %5d", this.getName(), this.getCategory(), this.getPrice(), this.getQuantity());
+    }
 
-        return String.format("%-15s %-15s P%-5.2f     %-3d", this.getName(), this.getCategory(), this.getPrice(), this.getQuantity());
-        
-        // return "Name: " + this.getName() + "\tCategory: " + this.getCategory() +
-        //         "\tPrice: " + this.getPrice() + "\tQuantity: " + this.getQuantity();
+    public String totalizedString() {
+        return this.toString() + String.format(" %10.2f", this.getPrice() * this.getQuantity());
     }
 }
