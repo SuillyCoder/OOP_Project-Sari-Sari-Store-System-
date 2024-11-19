@@ -5,31 +5,20 @@ package classes.indiv;
 import classes.NamedMap;
 import classes.group.Stock;
 
-public class Transaction implements Cloneable {
-    private NamedMap<Item> items;       // treat like a "cart" during a transaction
+public class Transaction {
+    private Stock items;       // treat like a "cart" during a transaction
     private String customer;
     private int date;
-    private double payment;             // Payment made by the customer
-    private double worth;               // Worth of the cart
+    private double payment;    // Payment made by the customer
+    private double worth;      // Worth of the cart
 
-    // constructor: provide customer name and date
-    public Transaction(String customer, int date) {
-        this.items = new NamedMap<>();  // empty cart
-        this.customer = customer;
-        this.date = date;
-        this.payment = 0;
-        this.worth = 0;
-    }
-
-    @Override
-    public Transaction clone() {
-        Transaction transaction = new Transaction(this.customer, this.date);
-        for (Item i : this.items.values()) {
-            transaction.addItem(i.clone());
-        }
-        transaction.payment = this.payment;
-        transaction.worth = this.worth;
-        return transaction;
+    // constructor for date only
+    public Transaction(int date) {
+        this.items = new Stock();  // empty cart
+        this.setCustomer("NO_NAME");
+        this.setDate(date);
+        this.setPayment(0);
+        this.setWorth(0);
     }
 
     public NamedMap<Item> getItems() { return items; }
@@ -47,25 +36,17 @@ public class Transaction implements Cloneable {
     public void setPayment(double payment) { this.payment = payment; }
 
     public double getWorth() { return this.worth; }
+    public void setWorth(double worth) { this.worth = worth; }
     public void incWorth(double worth) { this.worth += worth; }
     public void decWorth(double worth) { this.worth -= worth; }
 
     public double getRevenue() { return this.getPayment() - this.getWorth(); }
 
     public String toString() {
-        String output = "Transaction Summary\nCustomer: " + this.getCustomer() + "\tDate: " + date + "\n";
+        String output = String.format(" %-15s %-15s %10s %5s %10s\n", "Name", "Category", "Price", "Qty", "");
         for (Item i : items.values()) {
-            output += i.toString() + "\n";
+            output += i.totalizedString() + "\n";
         }
-        output += "Worth: " + worth + "\n";
         return output;
-    }
-
-    public Stock toStock() {
-        Stock stock = new Stock();
-        for (Item i : items.values()) {
-            stock.addItem(i.getName(), i);
-        }
-        return stock;
     }
 }

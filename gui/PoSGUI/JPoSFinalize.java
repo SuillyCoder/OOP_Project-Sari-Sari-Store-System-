@@ -22,6 +22,7 @@ public class JPoSFinalize extends JCustomFrame implements ActionListener, Docume
     protected JTextArea customerList = new JTextArea();
     protected JTextField customerName = new JTextField(20);
     protected JTextField payment = new JTextField(20);
+    private JLabel cartWorth = new JLabel();
 
     // Saving constructor arguments to class
     private JPoS parentFrame;
@@ -40,7 +41,7 @@ public class JPoSFinalize extends JCustomFrame implements ActionListener, Docume
         this.cart = cart;
 
         // Dashboard at the center of the window
-        JPanel dashboard = new JPanel(new BorderLayout());
+        JPanel dashboard = new JPanel(new GridLayout(2, 1));
             // Cart details on the upper half
             JPanel cartDetails = new JPanel(new BorderLayout());
                 JLabel cartHeader = new JLabel("Contents of Cart");
@@ -50,8 +51,13 @@ public class JPoSFinalize extends JCustomFrame implements ActionListener, Docume
                     cartList.setColumns(50);
                     cartList.setText("Empty Default\n".repeat(50));
                     cartPane.add(cartList);
+                JPanel worthLabels = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+                    JLabel cartWorthLabel = new JLabel("Subtotal: P");
+                    worthLabels.add(cartWorthLabel);
+                    worthLabels.add(cartWorth);
                 cartDetails.add(cartHeader, BorderLayout.NORTH);
                 cartDetails.add(scroll, BorderLayout.CENTER);
+                cartDetails.add(worthLabels, BorderLayout.SOUTH);
             
             // customer list on the lower half
             JPanel customerDetails = new JPanel(new BorderLayout());
@@ -64,8 +70,8 @@ public class JPoSFinalize extends JCustomFrame implements ActionListener, Docume
                     customerPane.add(customerList);
                 customerDetails.add(customerHeader, BorderLayout.NORTH);
                 customerDetails.add(scroll2, BorderLayout.CENTER);
-            dashboard.add(cartDetails, BorderLayout.NORTH);
-            dashboard.add(customerDetails, BorderLayout.CENTER);
+            dashboard.add(cartDetails);
+            dashboard.add(customerDetails);
         con.add(dashboard, BorderLayout.CENTER);
 
         // Fields at the bottom of the window
@@ -109,7 +115,7 @@ public class JPoSFinalize extends JCustomFrame implements ActionListener, Docume
     // Accessors
     public String getCustomerName() {
         try {
-            return customerName.getText();
+            return customerName.getText().strip();
         } catch (Exception e) {
             e.printStackTrace();
             return "";
@@ -156,11 +162,12 @@ public class JPoSFinalize extends JCustomFrame implements ActionListener, Docume
         double outstanding, revenue;
 
         // Failure cases
-        // if any field is empty
-            if (customerName.equals("") || payment == 0.0) {
-                JOptionPane.showMessageDialog(this, "Enter all fields properly first!");
-                return;
-            }
+        // if there is no name entered
+        // payment of 0 is valid
+        if (customerName.equals("")) {
+            JOptionPane.showMessageDialog(this, "Enter all fields properly first!");
+            return;
+        }
         
         // Otherwise
         // customer from customerName, either existing or new
@@ -182,7 +189,6 @@ public class JPoSFinalize extends JCustomFrame implements ActionListener, Docume
         }
 
         // otherwise the transaction is approved
-
         // if the customer has paid off the debt
         if (revenue == 0) {
             contacts.remove(customerName);
@@ -193,20 +199,38 @@ public class JPoSFinalize extends JCustomFrame implements ActionListener, Docume
             customer.setDate(cart.getDate());
         }
 
+        // update the transaction details
         cart.setCustomer(customerName);
         cart.setPayment(payment);
 
+        // update the logs
         history.addTransaction(cart);
+
+        // if the customer has no contact information in the contacts
+        if (contacts.containsKey(customerName) && contacts.get(customerName).getContactNo().equalsIgnoreCase("")) {
+            String contactNo = JOptionPane.showInputDialog(this, "Enter contact number for " + customerName + ":");
+            contacts.get(customerName).setContactNo(contactNo);
+
+            if (contactNo.equalsIgnoreCase("")) {
+                JOptionPane.showMessageDialog(this, "No contact number entered.\nTransaction finalized!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Contact number recorded.\nTransaction finalized!");
+            }
+
+        // otherwise, no need to ask for contact number
+        } else {
+            JOptionPane.showMessageDialog(this, "Transaction finalized!");
+        }
 
         // return to parent frame
         this.dispose();
         parentFrame.returnToMenu();
-        JOptionPane.showMessageDialog(this, "Transaction finalized.");
     }
 
     // For updating all text areas
     public void updateText(){
         cartList.setText(cart.toString());
+        cartWorth.setText(String.format("%.2f", cart.getWorth()));
 
         String search = getCustomerName();
         customerList.setText(contacts.search(search));

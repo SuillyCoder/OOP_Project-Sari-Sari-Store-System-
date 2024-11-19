@@ -16,7 +16,7 @@ public class Contacts extends NamedMap<Customer> {
 
     // prints the list of all customers
     public String toString() {
-        String res = "";
+        String res = String.format(" %-10s %-15s %10s %7s\n", "Name", "Contact No.", "Credit", "Date");
 
         ArrayList<Customer> sortedCustomers = new ArrayList<>(this.values());
         Collections.sort(sortedCustomers);

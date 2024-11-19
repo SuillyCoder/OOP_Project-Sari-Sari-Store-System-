@@ -47,7 +47,7 @@ public class JPoS extends JCustomFrame implements ActionListener {
         this.history = history;
         this.stock = stock;
         
-        this.cart = new Transaction("NO_NAME", history.size());
+        this.cart = new Transaction(history.size());
         Container con = getContentPane();
 
         // Add buttons to the left of the window
