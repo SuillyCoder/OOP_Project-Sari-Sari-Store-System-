@@ -6,20 +6,22 @@ package classes.indiv;
 
 public class Customer implements Comparable<Customer> {
     private String name;
-    private double credit;  // negative means debt, positive means advance
-    private int date;       // date of last payment
+    private String contactNo;
+    private double credit;      // negative means debt, positive means advance
+    private int date;           // date of last payment
     
-
     // constructor: supply name only
     public Customer(String name) {
         this.setName(name);
+        this.setContactNo("");
         this.setCredit(0);
         this.setDate(0);
     }
 
     // constructor used in file reading
-    public Customer(String name, double credit, int date) {
+    public Customer(String name, String contactNo, double credit, int date) {
         this.setName(name);
+        this.setContactNo(contactNo);
         this.setCredit(credit);
         this.setDate(date);
     }
@@ -27,6 +29,9 @@ public class Customer implements Comparable<Customer> {
     // accessors and mutators
     public String getName() { return name; }
     public void setName(String name) { this.name = name.strip(); }
+
+    public String getContactNo() { return contactNo; }
+    public void setContactNo(String contactNo) { this.contactNo = contactNo.strip(); }
     
     public double getCredit() { return credit; }
     public void setCredit(double credit) { this.credit = credit; }

@@ -2,14 +2,8 @@
 
 package classes.group;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 
 import classes.NamedMap;
 import classes.indiv.Customer;
@@ -22,7 +16,7 @@ public class Contacts extends NamedMap<Customer> {
 
     // prints the list of all customers
     public String toString() {
-        String res = "Customer Catalog: " + this.size() + " customers\n";
+        String res = "";
 
         ArrayList<Customer> sortedCustomers = new ArrayList<>(this.values());
         Collections.sort(sortedCustomers);
@@ -42,7 +36,7 @@ public class Contacts extends NamedMap<Customer> {
             }
         }
 
-        return filteredContacts.toString();
+        return (name.equals("") ? "" : "Search results for " + name + "\n" + filteredContacts.size() + " results\n\n") + filteredContacts.toString();
     }
     
     // file read and write operations
@@ -51,14 +45,15 @@ public class Contacts extends NamedMap<Customer> {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
-                if (parts.length == 3) {
+                if (parts.length == 4) {
                     String name = parts[0].strip();
-                    double credit = Double.parseDouble(parts[1].strip());
-                    int date = Integer.parseInt(parts[2].strip());
+                    String contactNo = parts[1].strip();
+                    double credit = Double.parseDouble(parts[2].strip());
+                    int date = Integer.parseInt(parts[3].strip());
                     
                     // Only add customers with credit != 0
                     if (credit != 0) {
-                        this.put(name, new Customer(name, credit, date));
+                        this.put(name, new Customer(name, contactNo, credit, date));
                     }
                 }
             }
@@ -76,7 +71,7 @@ public class Contacts extends NamedMap<Customer> {
                 Customer customer = entry.getValue();
                 // Write only customers with credit != 0
                 if (customer.getCredit() != 0) {
-                    bw.write(customer.getName() + "," + customer.getCredit() + "," + customer.getDate());
+                    bw.write(customer.getName() + "," + customer.getContactNo() + "," + customer.getCredit() + "," + customer.getDate());
                     bw.newLine();
                 }
             }
