@@ -14,22 +14,6 @@ public class JInventoryRemove extends JItemSelector {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        // When user confirms of adding the item
-        // By pressing enter on any field
-        if (e.getSource() == itemName) { confirm();
-
-        // By pressing the confirm button
-        } else if (e.getSource() == confirmButton) { confirm();
-
-        // Return to Inventory submenu
-        } else if (e.getSource() == cancelButton) {
-            this.dispose();
-            parentFrame.updateText();
-            parentFrame.setVisible(true); // Make the parent frame visible again
-        }
-    }
-
     public void confirm() {
         String itemName = getItemName();
 

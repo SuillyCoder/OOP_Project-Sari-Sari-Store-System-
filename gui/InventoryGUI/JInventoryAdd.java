@@ -14,27 +14,8 @@ public class JInventoryAdd extends JItemSelector {
         super(parentFrame, "Add Item", stock, true, true, true);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // When user confirms of adding the item
-        // By pressing enter on any field
-        if (e.getSource() == itemName) { confirm();
-        } else if (e.getSource() == itemCategory) { confirm();
-        } else if (e.getSource() == itemQuantity) { confirm();
-        } else if (e.getSource() == itemPrice) { confirm();
-        
-        // By pressing the confirm button
-        } else if (e.getSource() == confirmButton) { confirm();
-
-        // Return to Inventory submenu
-        } else if (e.getSource() == cancelButton) {
-            this.dispose();
-            parentFrame.updateText();
-            parentFrame.setVisible(true);
-        }
-    }
-
     // When user confirms of adding the item
+    @Override
     public void confirm() {
         // Get item details from user
         String itemName = getItemName();

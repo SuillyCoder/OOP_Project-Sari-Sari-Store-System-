@@ -2,7 +2,6 @@
 
 package gui.InventoryGUI;
 
-import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 
 import classes.group.Stock;
@@ -14,23 +13,6 @@ public class JInventoryRestock extends JItemSelector {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == itemName) {
-            confirm();
-
-        } else if (e.getSource() == itemQuantity) {
-            confirm();
-
-        } else if (e.getSource() == confirmButton) {
-            confirm();
-
-        } else if (e.getSource() == cancelButton) {
-            this.dispose();
-            parentFrame.updateText();
-            parentFrame.setVisible(true); // Make the parent frame visible again
-        }
-    }
-
     public void confirm() {
         String itemName = getItemName();
         int itemQuantity = getItemQuantity();

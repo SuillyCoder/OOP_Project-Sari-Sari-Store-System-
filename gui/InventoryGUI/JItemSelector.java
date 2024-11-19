@@ -13,17 +13,17 @@ import javax.swing.*;
 
 public class JItemSelector extends JCustomFrame implements ActionListener {
 
-    protected JTextField itemName = new JTextField(20);
-    protected JTextField itemCategory = new JTextField(20);
-    protected JTextField itemQuantity = new JTextField(20);
-    protected JTextField itemPrice = new JTextField(20);
+    private JTextField itemName = new JTextField(20);
+    private JTextField itemCategory = new JTextField(20);
+    private JTextField itemQuantity = new JTextField(20);
+    private JTextField itemPrice = new JTextField(20);
 
-    protected JButton confirmButton = new JButton("Confirm");
-    protected JButton cancelButton = new JButton("Return");
+    private JButton confirmButton = new JButton("Confirm");
+    private JButton cancelButton = new JButton("Return");
 
-    protected JTextArea inventoryList = new JTextArea();
+    private JTextArea inventoryList = new JTextArea();
 
-    protected JInventory parentFrame;
+    private JInventory parentFrame;
     protected Stock stock;
 
     public JItemSelector(JInventory parentFrame, String description, Stock stock, boolean enableCategory, boolean enableQuantity, boolean enablePrice) {
@@ -115,31 +115,23 @@ public class JItemSelector extends JCustomFrame implements ActionListener {
         cancelButton.addActionListener(this);
     }
 
-    // should be overridden
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == itemName) {
-            JOptionPane.showMessageDialog(this, "Item name field confirmed");
-
-        } else if (e.getSource() == itemCategory) {
-            JOptionPane.showMessageDialog(this, "Item category field confirmed");
-
-        } else if (e.getSource() == itemQuantity) {
-            JOptionPane.showMessageDialog(this, "Item quantity field confirmed");
-            
-        } else if (e.getSource() == itemPrice) {
-            JOptionPane.showMessageDialog(this, "Item price field confirmed");
+        // When user confirms of adding the item
+        // By pressing enter on any field
+        if (e.getSource() == itemName) { confirm();
+        } else if (e.getSource() == itemCategory) { confirm();
+        } else if (e.getSource() == itemQuantity) { confirm();
+        } else if (e.getSource() == itemPrice) { confirm();
         
-        } else if (e.getSource() == confirmButton) {
-            JOptionPane.showMessageDialog(this, "Confirm button pressed");
+        // By pressing the confirm button
+        } else if (e.getSource() == confirmButton) { confirm();
 
+        // Return to Inventory submenu
         } else if (e.getSource() == cancelButton) {
-            JOptionPane.showMessageDialog(this, "Cancel button pressed");
-
+            this.dispose();
+            parentFrame.updateText();
+            parentFrame.setVisible(true);
         }
-    }
-
-    public void updateText(){
-        inventoryList.setText(stock.toString());
     }
 
     public String getItemName() {
@@ -180,5 +172,14 @@ public class JItemSelector extends JCustomFrame implements ActionListener {
             e.printStackTrace();
             return 0.0;
         }
+    }
+
+    // Should be overriden
+    public void confirm(){
+        throw(new UnsupportedOperationException("Method not implemented"));
+    }
+
+    public void updateText(){
+        inventoryList.setText(stock.toString());
     }
 }
