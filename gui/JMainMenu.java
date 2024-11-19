@@ -9,7 +9,7 @@ public class JMainMenu extends JCustomFrame implements ActionListener{
 
     // GUI components
     private JPanel mainPanel, panelOne, panelTwo, panelTwoButtons, panelTwoLogs;
-    private JButton transaction, inventory, customerDirectory, nextDay, dailyLogs, weeklyLogs, monthlyLogs;
+    private JButton transaction, inventory, customerDirectory, nextDay, dailyLogs, weeklyLogs, monthlyLogs, saveButton;
     private JTextArea inventoryList, customerList, dayIndicatorLabel;
 
     // GUI pages
@@ -33,7 +33,7 @@ public JMainMenu(History history, Stock stock, Contacts contacts) {
 public void initializeUI() {
     // Initialize panels, buttons, etc.
     mainPanel = new JPanel(new BorderLayout());
-    panelOne = new JPanel(new GridLayout(4, 1));
+    panelOne = new JPanel(new GridLayout(5, 1));
     panelTwo = new JPanel(new BorderLayout());
     panelTwoButtons = new JPanel(new GridLayout(1,3));
     panelTwoLogs = new JPanel(new BorderLayout());
@@ -42,6 +42,7 @@ public void initializeUI() {
     inventory = new JButton("Inventory");
     customerDirectory = new JButton("Customer Directory");
     nextDay = new JButton("Next Day");
+    saveButton = new JButton("Save and Exit");
 
     dailyLogs = new JButton("Daily Logs");
     weeklyLogs = new JButton("Weekly Logs");
@@ -56,6 +57,7 @@ public void initializeUI() {
     panelOne.add(inventory);
     panelOne.add(customerDirectory);
     panelOne.add(nextDay);
+    panelOne.add(saveButton);
 
     panelTwoButtons.add(dailyLogs);
     panelTwoButtons.add(weeklyLogs);
@@ -103,6 +105,7 @@ public void initializeUI() {
     dailyLogs.addActionListener(this);
     weeklyLogs.addActionListener(this);
     monthlyLogs.addActionListener(this);
+    saveButton.addActionListener(this);
 }
 
  //Updating Data 
@@ -134,6 +137,12 @@ public void initializeUI() {
        } else if (e.getSource() == nextDay) {
         // Main.nextDay();
         // this.updateText();
+       }
+      else if (e.getSource() == saveButton) {
+        this.dispose();
+        stock.toFile();
+        contacts.toFile();
+        history.toFile();
        }
 
        //Log Displays
