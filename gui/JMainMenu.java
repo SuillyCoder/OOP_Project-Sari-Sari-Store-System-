@@ -141,8 +141,8 @@ public void initializeUI() {
         // customerDirectoryPage.updateText();
         customerDirectoryPage.setVisible(true);
        } else if (e.getSource() == nextDay) {
-        // Main.nextDay();
-        // this.updateText();
+        history.nextDay();
+        this.updateText();
        }
       else if (e.getSource() == saveButton) {
         this.dispose();

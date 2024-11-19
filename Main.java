@@ -31,10 +31,5 @@ public class Main{
         System.out.println(stock);
         System.out.println(history);
         System.out.println(stock.lowInventoryNotifier());
-
-        // // Save data to files
-        // stock.toFile();
-        // contacts.toFile();
-        // history.toFile();
     }
 }
