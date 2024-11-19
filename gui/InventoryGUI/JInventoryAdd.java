@@ -2,7 +2,6 @@
 
 package gui.InventoryGUI;
 
-import java.awt.event.*;
 import javax.swing.*;
 
 import classes.group.Stock;
@@ -14,9 +13,9 @@ public class JInventoryAdd extends JItemSelector {
         super(parentFrame, "Add Item", stock, true, true, true);
     }
 
-    // When user confirms of adding the item
+    // When user confirms of the item
     @Override
-    public void confirm() {
+    protected void confirm() {
         // Get item details from user
         String itemName = getItemName();
         String itemCategory = getItemCategory();

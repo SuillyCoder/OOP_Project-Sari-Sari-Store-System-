@@ -1,16 +1,15 @@
+// Submenu for finalizing the transaction
+
 package gui.PoSGUI;
 
 import java.awt.*;
 import java.awt.event.*;
-
 import javax.swing.*;
 import javax.swing.event.*;
 
 import classes.JCustomFrame;
-import classes.group.Contacts;
-import classes.group.History;
-import classes.indiv.Customer;
-import classes.indiv.Transaction;
+import classes.group.*;
+import classes.indiv.*;
 import gui.JPoS;
 
 public class JPoSFinalize extends JCustomFrame implements ActionListener, DocumentListener {

@@ -8,7 +8,6 @@ import gui.JInventory;
 
 import java.awt.*;
 import java.awt.event.*;
-
 import javax.swing.*;
 
 public class JItemSelector extends JCustomFrame implements ActionListener {
@@ -116,7 +115,7 @@ public class JItemSelector extends JCustomFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        // When user confirms of adding the item
+        // When user confirms of the item
         // By pressing enter on any field
         if (e.getSource() == itemName) { confirm();
         } else if (e.getSource() == itemCategory) { confirm();
@@ -175,7 +174,7 @@ public class JItemSelector extends JCustomFrame implements ActionListener {
     }
 
     // Should be overriden
-    public void confirm(){
+    protected void confirm(){
         throw(new UnsupportedOperationException("Method not implemented"));
     }
 
