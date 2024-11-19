@@ -10,14 +10,14 @@
 
 package gui;
 
-import classes.JCustomFrame;
-import classes.group.*;
-import gui.InventoryGUI.*;
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
+
+import classes.JCustomFrame;
+import classes.group.Stock;
+import gui.InventoryGUI.*;
 
 public class JInventory extends JCustomFrame implements ActionListener, DocumentListener {
     // Buttons
@@ -31,7 +31,7 @@ public class JInventory extends JCustomFrame implements ActionListener, Document
     private JTextArea inventoryList = new JTextArea();
     private JTextField searchItem = new JTextField(20);
 
-    // saving constructor arguments
+    // Saving constructor arguments to class
     private JMainMenu parentFrame;
     private Stock stock;
 
@@ -56,11 +56,10 @@ public class JInventory extends JCustomFrame implements ActionListener, Document
         JPanel inventoryWindow = new JPanel(new BorderLayout());
             // Header for the inventory list
             JLabel header = new JLabel("Current Inventory");
-                header.setFont(new Font("Arial", Font.BOLD, 20));
             // Scrollable inventory list
             JPanel itemWindow = new JPanel();
             JScrollPane scroll = new JScrollPane(itemWindow, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-                inventoryList.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 13));
+                inventoryList.setEditable(false);
                 inventoryList.setColumns(50);
                 inventoryList.setText("Empty Default\n".repeat(50));
                 itemWindow.add(inventoryList);
@@ -81,6 +80,10 @@ public class JInventory extends JCustomFrame implements ActionListener, Document
         restock.addActionListener(this);
         exit.addActionListener(this);
         searchItem.getDocument().addDocumentListener(this);
+
+        // Decorating the frame
+        header.setFont(Theme.HEADER2_FONT);
+        inventoryList.setFont(Theme.MONO_FONT);
 
         updateText();
     }
@@ -128,12 +131,10 @@ public class JInventory extends JCustomFrame implements ActionListener, Document
     @Override public void insertUpdate(DocumentEvent e) { updateText(); }
     @Override public void changedUpdate(DocumentEvent e) { updateText(); }
     @Override public void removeUpdate(DocumentEvent e) { updateText(); }
+
+    // For updating all text areas
     public void updateText(){
         String search = searchItem.getText();
         inventoryList.setText(stock.search(search));
-    }
-
-    public void setStock(Stock stock){
-        this.stock = stock;
     }
 }

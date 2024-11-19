@@ -1,51 +1,22 @@
+// Submenu for removing items from cart
+
 package gui.PoSGUI;
 
-import java.awt.event.ActionEvent;
-import javax.swing.JOptionPane;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
+import javax.swing.*;
 
-import classes.JItemSelector;
 import classes.NamedMap;
 import classes.group.Stock;
-import classes.indiv.Item;
-import classes.indiv.Transaction;
+import classes.indiv.*;
 import gui.JPoS;
 
-public class JPoSRemove extends JItemSelector implements DocumentListener {
-
-    private Transaction cart;
-    private JPoS parentFrame;
-    
-    
+public class JPoSRemove extends JCartSelector {
     public JPoSRemove(JPoS parentFrame, Stock stock, Transaction cart) {
-        super("Remove Item from cart", cart.toStock(), false, true, false);
-        this.cart = cart;
-        this.stock = stock;
-        this.parentFrame = parentFrame;
-
-        this.updateText();
-        this.setVisible(true);
-
-        itemName.getDocument().addDocumentListener(this);
+        super(parentFrame, stock, cart, JCartSelector.DISPLAY_CART);
     }
 
+    // When user confirms of the item
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == itemName) {
-            confirm();
-        } else if (e.getSource() == itemQuantity) {
-            confirm();
-        } else if (e.getSource() == confirmButton) {
-            confirm();
-        } else if (e.getSource() == cancelButton) {
-            this.dispose();
-            parentFrame.updateText();
-            parentFrame.setVisible(true); // Make the parent frame visible again
-        }
-    }
-
-    private void confirm(){
+    protected void confirm(){
         String itemName = getItemName();
         int itemQuantity = getItemQuantity();
 
@@ -90,20 +61,7 @@ public class JPoSRemove extends JItemSelector implements DocumentListener {
             stock.put(itemName, new Item(itemName, cartItem.getCategory(), cartItem.getPrice(), itemQuantity));
         }
 
-        this.handleTextChange();
+        this.updateText();
         JOptionPane.showMessageDialog(this, "Item removed from cart successfully");
-    }
-
-    @Override public void insertUpdate(DocumentEvent e) { handleTextChange(); }
-    @Override public void changedUpdate(DocumentEvent e) { handleTextChange(); }
-    @Override public void removeUpdate(DocumentEvent e) { handleTextChange(); }
-    private void handleTextChange(){
-        String search = itemName.getText();
-        inventoryList.setText(cart.toStock().search(search));
-    }
-
-    @Override
-    public void updateText() {
-        inventoryList.setText(cart.toStock().toString());
     }
 }

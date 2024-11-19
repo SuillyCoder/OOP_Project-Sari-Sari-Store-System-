@@ -1,41 +1,44 @@
-package classes;
+// Template frame for all JInventory submenus
 
-import classes.group.Stock;
+package gui.InventoryGUI;
 
 import java.awt.*;
 import java.awt.event.*;
-
 import javax.swing.*;
 
+import classes.JCustomFrame;
+import classes.group.Stock;
+import gui.*;
+
 public class JItemSelector extends JCustomFrame implements ActionListener {
+    // Buttons
+    private JButton confirmButton = new JButton("Confirm");
+    private JButton cancelButton = new JButton("Return");
 
-    protected JTextField itemName = new JTextField(20);
-    protected JTextField itemCategory = new JTextField(20);
-    protected JTextField itemQuantity = new JTextField(20);
-    protected JTextField itemPrice = new JTextField(20);
+    // Text areas and fields
+    private JTextArea inventoryList = new JTextArea();
+    private JTextField itemName = new JTextField(20);
+    private JTextField itemCategory = new JTextField(20);
+    private JTextField itemQuantity = new JTextField(20);
+    private JTextField itemPrice = new JTextField(20);
 
-    protected JButton confirmButton = new JButton("Confirm");
-    protected JButton cancelButton = new JButton("Return");
-
-    protected JTextArea inventoryList = new JTextArea();
-
+    // Saving constructor arguments to class
+    private JInventory parentFrame;
     protected Stock stock;
 
-    public JItemSelector(String description, Stock stock, boolean enableCategory, boolean enableQuantity, boolean enablePrice) {
+    public JItemSelector(JInventory parentFrame, String description, Stock stock, boolean enableCategory, boolean enableQuantity, boolean enablePrice) {
         super("Inventory List");
         Container con = getContentPane();
-
+        this.parentFrame = parentFrame;
         this.stock = stock;
 
         // Inventory list at the center of the window
         JPanel inventoryWindow = new JPanel(new BorderLayout());
-
             JLabel header = new JLabel("Current Inventory");
-                header.setFont(new Font("Arial", Font.BOLD, 20));
 
             JPanel itemWindow = new JPanel();
                 JScrollPane scroll = new JScrollPane(itemWindow, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-                inventoryList.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 13));
+                inventoryList.setEditable(false);
                 inventoryList.setColumns(50);
                 inventoryList.setText("Empty Default\n".repeat(50));
 
@@ -58,7 +61,6 @@ public class JItemSelector extends JCustomFrame implements ActionListener {
                 // Always able to input item name
                 JPanel nameFields = new JPanel(new FlowLayout(FlowLayout.LEFT));
                         JLabel itemLabel = new JLabel("Item Name:");
-                            itemLabel.setFont(new Font("Arial", Font.PLAIN, 15));
                         nameFields.add(itemLabel);
                         nameFields.add(itemName);
                     fields.add(nameFields);
@@ -66,7 +68,7 @@ public class JItemSelector extends JCustomFrame implements ActionListener {
                 if (enableCategory) {
                     JPanel categoryFields = new JPanel(new FlowLayout(FlowLayout.LEFT));
                         JLabel categoryLabel = new JLabel("Category:");
-                            categoryLabel.setFont(new Font("Arial", Font.PLAIN, 15));
+                            categoryLabel.setFont(Theme.HEADER4_FONT);
                         categoryFields.add(categoryLabel);
                         categoryFields.add(itemCategory);
                     fields.add(categoryFields);
@@ -75,7 +77,7 @@ public class JItemSelector extends JCustomFrame implements ActionListener {
                 if (enableQuantity) {
                     JPanel quantityFields = new JPanel(new FlowLayout(FlowLayout.LEFT));
                         JLabel quantityLabel = new JLabel("Quantity:");
-                            quantityLabel.setFont(new Font("Arial", Font.PLAIN, 15));
+                            quantityLabel.setFont(Theme.HEADER4_FONT);
                         quantityFields.add(quantityLabel);
                         quantityFields.add(itemQuantity);
                     fields.add(quantityFields);
@@ -84,7 +86,7 @@ public class JItemSelector extends JCustomFrame implements ActionListener {
                 if (enablePrice) {
                     JPanel priceFields = new JPanel(new FlowLayout(FlowLayout.LEFT));
                         JLabel priceLabel = new JLabel("Price:");
-                            priceLabel.setFont(new Font("Arial", Font.PLAIN, 15));
+                            priceLabel.setFont(Theme.HEADER4_FONT);
                         priceFields.add(priceLabel);
                         priceFields.add(itemPrice);
                     fields.add(priceFields);
@@ -108,72 +110,77 @@ public class JItemSelector extends JCustomFrame implements ActionListener {
         itemPrice.addActionListener(this);
         confirmButton.addActionListener(this);
         cancelButton.addActionListener(this);
+
+        // Decorating the frame
+        header.setFont(Theme.HEADER2_FONT);
+        descriptionBox.setFont(Theme.HEADER3_FONT);
+        itemLabel.setFont(Theme.HEADER4_FONT);
+        inventoryList.setFont(Theme.MONO_FONT);
+
+        updateText();
     }
 
-    // should be overridden
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == itemName) {
-            JOptionPane.showMessageDialog(this, "Item name field confirmed");
-
-        } else if (e.getSource() == itemCategory) {
-            JOptionPane.showMessageDialog(this, "Item category field confirmed");
-
-        } else if (e.getSource() == itemQuantity) {
-            JOptionPane.showMessageDialog(this, "Item quantity field confirmed");
-            
-        } else if (e.getSource() == itemPrice) {
-            JOptionPane.showMessageDialog(this, "Item price field confirmed");
-        
-        } else if (e.getSource() == confirmButton) {
-            JOptionPane.showMessageDialog(this, "Confirm button pressed");
-
-        } else if (e.getSource() == cancelButton) {
-            JOptionPane.showMessageDialog(this, "Cancel button pressed");
-
-        }
-    }
-
-    public void updateText(){
-        inventoryList.setText(stock.toString());
-    }
-
+    // Accessors
     public String getItemName() {
         try {
             return itemName.getText();
-
         } catch (Exception e) {
             e.printStackTrace();
             return "";
         }
     }
-
     public String getItemCategory() {
         try {
             return itemCategory.getText();
-
         } catch (Exception e) {
             e.printStackTrace();
             return "";
         }
     }
-
     public int getItemQuantity() {
         try {
             return Integer.parseInt(itemQuantity.getText());
-
         } catch (Exception e) {
             e.printStackTrace();
             return 0;
         }
     }
-
     public double getItemPrice() {
         try {
             return Double.parseDouble(itemPrice.getText());
-
         } catch (Exception e) {
             e.printStackTrace();
             return 0.0;
         }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // When user confirms of the item
+        // By pressing enter on any field
+        if (e.getSource() == itemName) { confirm();
+        } else if (e.getSource() == itemCategory) { confirm();
+        } else if (e.getSource() == itemQuantity) { confirm();
+        } else if (e.getSource() == itemPrice) { confirm();
+        
+        // By pressing the confirm button
+        } else if (e.getSource() == confirmButton) { confirm();
+
+        // Return to Inventory submenu
+        } else if (e.getSource() == cancelButton) {
+            this.dispose();
+            parentFrame.updateText();
+            parentFrame.setVisible(true);
+        }
+    }
+
+    // Should be overriden
+    protected void confirm(){
+        throw(new UnsupportedOperationException("Method not implemented"));
+    }
+
+    // For updating all text areas
+    public void updateText(){
+        inventoryList.setText(stock.toString());
     }
 }

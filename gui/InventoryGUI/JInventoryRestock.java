@@ -2,42 +2,23 @@
 
 package gui.InventoryGUI;
 
-import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
-import classes.JItemSelector;
+
 import classes.group.Stock;
 import gui.JInventory;
 
 public class JInventoryRestock extends JItemSelector {
-    private JInventory parentFrame;
-
     public JInventoryRestock(JInventory parentFrame, Stock stock) {
-        super("Change price of item", stock, false, true, false);
-        this.parentFrame = parentFrame;
+        super(parentFrame, "Change price of item", stock, false, true, false);
     }
 
+    // When user confirms of restocking the item
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == itemName) {
-            confirm();
-
-        } else if (e.getSource() == itemQuantity) {
-            confirm();
-
-        } else if (e.getSource() == confirmButton) {
-            confirm();
-
-        } else if (e.getSource() == cancelButton) {
-            this.dispose();
-            parentFrame.updateText();
-            parentFrame.setVisible(true); // Make the parent frame visible again
-        }
-    }
-
     public void confirm() {
         String itemName = getItemName();
         int itemQuantity = getItemQuantity();
 
+        // If any field is empty or invalid
         if (itemName.equals("") || itemQuantity == 0) {
             JOptionPane.showMessageDialog(this, "Enter an item name first!");
             return;

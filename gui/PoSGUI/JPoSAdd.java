@@ -1,48 +1,22 @@
+// Submenu for ading items to cart
+
 package gui.PoSGUI;
 
-import java.awt.event.ActionEvent;
-import javax.swing.JOptionPane;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
+import javax.swing.*;
 
-import classes.JItemSelector;
 import classes.NamedMap;
 import classes.group.Stock;
-import classes.indiv.Item;
-import classes.indiv.Transaction;
+import classes.indiv.*;
 import gui.JPoS;
 
-public class JPoSAdd extends JItemSelector implements DocumentListener {
-
-    private Transaction cart;
-    private JPoS parentFrame;
-    
-    
+public class JPoSAdd extends JCartSelector {
     public JPoSAdd(JPoS parentFrame, Stock stock, Transaction cart) {
-        super("Add Item to cart", stock, false, true, false);
-        this.cart = cart;
-        this.stock = stock;
-        this.parentFrame = parentFrame;
-
-        itemName.getDocument().addDocumentListener(this);
+        super(parentFrame, stock, cart, JCartSelector.DISPLAY_STOCK);
     }
 
+    // When user confirms of the item
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == itemName) {
-            confirm();
-        } else if (e.getSource() == itemQuantity) {
-            confirm();
-        } else if (e.getSource() == confirmButton) {
-            confirm();
-        } else if (e.getSource() == cancelButton) {
-            this.dispose();
-            parentFrame.updateText();
-            parentFrame.setVisible(true); // Make the parent frame visible again
-        }
-    }
-
-    private void confirm(){
+    protected void confirm(){
         String itemName = getItemName();
         int itemQuantity = getItemQuantity();
 
@@ -89,7 +63,7 @@ public class JPoSAdd extends JItemSelector implements DocumentListener {
         // if item already exists in cart
         if (cartItems.containsKey(itemName)) {
             cartItems.get(itemName).incQuantity(itemQuantity);
-            this.handleTextChange();
+            this.updateText();
             JOptionPane.showMessageDialog(this, "Successfully added " + itemQuantity + " more " + itemName + " to cart.");
 
         // if item does not exist in cart
@@ -97,16 +71,8 @@ public class JPoSAdd extends JItemSelector implements DocumentListener {
             newItem = stockedItem.clone();
             newItem.setQuantity(itemQuantity);
             cartItems.put(itemName, newItem);
-            this.handleTextChange();
+            this.updateText();
             JOptionPane.showMessageDialog(this, "Successfully added " + itemQuantity + " " + itemName + " to cart.");
         }
-    }
-
-    @Override public void insertUpdate(DocumentEvent e) { handleTextChange(); }
-    @Override public void changedUpdate(DocumentEvent e) { handleTextChange(); }
-    @Override public void removeUpdate(DocumentEvent e) { handleTextChange(); }
-    private void handleTextChange(){
-        String search = itemName.getText();
-        inventoryList.setText(stock.search(search));
     }
 }

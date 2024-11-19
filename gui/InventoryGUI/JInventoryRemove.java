@@ -2,35 +2,18 @@
 
 package gui.InventoryGUI;
 
-import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
-import classes.JItemSelector;
+
 import classes.group.Stock;
 import gui.JInventory;
 
 public class JInventoryRemove extends JItemSelector {
-    private JInventory parentFrame;
-
     public JInventoryRemove(JInventory parentFrame, Stock stock) {
-        super("Remove Item", stock, false, false, false);
-        this.parentFrame = parentFrame;
+        super(parentFrame, "Remove Item", stock, false, false, false);
     }
 
+    // When user confirms of removing the item
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == itemName) {
-            confirm();
-
-        } else if (e.getSource() == confirmButton) {
-            confirm();
-
-        } else if (e.getSource() == cancelButton) {
-            this.dispose();
-            parentFrame.updateText();
-            parentFrame.setVisible(true); // Make the parent frame visible again
-        }
-    }
-
     public void confirm() {
         String itemName = getItemName();
 

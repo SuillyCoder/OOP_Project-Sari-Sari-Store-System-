@@ -2,46 +2,21 @@
 
 package gui.InventoryGUI;
 
-import java.awt.event.ActionEvent;
-import javax.swing.JOptionPane;
-import classes.JItemSelector;
+import javax.swing.*;
+
 import classes.group.Stock;
 import classes.indiv.Item;
 import gui.JInventory;
 
 public class JInventoryAdd extends JItemSelector {
-    private JInventory parentFrame;
-
     public JInventoryAdd(JInventory parentFrame, Stock stock) {
-        super("Add Item", stock, true, true, true);
-        this.parentFrame = parentFrame;
+        super(parentFrame, "Add Item", stock, true, true, true);
     }
 
+    // When user confirms of the item
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == itemName) {
-            confirm();
-
-        } else if (e.getSource() == itemCategory) {
-            confirm();
-
-        } else if (e.getSource() == itemQuantity) {
-            confirm();
-            
-        } else if (e.getSource() == itemPrice) {
-            confirm();
-
-        } else if (e.getSource() == confirmButton) {
-            confirm();
-
-        } else if (e.getSource() == cancelButton) {
-            this.dispose();
-            parentFrame.updateText();
-            parentFrame.setVisible(true); // Make the parent frame visible again
-        }
-    }
-
-    public void confirm() {
+    protected void confirm() {
+        // Get item details from user
         String itemName = getItemName();
         String itemCategory = getItemCategory();
         int itemQuantity = getItemQuantity();
@@ -49,6 +24,7 @@ public class JInventoryAdd extends JItemSelector {
 
         Item newItem;
 
+        // If any field is empty or invalid
         if (itemName.equals("") || itemCategory.equals("") || itemQuantity == 0 || itemPrice == 0.0) {
             JOptionPane.showMessageDialog(this, "Enter all fields properly first!");
             return;
