@@ -12,11 +12,13 @@ public class JInventoryRestock extends JItemSelector {
         super(parentFrame, "Change price of item", stock, false, true, false);
     }
 
+    // When user confirms of restocking the item
     @Override
     public void confirm() {
         String itemName = getItemName();
         int itemQuantity = getItemQuantity();
 
+        // If any field is empty or invalid
         if (itemName.equals("") || itemQuantity == 0) {
             JOptionPane.showMessageDialog(this, "Enter an item name first!");
             return;

@@ -2,7 +2,6 @@
 
 package gui.InventoryGUI;
 
-import java.awt.event.*;
 import javax.swing.*;
 
 import classes.group.Stock;

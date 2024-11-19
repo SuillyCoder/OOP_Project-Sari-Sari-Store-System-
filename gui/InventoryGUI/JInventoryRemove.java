@@ -2,7 +2,6 @@
 
 package gui.InventoryGUI;
 
-import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 
 import classes.group.Stock;
@@ -13,6 +12,7 @@ public class JInventoryRemove extends JItemSelector {
         super(parentFrame, "Remove Item", stock, false, false, false);
     }
 
+    // When user confirms of removing the item
     @Override
     public void confirm() {
         String itemName = getItemName();

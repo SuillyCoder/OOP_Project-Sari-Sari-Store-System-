@@ -6,8 +6,7 @@ import javax.swing.*;
 
 import classes.NamedMap;
 import classes.group.Stock;
-import classes.indiv.Item;
-import classes.indiv.Transaction;
+import classes.indiv.*;
 import gui.JPoS;
 
 public class JPoSAdd extends JCartSelector {

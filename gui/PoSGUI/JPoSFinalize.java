@@ -10,23 +10,26 @@ import javax.swing.event.*;
 import classes.JCustomFrame;
 import classes.group.*;
 import classes.indiv.*;
-import gui.JPoS;
+import gui.*;
 
 public class JPoSFinalize extends JCustomFrame implements ActionListener, DocumentListener {
+    // Buttons
+    protected JButton confirmButton = new JButton("Checkout");
+    protected JButton cancelButton = new JButton("Return");
+
+    // Text areas and fields
+    protected JTextArea cartList = new JTextArea();
+    protected JTextArea customerList = new JTextArea();
+    protected JTextField customerName = new JTextField(20);
+    protected JTextField payment = new JTextField(20);
+
+    // Saving constructor arguments to class
     private JPoS parentFrame;
     private History history;
     private Contacts contacts;
     private Transaction cart;
 
-    protected JTextField customerName = new JTextField(20);
-    protected JTextField payment = new JTextField(20);
-
-    protected JButton confirmButton = new JButton("Checkout");
-    protected JButton cancelButton = new JButton("Return");
-
-    protected JTextArea cartList = new JTextArea();
-    protected JTextArea customerList = new JTextArea();
-
+    // Frame constructor
     public JPoSFinalize(JPoS parentFrame, History history, Contacts contacts, Transaction cart) {
         super("Finalize Transaction");
         Container con = getContentPane();
@@ -36,42 +39,33 @@ public class JPoSFinalize extends JCustomFrame implements ActionListener, Docume
         this.contacts = contacts;
         this.cart = cart;
 
-        // dashboard at the center of the window
+        // Dashboard at the center of the window
         JPanel dashboard = new JPanel(new BorderLayout());
-
-            // cart details on the upper half
+            // Cart details on the upper half
             JPanel cartDetails = new JPanel(new BorderLayout());
                 JLabel cartHeader = new JLabel("Contents of Cart");
-                    cartHeader.setFont(new Font("Arial", Font.BOLD, 20));
-            
                 JPanel cartPane = new JPanel();
                 JScrollPane scroll = new JScrollPane(cartPane, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-                    cartList.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 13));
+                    cartList.setEditable(false);
                     cartList.setColumns(50);
                     cartList.setText("Empty Default\n".repeat(50));
                     cartPane.add(cartList);
-                
                 cartDetails.add(cartHeader, BorderLayout.NORTH);
                 cartDetails.add(scroll, BorderLayout.CENTER);
             
             // customer list on the lower half
             JPanel customerDetails = new JPanel(new BorderLayout());
                 JLabel customerHeader = new JLabel("Customer List");
-                    customerHeader.setFont(new Font("Arial", Font.BOLD, 20));
-            
                 JPanel customerPane = new JPanel();
                 JScrollPane scroll2 = new JScrollPane(customerPane, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-                    customerList.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 13));
+                    customerList.setEditable(false);
                     customerList.setColumns(50);
                     customerList.setText("Empty Default\n".repeat(50));
                     customerPane.add(customerList);
-                
                 customerDetails.add(customerHeader, BorderLayout.NORTH);
                 customerDetails.add(scroll2, BorderLayout.CENTER);
-        
             dashboard.add(cartDetails, BorderLayout.NORTH);
             dashboard.add(customerDetails, BorderLayout.CENTER);
-
         con.add(dashboard, BorderLayout.CENTER);
 
         // Fields at the bottom of the window
@@ -79,26 +73,19 @@ public class JPoSFinalize extends JCustomFrame implements ActionListener, Docume
             JPanel entryFields = new JPanel(new GridLayout(2, 1));
                 JPanel customerField = new JPanel(new FlowLayout(FlowLayout.LEFT));
                     JLabel customerNameLabel = new JLabel("Customer Name:");
-                    customerNameLabel.setFont(new Font("Arial", Font.PLAIN, 15));
                     customerField.add(customerNameLabel);
                     customerField.add(customerName);
-
                 JPanel paymentField = new JPanel(new FlowLayout(FlowLayout.LEFT));
                     JLabel paymentLabel = new JLabel("Payment:");
-                    paymentLabel.setFont(new Font("Arial", Font.PLAIN, 15));
                     paymentField.add(paymentLabel);
                     paymentField.add(payment);
-            
             entryFields.add(customerField);
             entryFields.add(paymentField);
-        
             JPanel buttonFields = new JPanel(new FlowLayout(FlowLayout.RIGHT));
                 buttonFields.add(confirmButton);
                 buttonFields.add(cancelButton);
-            
             fields.add(entryFields, BorderLayout.WEST);
             fields.add(buttonFields, BorderLayout.EAST);
-            
         con.add(fields, BorderLayout.SOUTH);
 
         // Add action listeners
@@ -107,15 +94,47 @@ public class JPoSFinalize extends JCustomFrame implements ActionListener, Docume
         payment.addActionListener(this);
         confirmButton.addActionListener(this);
         cancelButton.addActionListener(this);
+
+        // Decorating the frame
+        cartHeader.setFont(Theme.HEADER2_FONT);
+        customerHeader.setFont(Theme.HEADER2_FONT);
+        customerNameLabel.setFont(Theme.HEADER3_FONT);
+        paymentLabel.setFont(Theme.HEADER3_FONT);
+        cartList.setFont(Theme.MONO_FONT);
+        customerList.setFont(Theme.MONO_FONT);
+
+        updateText();
     }
 
+    // Accessors
+    public String getCustomerName() {
+        try {
+            return customerName.getText();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+    public double getPayment() {
+        try {
+            return Double.parseDouble(payment.getText());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0.0;
+        }
+    }
+
+    // Button actions and field completions
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == customerName) {
-            confirm();
-        } else if (e.getSource() == payment) {
-            confirm();
-        } else if (e.getSource() == confirmButton) {
-            confirm();
+        // When user confirms of the transaction
+        // By pressing enter on any field
+        if (e.getSource() == customerName) { confirm();
+        } else if (e.getSource() == payment) { confirm();
+        
+        // By pressing the confirm button
+        } else if (e.getSource() == confirmButton) { confirm();
+
+        // Return to Transaction submenu
         } else if (e.getSource() == cancelButton) {
             this.dispose();
             parentFrame.updateText();
@@ -123,19 +142,12 @@ public class JPoSFinalize extends JCustomFrame implements ActionListener, Docume
         }
     }
 
-    public void updateText() {
-        cartList.setText(cart.toString());
-        handleTextChange();
-    }
-
-    @Override public void insertUpdate(DocumentEvent e) { handleTextChange(); }
-    @Override public void changedUpdate(DocumentEvent e) { handleTextChange(); }
-    @Override public void removeUpdate(DocumentEvent e) { handleTextChange(); }
-    private void handleTextChange(){
-        String search = getCustomerName();
-        customerList.setText(contacts.search(search));
-    }
-
+    // Field edits
+    @Override public void insertUpdate(DocumentEvent e) { updateText(); }
+    @Override public void changedUpdate(DocumentEvent e) { updateText(); }
+    @Override public void removeUpdate(DocumentEvent e) { updateText(); }
+    
+    // When user confirms of the entry
     public void confirm() {
         String customerName = getCustomerName();
         double payment = getPayment();
@@ -192,23 +204,11 @@ public class JPoSFinalize extends JCustomFrame implements ActionListener, Docume
         JOptionPane.showMessageDialog(this, "Transaction finalized.");
     }
 
-    public String getCustomerName() {
-        try {
-            return customerName.getText();
+    // For updating all text areas
+    public void updateText(){
+        cartList.setText(cart.toString());
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
-
-    public double getPayment() {
-        try {
-            return Double.parseDouble(payment.getText());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return 0.0;
-        }
+        String search = getCustomerName();
+        customerList.setText(contacts.search(search));
     }
 }

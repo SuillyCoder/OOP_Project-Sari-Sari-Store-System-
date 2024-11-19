@@ -132,6 +132,7 @@ public class JInventory extends JCustomFrame implements ActionListener, Document
     @Override public void changedUpdate(DocumentEvent e) { updateText(); }
     @Override public void removeUpdate(DocumentEvent e) { updateText(); }
 
+    // For updating all text areas
     public void updateText(){
         String search = searchItem.getText();
         inventoryList.setText(stock.search(search));

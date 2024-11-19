@@ -2,26 +2,27 @@
 
 package gui.InventoryGUI;
 
-import classes.JCustomFrame;
-import classes.group.Stock;
-import gui.JInventory;
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class JItemSelector extends JCustomFrame implements ActionListener {
+import classes.JCustomFrame;
+import classes.group.Stock;
+import gui.*;
 
+public class JItemSelector extends JCustomFrame implements ActionListener {
+    // Buttons
+    private JButton confirmButton = new JButton("Confirm");
+    private JButton cancelButton = new JButton("Return");
+
+    // Text areas and fields
+    private JTextArea inventoryList = new JTextArea();
     private JTextField itemName = new JTextField(20);
     private JTextField itemCategory = new JTextField(20);
     private JTextField itemQuantity = new JTextField(20);
     private JTextField itemPrice = new JTextField(20);
 
-    private JButton confirmButton = new JButton("Confirm");
-    private JButton cancelButton = new JButton("Return");
-
-    private JTextArea inventoryList = new JTextArea();
-
+    // Saving constructor arguments to class
     private JInventory parentFrame;
     protected Stock stock;
 
@@ -33,13 +34,11 @@ public class JItemSelector extends JCustomFrame implements ActionListener {
 
         // Inventory list at the center of the window
         JPanel inventoryWindow = new JPanel(new BorderLayout());
-
             JLabel header = new JLabel("Current Inventory");
-                header.setFont(new Font("Arial", Font.BOLD, 20));
 
             JPanel itemWindow = new JPanel();
                 JScrollPane scroll = new JScrollPane(itemWindow, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-                inventoryList.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 13));
+                inventoryList.setEditable(false);
                 inventoryList.setColumns(50);
                 inventoryList.setText("Empty Default\n".repeat(50));
 
@@ -62,7 +61,6 @@ public class JItemSelector extends JCustomFrame implements ActionListener {
                 // Always able to input item name
                 JPanel nameFields = new JPanel(new FlowLayout(FlowLayout.LEFT));
                         JLabel itemLabel = new JLabel("Item Name:");
-                            itemLabel.setFont(new Font("Arial", Font.PLAIN, 15));
                         nameFields.add(itemLabel);
                         nameFields.add(itemName);
                     fields.add(nameFields);
@@ -70,7 +68,7 @@ public class JItemSelector extends JCustomFrame implements ActionListener {
                 if (enableCategory) {
                     JPanel categoryFields = new JPanel(new FlowLayout(FlowLayout.LEFT));
                         JLabel categoryLabel = new JLabel("Category:");
-                            categoryLabel.setFont(new Font("Arial", Font.PLAIN, 15));
+                            categoryLabel.setFont(Theme.HEADER4_FONT);
                         categoryFields.add(categoryLabel);
                         categoryFields.add(itemCategory);
                     fields.add(categoryFields);
@@ -79,7 +77,7 @@ public class JItemSelector extends JCustomFrame implements ActionListener {
                 if (enableQuantity) {
                     JPanel quantityFields = new JPanel(new FlowLayout(FlowLayout.LEFT));
                         JLabel quantityLabel = new JLabel("Quantity:");
-                            quantityLabel.setFont(new Font("Arial", Font.PLAIN, 15));
+                            quantityLabel.setFont(Theme.HEADER4_FONT);
                         quantityFields.add(quantityLabel);
                         quantityFields.add(itemQuantity);
                     fields.add(quantityFields);
@@ -88,7 +86,7 @@ public class JItemSelector extends JCustomFrame implements ActionListener {
                 if (enablePrice) {
                     JPanel priceFields = new JPanel(new FlowLayout(FlowLayout.LEFT));
                         JLabel priceLabel = new JLabel("Price:");
-                            priceLabel.setFont(new Font("Arial", Font.PLAIN, 15));
+                            priceLabel.setFont(Theme.HEADER4_FONT);
                         priceFields.add(priceLabel);
                         priceFields.add(itemPrice);
                     fields.add(priceFields);
@@ -112,8 +110,51 @@ public class JItemSelector extends JCustomFrame implements ActionListener {
         itemPrice.addActionListener(this);
         confirmButton.addActionListener(this);
         cancelButton.addActionListener(this);
+
+        // Decorating the frame
+        header.setFont(Theme.HEADER2_FONT);
+        descriptionBox.setFont(Theme.HEADER3_FONT);
+        itemLabel.setFont(Theme.HEADER4_FONT);
+        inventoryList.setFont(Theme.MONO_FONT);
+
+        updateText();
     }
 
+    // Accessors
+    public String getItemName() {
+        try {
+            return itemName.getText();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+    public String getItemCategory() {
+        try {
+            return itemCategory.getText();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+    public int getItemQuantity() {
+        try {
+            return Integer.parseInt(itemQuantity.getText());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    public double getItemPrice() {
+        try {
+            return Double.parseDouble(itemPrice.getText());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0.0;
+        }
+    }
+
+    @Override
     public void actionPerformed(ActionEvent e) {
         // When user confirms of the item
         // By pressing enter on any field
@@ -133,51 +174,12 @@ public class JItemSelector extends JCustomFrame implements ActionListener {
         }
     }
 
-    public String getItemName() {
-        try {
-            return itemName.getText();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
-
-    public String getItemCategory() {
-        try {
-            return itemCategory.getText();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
-
-    public int getItemQuantity() {
-        try {
-            return Integer.parseInt(itemQuantity.getText());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return 0;
-        }
-    }
-
-    public double getItemPrice() {
-        try {
-            return Double.parseDouble(itemPrice.getText());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return 0.0;
-        }
-    }
-
     // Should be overriden
     protected void confirm(){
         throw(new UnsupportedOperationException("Method not implemented"));
     }
 
+    // For updating all text areas
     public void updateText(){
         inventoryList.setText(stock.toString());
     }

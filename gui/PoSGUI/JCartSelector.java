@@ -27,9 +27,9 @@ public class JCartSelector extends JCustomFrame implements ActionListener, Docum
     protected JTextField itemQuantity = new JTextField(20);
 
     // Saving constructor arguments to class
+    protected JPoS parentFrame;
     protected Stock stock;
     protected Transaction cart;
-    protected JPoS parentFrame;
     private int displayMode;
 
     // Frame constructor
@@ -96,28 +96,25 @@ public class JCartSelector extends JCustomFrame implements ActionListener, Docum
         updateText();
     }
 
-    // accessors
+    // Accessors
     public String getItemName() {
         try {
             return itemName.getText();
-
         } catch (Exception e) {
             e.printStackTrace();
             return "";
         }
     }
-
     public int getItemQuantity() {
         try {
             return Integer.parseInt(itemQuantity.getText());
-
         } catch (Exception e) {
             e.printStackTrace();
             return 0;
         }
     }
 
-    // button actions and field completions
+    // Button actions and field completions
     @Override
     public void actionPerformed(ActionEvent e) {
         // When user confirms of the item
@@ -155,6 +152,4 @@ public class JCartSelector extends JCustomFrame implements ActionListener, Docum
             itemList.setText(cart.toStock().toString());
         }
     }
-
-
 }
