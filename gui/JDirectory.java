@@ -9,12 +9,12 @@ import classes.JCustomFrame;
 import classes.group.Contacts;
 
 public class JDirectory extends JCustomFrame implements ActionListener {
-        //because I'm quirky and I want color
-        Color navyBlue = new Color(0,0,128);
+        // buttons
+        private JButton back = new JButton("Back");
 
-        JTextField changeField = new JTextField(15);
+        private JTextField changeField = new JTextField(15);
 
-        JButton back = new JButton("Back");
+        
 
         JTextArea directoryList = new JTextArea();
         JLabel customerSize = new JLabel("Blank default");
@@ -34,15 +34,12 @@ public class JDirectory extends JCustomFrame implements ActionListener {
             JPanel headerPanel = new JPanel(new BorderLayout());
                 JLabel header = new JLabel ("Debtors list");
                     header.setFont(new Font("Arial", Font.BOLD, 20));
-                
                 JPanel customerInfo = new JPanel(new FlowLayout(FlowLayout.LEFT));
                     JLabel customerHeader = new JLabel("Number of Customers: ");
                     customerInfo.add(customerHeader);
                     customerInfo.add(customerSize);
-                
                 headerPanel.add(header, BorderLayout.NORTH);
                 headerPanel.add(customerInfo, BorderLayout.SOUTH);
-
             // Scrollable contacts list
             JPanel directoryWindow = new JPanel();
             JScrollPane scroll = new JScrollPane(directoryWindow, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -51,19 +48,16 @@ public class JDirectory extends JCustomFrame implements ActionListener {
                 directoryList.setText("Empty Default\n".repeat(50));
                 directoryList.setEditable(false);
                 directoryWindow.add(directoryList);
-            
             // Current max debt at the bottom
             JPanel debtInfo = new JPanel(new FlowLayout());
                 JLabel debtHeader = new JLabel("Current Max Debt: ");
                     debtHeader.setFont(new Font("Arial", Font.BOLD, 20));
                 debtInfo.add(debtHeader);
                 debtInfo.add(maxDebtLabel);
-            
             center.add(headerPanel, BorderLayout.NORTH);
             center.add(scroll, BorderLayout.CENTER);
             center.add(debtInfo, BorderLayout.SOUTH);
             center.setBackground(Color.cyan);
-        
         this.add(center, BorderLayout.CENTER);
 
         // Bottom panel for changing max debt and exiting
@@ -73,20 +67,18 @@ public class JDirectory extends JCustomFrame implements ActionListener {
                 JLabel changeLabel = new JLabel("Change Max Debt");
                 changePanel.add(changeLabel);
                 changePanel.add(changeField);
-            
-
                 back.setPreferredSize(new Dimension(150, 50));
-
             bottom.add(changePanel);
             bottom.add(back);
-            bottom.setBackground(navyBlue);
             bottom.setLayout(new FlowLayout());
-      
         this.add(bottom, BorderLayout.SOUTH);
 
         // Add action listeners
         changeField.addActionListener(this);
         back.addActionListener(this);
+
+        // decorating the frame
+        bottom.setBackground(Theme.NAVY_BLUE);
 
         updateText();
     }

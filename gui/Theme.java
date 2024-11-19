@@ -12,6 +12,8 @@ public class Theme {
 
     public static final Color BUTTON_RED = new Color(255, 0,0);
     public static final Color BUTTON_GREEN = new Color(0, 128,0);
+    
+    public static final Color NAVY_BLUE = new Color(0,0,128);
 
 
     //BACKGROUND_COLOR
