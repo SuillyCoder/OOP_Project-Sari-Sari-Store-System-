@@ -1,16 +1,9 @@
 package gui.PoSGUI;
 
-import java.awt.Container;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.event.*;
 
 import classes.JCustomFrame;
 import classes.NamedMap;
@@ -21,6 +14,14 @@ import gui.JPoS;
 import gui.InventoryGUI.JItemSelector;
 
 public class JPoSAdd extends JCustomFrame implements ActionListener, DocumentListener {
+
+    protected JTextField itemName = new JTextField(20);
+    protected JTextField itemQuantity = new JTextField(20);
+
+    protected JButton confirmButton = new JButton("Confirm");
+    protected JButton cancelButton = new JButton("Return");
+
+    protected JTextArea inventoryList = new JTextArea();
 
     private Stock stock;
     private Transaction cart;
@@ -158,7 +159,7 @@ public class JPoSAdd extends JCustomFrame implements ActionListener, DocumentLis
         // if item already exists in cart
         if (cartItems.containsKey(itemName)) {
             cartItems.get(itemName).incQuantity(itemQuantity);
-            this.handleTextChange();
+            this.updateText();
             JOptionPane.showMessageDialog(this, "Successfully added " + itemQuantity + " more " + itemName + " to cart.");
 
         // if item does not exist in cart
@@ -166,16 +167,36 @@ public class JPoSAdd extends JCustomFrame implements ActionListener, DocumentLis
             newItem = stockedItem.clone();
             newItem.setQuantity(itemQuantity);
             cartItems.put(itemName, newItem);
-            this.handleTextChange();
+            this.updateText();
             JOptionPane.showMessageDialog(this, "Successfully added " + itemQuantity + " " + itemName + " to cart.");
         }
     }
 
-    @Override public void insertUpdate(DocumentEvent e) { handleTextChange(); }
-    @Override public void changedUpdate(DocumentEvent e) { handleTextChange(); }
-    @Override public void removeUpdate(DocumentEvent e) { handleTextChange(); }
-    private void handleTextChange(){
+    @Override public void insertUpdate(DocumentEvent e) { updateText(); }
+    @Override public void changedUpdate(DocumentEvent e) { updateText(); }
+    @Override public void removeUpdate(DocumentEvent e) { updateText(); }
+    public void updateText(){
         String search = itemName.getText();
         inventoryList.setText(stock.search(search));
+    }
+
+    public String getItemName() {
+        try {
+            return itemName.getText();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    public int getItemQuantity() {
+        try {
+            return Integer.parseInt(itemQuantity.getText());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 }

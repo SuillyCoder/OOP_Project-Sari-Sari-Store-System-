@@ -9,11 +9,8 @@ import classes.group.Stock;
 import gui.JInventory;
 
 public class JInventoryRestock extends JItemSelector {
-    private JInventory parentFrame;
-
     public JInventoryRestock(JInventory parentFrame, Stock stock) {
-        super("Change price of item", stock, false, true, false);
-        this.parentFrame = parentFrame;
+        super(parentFrame, "Change price of item", stock, false, true, false);
     }
 
     @Override

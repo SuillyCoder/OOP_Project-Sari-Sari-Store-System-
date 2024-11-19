@@ -10,11 +10,8 @@ import classes.indiv.Item;
 import gui.JInventory;
 
 public class JInventoryAdd extends JItemSelector {
-    private JInventory parentFrame;
-
     public JInventoryAdd(JInventory parentFrame, Stock stock) {
-        super("Add Item", stock, true, true, true);
-        this.parentFrame = parentFrame;
+        super(parentFrame, "Add Item", stock, true, true, true);
     }
 
     @Override
