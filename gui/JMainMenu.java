@@ -50,6 +50,7 @@ public void initializeUI() {
     inventoryList = new JTextArea();
     customerList = new JTextArea();
     dayIndicatorLabel = new JTextArea();
+    
 
     // Configure components
     panelOne.add(transaction);
@@ -103,6 +104,11 @@ public void initializeUI() {
     dailyLogs.addActionListener(this);
     weeklyLogs.addActionListener(this);
     monthlyLogs.addActionListener(this);
+
+    // Decorate the frame
+    dayIndicatorLabel.setEditable(false);
+    dayIndicatorLabel.setFont(Theme.MONO_FONT);
+
 }
 
  //Updating Data 
