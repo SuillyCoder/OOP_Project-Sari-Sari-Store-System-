@@ -10,7 +10,8 @@ public class JMainMenu extends JCustomFrame implements ActionListener{
     // GUI components
     private JPanel mainPanel, panelOne, panelTwo, panelTwoButtons, panelTwoLogs;
     private JButton transaction, inventory, customerDirectory, nextDay, dailyLogs, weeklyLogs, monthlyLogs, saveButton;
-    private JTextArea inventoryList, customerList, dayIndicatorLabel;
+    private JTextArea inventoryList, customerList;
+    private JTextArea dayIndicatorLabel;
     private JLabel period;
 
     // GUI pages
@@ -49,7 +50,7 @@ public void initializeUI() {
     weeklyLogs = new JButton("Weekly Logs");
     monthlyLogs = new JButton("Monthly Logs");
 
-    inventoryList = new JTextArea();
+    // inventoryList = new JTextArea();
     customerList = new JTextArea();
     dayIndicatorLabel = new JTextArea();
     period = new JLabel("Day " + history.size());
@@ -75,30 +76,30 @@ public void initializeUI() {
       JPanel logPanel = new JPanel(new GridLayout(4, 1, 0, 0));
 
         // Adding the data to the customer window
-         customerList.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 13));
-         customerList.setColumns(50);
-         customerList.setText("Empty Default\n".repeat(50));
-         panelTwoLogs.add(customerList);
+        customerList.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 13));
+        customerList.setColumns(50);
+        customerList.setText("Empty Default\n".repeat(50));
+        panelTwoLogs.add(customerList);
 
         // Adding the data to the inventory window
-        inventoryList.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 13));
-        inventoryList.setColumns(50);
-        inventoryList.setText("Empty Default\n".repeat(50));
-        panelTwoLogs.add(inventoryList);
-        panelTwoLogs.add(dayIndicatorLabel);
-        logPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5)); // Minimal padding
+        // inventoryList.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 13));
+        // inventoryList.setColumns(50);
+        // inventoryList.setText("Empty Default\n".repeat(50));
+        // panelTwoLogs.add(inventoryList);
+        // panelTwoLogs.add(dayIndicatorLabel);
+        // logPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5)); // Minimal padding
 
         // Add components
         dayIndicatorLabel.setAlignmentX(Component.LEFT_ALIGNMENT); // Align each component
         logPanel.add(dayIndicatorLabel);
         
-        JScrollPane customerScrollPane = new JScrollPane(customerList);
-        customerScrollPane.setAlignmentX(Component.LEFT_ALIGNMENT); 
-        logPanel.add(customerScrollPane);
+        // JScrollPane customerScrollPane = new JScrollPane(customerList);
+        // customerScrollPane.setAlignmentX(Component.LEFT_ALIGNMENT); 
+        // logPanel.add(customerScrollPane);
         
-        JScrollPane inventoryScrollPane = new JScrollPane(inventoryList);
-        inventoryScrollPane.setAlignmentX(Component.LEFT_ALIGNMENT);
-        logPanel.add(inventoryScrollPane);
+        // JScrollPane inventoryScrollPane = new JScrollPane(inventoryList);
+        // inventoryScrollPane.setAlignmentX(Component.LEFT_ALIGNMENT);
+        // logPanel.add(inventoryScrollPane);
   
         scrollPane.setViewportView(logPanel);
         panelTwoLogs.add(scrollPane, BorderLayout.CENTER);
@@ -132,8 +133,8 @@ public void initializeUI() {
  //Updating Data 
  public void updateText(){
     dayIndicatorLabel.setText(history.toString());
-    customerList.setText(contacts.toString());
-    inventoryList.setText(stock.toString());
+    // customerList.setText(contacts.toString());
+    // inventoryList.setText(stock.toString());
   }
 
 
