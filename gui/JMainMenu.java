@@ -11,6 +11,7 @@ public class JMainMenu extends JCustomFrame implements ActionListener{
     private JPanel mainPanel, panelOne, panelTwo, panelTwoButtons, panelTwoLogs;
     private JButton transaction, inventory, customerDirectory, nextDay, dailyLogs, weeklyLogs, monthlyLogs, saveButton;
     private JTextArea inventoryList, customerList, dayIndicatorLabel;
+    private JLabel period;
 
     // GUI pages
     public Contacts contacts;
@@ -35,7 +36,7 @@ public void initializeUI() {
     mainPanel = new JPanel(new BorderLayout());
     panelOne = new JPanel(new GridLayout(5, 1));
     panelTwo = new JPanel(new BorderLayout());
-    panelTwoButtons = new JPanel(new GridLayout(1,3));
+    panelTwoButtons = new JPanel(new GridLayout(2,3));
     panelTwoLogs = new JPanel(new BorderLayout());
 
     transaction = new JButton("Transaction");
@@ -51,6 +52,8 @@ public void initializeUI() {
     inventoryList = new JTextArea();
     customerList = new JTextArea();
     dayIndicatorLabel = new JTextArea();
+    period = new JLabel("TESTING");
+    period.setHorizontalAlignment(SwingConstants.CENTER);
     
 
     // Configure components
@@ -60,13 +63,16 @@ public void initializeUI() {
     panelOne.add(nextDay);
     panelOne.add(saveButton);
 
+    panelTwoButtons.add(period);
+    panelTwoButtons.add(period);
+    panelTwoButtons.add(period);
     panelTwoButtons.add(dailyLogs);
     panelTwoButtons.add(weeklyLogs);
     panelTwoButtons.add(monthlyLogs);
 
     //Adding Inventory and Customer Data to the Logs
       JScrollPane scrollPane = new JScrollPane(customerList, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-      JPanel logPanel = new JPanel(new GridLayout(3, 1));
+      JPanel logPanel = new JPanel(new GridLayout(4, 1, 0, 0));
 
         // Adding the data to the customer window
          customerList.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 13));
@@ -79,16 +85,25 @@ public void initializeUI() {
         inventoryList.setColumns(50);
         inventoryList.setText("Empty Default\n".repeat(50));
         panelTwoLogs.add(inventoryList);
-
         panelTwoLogs.add(dayIndicatorLabel);
+        logPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5)); // Minimal padding
 
+        // Add components
+        dayIndicatorLabel.setAlignmentX(Component.LEFT_ALIGNMENT); // Align each component
         logPanel.add(dayIndicatorLabel);
-        logPanel.add(customerList);
-        logPanel.add(inventoryList);
+        
+        JScrollPane customerScrollPane = new JScrollPane(customerList);
+        customerScrollPane.setAlignmentX(Component.LEFT_ALIGNMENT); 
+        logPanel.add(customerScrollPane);
+        
+        JScrollPane inventoryScrollPane = new JScrollPane(inventoryList);
+        inventoryScrollPane.setAlignmentX(Component.LEFT_ALIGNMENT);
+        logPanel.add(inventoryScrollPane);
   
-      scrollPane.setViewportView(logPanel);
-      panelTwoLogs.add(scrollPane, BorderLayout.CENTER);
+        scrollPane.setViewportView(logPanel);
+        panelTwoLogs.add(scrollPane, BorderLayout.CENTER);
 
+    
     panelTwo.add(panelTwoButtons, BorderLayout.NORTH);
     panelTwo.add(panelTwoLogs, BorderLayout.CENTER);
 
