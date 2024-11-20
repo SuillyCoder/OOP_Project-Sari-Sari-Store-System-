@@ -70,7 +70,7 @@ public class Stock extends NamedMap<Item> {
         Stock filteredStock = new Stock();
         for (String key : this.keySet()) {
             Item item = this.get(key);
-            if (item.getName().contains(search)) {
+            if (item.getName().contains(search.toLowerCase().replace(" ", ""))) {
                 filteredStock.addItem(key, item);
             }
         }
