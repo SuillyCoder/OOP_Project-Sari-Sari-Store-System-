@@ -52,7 +52,7 @@ public void initializeUI() {
     inventoryList = new JTextArea();
     customerList = new JTextArea();
     dayIndicatorLabel = new JTextArea();
-    period = new JLabel("TESTING");
+    period = new JLabel("Day " + history.size());
     period.setHorizontalAlignment(SwingConstants.CENTER);
     
 
@@ -172,12 +172,15 @@ public void initializeUI() {
         dailyLogs.setEnabled(false);
         weeklyLogs.setEnabled(true);
         monthlyLogs.setEnabled(true);
+        period.setText("Day " + history.size()); 
         this.updateText();
        }
        else if(e.getSource() == weeklyLogs){
         dailyLogs.setEnabled(true);
         weeklyLogs.setEnabled(false);
         monthlyLogs.setEnabled(true);
+        int currentWeek = ((history.size() - 1) / 7) + 1;
+        period.setText("Week " + currentWeek); 
         this.updateText();
         dayIndicatorLabel.setText(history.weekSummary().toString());
        }
@@ -185,6 +188,8 @@ public void initializeUI() {
         dailyLogs.setEnabled(true);
         weeklyLogs.setEnabled(true);
         monthlyLogs.setEnabled(false);
+        int currentMonth = ((history.size() - 1) / 30) + 1;
+        period.setText("Month " + currentMonth);
         this.updateText();
         dayIndicatorLabel.setText(history.monthSummary().toString());
        }
