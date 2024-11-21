@@ -20,7 +20,7 @@ public class JPoSRemove extends JCartSelector {
         String itemName = getItemName();
         int itemQuantity = getItemQuantity();
 
-        NamedMap<Item> cartItems = cart.getItems();
+        NamedMap<Item> cartItems = getCart().getItems();
         Item cartItem;
 
         // Failure cases
@@ -46,7 +46,7 @@ public class JPoSRemove extends JCartSelector {
 
         // reduce relevant values
         cartItem.setQuantity(cartItem.getQuantity() - itemQuantity);
-        cart.decWorth(itemQuantity * cartItem.getPrice());
+        getCart().decWorth(itemQuantity * cartItem.getPrice());
 
         // if quantity is 0, remove item from cart
         if (cartItem.getQuantity() == 0) {
@@ -54,11 +54,11 @@ public class JPoSRemove extends JCartSelector {
         }
 
         // add removed quantites back to stock
-        if (stock.containsKey(itemName)) {
-            Item stockItem = stock.get(itemName);
+        if (getStock().containsKey(itemName)) {
+            Item stockItem = getStock().get(itemName);
             stockItem.setQuantity(stockItem.getQuantity() + itemQuantity);
         } else {
-            stock.put(itemName, new Item(itemName, cartItem.getCategory(), cartItem.getPrice(), itemQuantity));
+            getStock().put(itemName, new Item(itemName, cartItem.getCategory(), cartItem.getPrice(), itemQuantity));
         }
 
         this.updateText();

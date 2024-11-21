@@ -2,7 +2,7 @@ import classes.group.*;
 import classes.indiv.Log;
 import gui.*;
 
-public class Main{
+public class sariSariManager{
     // Data declarations and initializations
     public static Contacts contacts = new Contacts();
     public static History history = new History();

@@ -26,7 +26,6 @@ public class JPoSFinalize extends JCustomFrame implements ActionListener, Docume
     // Saving constructor arguments to class
     private JPoS parentFrame;
     private History history;
-    private Stock stock;
     private Contacts contacts;
     private Transaction cart;
 

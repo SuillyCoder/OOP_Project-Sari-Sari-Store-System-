@@ -18,18 +18,18 @@ public class JCartSelector extends JCustomFrame implements ActionListener, Docum
     public static final int DISPLAY_CART = 2;
     
     // Buttons
-    protected JButton confirmButton = new JButton("Confirm");
-    protected JButton cancelButton = new JButton("Return");
+    private JButton confirmButton = new JButton("Confirm");
+    private JButton cancelButton = new JButton("Return");
 
     // Text areas and fields
-    protected JTextArea itemList = new JTextArea();         // Either stock or cart
-    protected JTextField itemName = new JTextField(20);
-    protected JTextField itemQuantity = new JTextField(20);
+    private JTextArea itemList = new JTextArea();         // Either stock or cart
+    private JTextField itemName = new JTextField(20);
+    private JTextField itemQuantity = new JTextField(20);
 
     // Saving constructor arguments to class
-    protected JPoS parentFrame;
-    protected Stock stock;
-    protected Transaction cart;
+    private JPoS parentFrame;
+    private Stock stock;
+    private Transaction cart;
     private int displayMode;
 
     // Frame constructor
@@ -60,7 +60,7 @@ public class JCartSelector extends JCustomFrame implements ActionListener, Docum
         JPanel itemSelection = new JPanel(new BorderLayout());
             // Description at the top of the frame
             JLabel descriptionBox = new JLabel(displayMode == DISPLAY_STOCK ? "Add item to cart" : "Remove item from cart");
-            // Fields at the bottome of the frame
+            // Fields at the bottom of the frame
             JPanel fields = new JPanel(new GridLayout(2, 1));
                 // Item name field
                 JPanel nameFields = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -115,7 +115,10 @@ public class JCartSelector extends JCustomFrame implements ActionListener, Docum
         }
     }
 
-    // Button actions and field completions
+    public Stock getStock() { return stock; }
+    public Transaction getCart() { return cart; }
+
+	// Button actions and field completions
     @Override
     public void actionPerformed(ActionEvent e) {
         // When user confirms of the item
@@ -148,9 +151,9 @@ public class JCartSelector extends JCustomFrame implements ActionListener, Docum
     public void updateText(){
         if (displayMode == DISPLAY_STOCK){
             String search = getItemName();
-            itemList.setText(stock.search(search));
+            itemList.setText(getStock().search(search));
         } else if (displayMode == DISPLAY_CART){
-            itemList.setText(cart.toString());
+            itemList.setText(getCart().toString());
         }
     }
 }

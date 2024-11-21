@@ -1,7 +1,6 @@
 package gui;
 
 import java.awt.*;
-import javax.swing.*;
 
 //class for constant values for the GUI's in the project
 public class Theme {

@@ -20,7 +20,7 @@ public class JPoSAdd extends JCartSelector {
         String itemName = getItemName();
         int itemQuantity = getItemQuantity();
 
-        NamedMap<Item> cartItems = cart.getItems();
+        NamedMap<Item> cartItems = getCart().getItems();
         Item stockedItem;
         Item newItem;
 
@@ -32,12 +32,12 @@ public class JPoSAdd extends JCartSelector {
             }
 
             // if item does not exist
-            if (!stock.containsKey(itemName)) {
+            if (!getStock().containsKey(itemName)) {
                 JOptionPane.showMessageDialog(this, "Item does not exist in stock!");
                 return;
             }
 
-            stockedItem = stock.get(itemName);
+            stockedItem = getStock().get(itemName);
 
             // if no stock left
             if (stockedItem.getQuantity() == 0) {
@@ -58,7 +58,7 @@ public class JPoSAdd extends JCartSelector {
             }
 
         stockedItem.decQuantity(itemQuantity);                  // decrement item quantity in stock
-        cart.incWorth(itemQuantity * stockedItem.getPrice());   // increment transaction worth
+        getCart().incWorth(itemQuantity * stockedItem.getPrice());   // increment transaction worth
 
         // if item already exists in cart
         if (cartItems.containsKey(itemName)) {
