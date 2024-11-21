@@ -4,7 +4,6 @@ package gui.PoSGUI;
 
 import javax.swing.*;
 
-import group.NamedMap;
 import group.Stock;
 import gui.JPoS;
 import indiv.*;
@@ -20,7 +19,7 @@ public class JPoSRemove extends JCartSelector {
         String itemName = getItemName();
         int itemQuantity = getItemQuantity();
 
-        NamedMap<Item> cartItems = cart.getItems();
+        Stock cartItems = cart.getItems();
         Item cartItem;
 
         // Failure cases

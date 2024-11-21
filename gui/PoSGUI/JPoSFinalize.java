@@ -13,14 +13,14 @@ import javax.swing.event.*;
 
 public class JPoSFinalize extends JCustomFrame implements ActionListener, DocumentListener {
     // Buttons
-    protected JButton confirmButton = new JButton("Checkout");
-    protected JButton cancelButton = new JButton("Return");
+    private JButton confirmButton = new JButton("Checkout");
+    private JButton cancelButton = new JButton("Return");
 
     // Text areas and fields
-    protected JTextArea cartList = new JTextArea();
-    protected JTextArea customerList = new JTextArea();
-    protected JTextField customerName = new JTextField(20);
-    protected JTextField payment = new JTextField(20);
+    private JTextArea cartList = new JTextArea();
+    private JTextArea customerList = new JTextArea();
+    private JTextField customerName = new JTextField(20);
+    private JTextField payment = new JTextField(20);
     private JLabel cartWorth = new JLabel();
 
     // Frame constructor
