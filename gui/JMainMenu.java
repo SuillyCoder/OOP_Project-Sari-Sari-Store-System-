@@ -10,8 +10,7 @@ public class JMainMenu extends JCustomFrame implements ActionListener{
     // GUI components
     private JPanel mainPanel, panelOne, panelTwo, panelTwoButtons, panelTwoLogs;
     private JButton transaction, inventory, customerDirectory, nextDay, dailyLogs, weeklyLogs, monthlyLogs, saveButton;
-    private JTextArea inventoryList, customerList;
-    private JTextArea dayIndicatorLabel;
+    private JTextArea inventoryList, customerList, dayIndicatorLabel, lowStock ;
     private JLabel period;
 
     // GUI pages
@@ -53,6 +52,7 @@ public void initializeUI() {
     // inventoryList = new JTextArea();
     customerList = new JTextArea();
     dayIndicatorLabel = new JTextArea();
+    lowStock = new JTextArea();
     period = new JLabel("Day " + history.size());
     period.setHorizontalAlignment(SwingConstants.CENTER);
     
@@ -73,7 +73,7 @@ public void initializeUI() {
 
     //Adding Inventory and Customer Data to the Logs
       JScrollPane scrollPane = new JScrollPane(customerList, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-      JPanel logPanel = new JPanel(new GridLayout(4, 1, 0, 0));
+      JPanel logPanel = new JPanel(new FlowLayout(FlowLayout.LEADING, 0, 5));
 
         // Adding the data to the customer window
         customerList.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 13));
@@ -92,6 +92,8 @@ public void initializeUI() {
         // Add components
         dayIndicatorLabel.setAlignmentX(Component.LEFT_ALIGNMENT); // Align each component
         logPanel.add(dayIndicatorLabel);
+
+        lowStock.setText(stock.lowInventoryNotifier());
         
         // JScrollPane customerScrollPane = new JScrollPane(customerList);
         // customerScrollPane.setAlignmentX(Component.LEFT_ALIGNMENT); 
@@ -107,6 +109,7 @@ public void initializeUI() {
     
     panelTwo.add(panelTwoButtons, BorderLayout.NORTH);
     panelTwo.add(panelTwoLogs, BorderLayout.CENTER);
+    panelTwo.add(lowStock, BorderLayout.SOUTH);
 
 
     mainPanel.add(panelOne, BorderLayout.WEST);
@@ -133,6 +136,7 @@ public void initializeUI() {
  //Updating Data 
  public void updateText(){
     dayIndicatorLabel.setText(history.toString());
+    lowStock.setText(stock.lowInventoryNotifier());
     // customerList.setText(contacts.toString());
     // inventoryList.setText(stock.toString());
   }

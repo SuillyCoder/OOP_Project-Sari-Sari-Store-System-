@@ -2,15 +2,14 @@
 
 package gui.PoSGUI;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.event.*;
-
 import classes.JCustomFrame;
 import classes.group.*;
 import classes.indiv.*;
 import gui.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.event.*;
 
 public class JPoSFinalize extends JCustomFrame implements ActionListener, DocumentListener {
     // Buttons
@@ -27,6 +26,7 @@ public class JPoSFinalize extends JCustomFrame implements ActionListener, Docume
     // Saving constructor arguments to class
     private JPoS parentFrame;
     private History history;
+    private Stock stock;
     private Contacts contacts;
     private Transaction cart;
 
@@ -139,7 +139,6 @@ public class JPoSFinalize extends JCustomFrame implements ActionListener, Docume
         
         // By pressing the confirm button
         } else if (e.getSource() == confirmButton) { confirm();
-
         // Return to Transaction submenu
         } else if (e.getSource() == cancelButton) {
             this.dispose();
