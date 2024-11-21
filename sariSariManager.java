@@ -1,6 +1,6 @@
 import group.*;
 import gui.*;
-import indiv.Log;
+import indiv.*;
 
 public class sariSariManager{
     // "boostrapping"
