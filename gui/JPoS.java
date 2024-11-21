@@ -91,6 +91,7 @@ public class JPoS extends JCustomFrame implements ActionListener {
         subtotalText.setFont(Theme.HEADER3_FONT);
         priceTicker.setFont(Theme.HEADER3_FONT);
         cartList.setFont(Theme.MONO_FONT);
+        cartList.setOpaque(false);
 
         updateText();
     }

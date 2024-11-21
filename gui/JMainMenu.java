@@ -10,7 +10,7 @@ public class JMainMenu extends JCustomFrame implements ActionListener{
     // GUI components
     private JPanel mainPanel, panelOne, panelTwo, panelTwoButtons, panelTwoLogs;
     private JButton transaction, inventory, customerDirectory, nextDay, dailyLogs, weeklyLogs, monthlyLogs, saveButton;
-    private JTextArea inventoryList, customerList, dayIndicatorLabel, lowStock ;
+    private JTextArea customerList, dayIndicatorLabel, lowStock ;
     private JLabel period;
 
     // GUI pages
@@ -130,6 +130,8 @@ public void initializeUI() {
     // Decorate the frame
     dayIndicatorLabel.setEditable(false);
     dayIndicatorLabel.setFont(Theme.MONO_FONT);
+    dayIndicatorLabel.setOpaque(false);
+    
 
 }
 

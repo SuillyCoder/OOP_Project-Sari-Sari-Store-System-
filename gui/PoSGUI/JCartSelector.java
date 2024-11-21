@@ -92,6 +92,7 @@ public class JCartSelector extends JCustomFrame implements ActionListener, Docum
 
         // Decorating the frame
         itemList.setFont(Theme.MONO_FONT);
+        itemList.setOpaque(false);
 
         updateText();
     }

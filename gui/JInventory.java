@@ -84,6 +84,7 @@ public class JInventory extends JCustomFrame implements ActionListener, Document
         // Decorating the frame
         header.setFont(Theme.HEADER2_FONT);
         inventoryList.setFont(Theme.MONO_FONT);
+        inventoryList.setOpaque(false);
 
         updateText();
     }

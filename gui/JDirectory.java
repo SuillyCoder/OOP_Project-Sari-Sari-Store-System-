@@ -83,7 +83,7 @@ public class JDirectory extends JCustomFrame implements ActionListener {
         header.setFont(Theme.HEADER2_FONT);
         debtHeader.setFont(Theme.HEADER3_FONT);
         directoryList.setFont(Theme.MONO_FONT);
-        bottom.setBackground(Theme.NAVY_BLUE);
+        directoryList.setOpaque(false);
 
         updateText();
     }

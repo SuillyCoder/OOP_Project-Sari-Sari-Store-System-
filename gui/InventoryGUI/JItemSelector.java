@@ -41,6 +41,7 @@ public class JItemSelector extends JCustomFrame implements ActionListener {
                 inventoryList.setEditable(false);
                 inventoryList.setColumns(50);
                 inventoryList.setText("Empty Default\n".repeat(50));
+                
 
                 itemWindow.add(inventoryList);
 
@@ -116,6 +117,7 @@ public class JItemSelector extends JCustomFrame implements ActionListener {
         descriptionBox.setFont(Theme.HEADER3_FONT);
         itemLabel.setFont(Theme.HEADER4_FONT);
         inventoryList.setFont(Theme.MONO_FONT);
+        inventoryList.setOpaque(false);
 
         updateText();
     }

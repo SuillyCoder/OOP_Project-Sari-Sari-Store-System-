@@ -107,7 +107,10 @@ public class JPoSFinalize extends JCustomFrame implements ActionListener, Docume
         customerNameLabel.setFont(Theme.HEADER3_FONT);
         paymentLabel.setFont(Theme.HEADER3_FONT);
         cartList.setFont(Theme.MONO_FONT);
+        cartList.setOpaque(false);
         customerList.setFont(Theme.MONO_FONT);
+        customerList.setOpaque(false);
+        
 
         updateText();
     }

@@ -15,6 +15,13 @@ public class JCustomFrame extends JFrame {
         setAlwaysOnTop(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
+        // Opens the frame at the center of the screen
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (screenSize.width - WIDTH) / 2;
+        int y = (screenSize.height - HEIGHT) / 2;
+        setLocation(x, y);
+        
+        
         // Set layout of frame as BorderLayout
         Container con = getContentPane();
         con.setLayout(new BorderLayout());

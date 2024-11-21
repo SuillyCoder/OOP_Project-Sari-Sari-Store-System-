@@ -85,7 +85,7 @@ public class Stock extends NamedMap<Item> {
         for (String key : this.keySet()) {
             Item item = this.get(key);
             if (item.getQuantity() < LOW_INVENTORY_THRESHOLD) {
-                res += "Stock of " + item.getName() + " is low (" + item.getQuantity() + " remaining)!\n";
+                res += "   Stock of " + item.getName() + " is low (" + item.getQuantity() + " remaining)!\n";
             }
         }
         return res;
