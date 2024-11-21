@@ -2,7 +2,7 @@
 // the system will only keep track of customers with credit != 0
 // Contacts.java keeps track of all customers 
 
-package classes.indiv;
+package indiv;
 
 public class Customer implements Comparable<Customer> {
     private String name;

@@ -15,8 +15,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
-import classes.JCustomFrame;
-import classes.group.Stock;
+import group.Stock;
 import gui.InventoryGUI.*;
 
 public class JInventory extends JCustomFrame implements ActionListener, DocumentListener {
@@ -31,12 +30,8 @@ public class JInventory extends JCustomFrame implements ActionListener, Document
     private JTextArea inventoryList = new JTextArea();
     private JTextField searchItem = new JTextField(20);
 
-    // Saving constructor arguments to class
-    private JMainMenu parentFrame;
-    private Stock stock;
-
     // Constructor for the inventory management window
-    public JInventory(JMainMenu parentFrame, Stock stock){
+    public JInventory(JCustomFrame parentFrame, Stock stock){
         super("Inventory Manager");
         this.parentFrame = parentFrame;
         this.stock = stock;

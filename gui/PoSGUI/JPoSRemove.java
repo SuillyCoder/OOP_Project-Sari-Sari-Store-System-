@@ -4,10 +4,10 @@ package gui.PoSGUI;
 
 import javax.swing.*;
 
-import classes.NamedMap;
-import classes.group.Stock;
-import classes.indiv.*;
+import group.NamedMap;
+import group.Stock;
 import gui.JPoS;
+import indiv.*;
 
 public class JPoSRemove extends JCartSelector {
     public JPoSRemove(JPoS parentFrame, Stock stock, Transaction cart) {
@@ -20,7 +20,7 @@ public class JPoSRemove extends JCartSelector {
         String itemName = getItemName();
         int itemQuantity = getItemQuantity();
 
-        NamedMap<Item> cartItems = getCart().getItems();
+        NamedMap<Item> cartItems = cart.getItems();
         Item cartItem;
 
         // Failure cases
@@ -46,7 +46,7 @@ public class JPoSRemove extends JCartSelector {
 
         // reduce relevant values
         cartItem.setQuantity(cartItem.getQuantity() - itemQuantity);
-        getCart().decWorth(itemQuantity * cartItem.getPrice());
+        cart.decWorth(itemQuantity * cartItem.getPrice());
 
         // if quantity is 0, remove item from cart
         if (cartItem.getQuantity() == 0) {
@@ -54,11 +54,11 @@ public class JPoSRemove extends JCartSelector {
         }
 
         // add removed quantites back to stock
-        if (getStock().containsKey(itemName)) {
-            Item stockItem = getStock().get(itemName);
+        if (stock.containsKey(itemName)) {
+            Item stockItem = stock.get(itemName);
             stockItem.setQuantity(stockItem.getQuantity() + itemQuantity);
         } else {
-            getStock().put(itemName, new Item(itemName, cartItem.getCategory(), cartItem.getPrice(), itemQuantity));
+            stock.put(itemName, new Item(itemName, cartItem.getCategory(), cartItem.getPrice(), itemQuantity));
         }
 
         this.updateText();

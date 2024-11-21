@@ -2,10 +2,10 @@
 
 package gui.PoSGUI;
 
-import classes.JCustomFrame;
-import classes.group.*;
-import classes.indiv.*;
+import group.*;
 import gui.*;
+import indiv.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -23,14 +23,8 @@ public class JPoSFinalize extends JCustomFrame implements ActionListener, Docume
     protected JTextField payment = new JTextField(20);
     private JLabel cartWorth = new JLabel();
 
-    // Saving constructor arguments to class
-    private JPoS parentFrame;
-    private History history;
-    private Contacts contacts;
-    private Transaction cart;
-
     // Frame constructor
-    public JPoSFinalize(JPoS parentFrame, History history, Contacts contacts, Transaction cart) {
+    public JPoSFinalize(JCustomFrame parentFrame, History history, Contacts contacts, Transaction cart) {
         super("Finalize Transaction");
         Container con = getContentPane();
 

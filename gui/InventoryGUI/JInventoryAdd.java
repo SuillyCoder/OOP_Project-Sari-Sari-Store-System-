@@ -4,9 +4,9 @@ package gui.InventoryGUI;
 
 import javax.swing.*;
 
-import classes.group.Stock;
-import classes.indiv.Item;
+import group.Stock;
 import gui.JInventory;
+import indiv.Item;
 
 public class JInventoryAdd extends JItemSelector {
     public JInventoryAdd(JInventory parentFrame, Stock stock) {

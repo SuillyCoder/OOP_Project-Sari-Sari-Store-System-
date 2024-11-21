@@ -1,9 +1,8 @@
 // A "reciept" class for a single transaction
 
-package classes.indiv;
+package indiv;
 
-import classes.NamedMap;
-import classes.group.Stock;
+import group.Stock;
 
 public class Transaction {
     private Stock items;       // treat like a "cart" during a transaction
@@ -21,7 +20,7 @@ public class Transaction {
         this.setWorth(0);
     }
 
-    public NamedMap<Item> getItems() { return items; }
+    public Stock getItems() { return items; }
     // adding/removing items from the cart
     public void addItem(Item item) { this.items.put(item.getName(), item); } // potential bug: if the item changes price in the middle
     public void removeItem(Item item) { this.items.remove(item.getName()); } //  of a purchase, then removeItem() will not remove item

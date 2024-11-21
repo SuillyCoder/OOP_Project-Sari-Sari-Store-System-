@@ -4,23 +4,22 @@ package gui.PoSGUI;
 
 import javax.swing.*;
 
-import classes.NamedMap;
-import classes.group.Stock;
-import classes.indiv.*;
-import gui.JPoS;
+import group.NamedMap;
+import group.Stock;
+import gui.JCustomFrame;
+import indiv.*;
 
 public class JPoSAdd extends JCartSelector {
-    public JPoSAdd(JPoS parentFrame, Stock stock, Transaction cart) {
+    public JPoSAdd(JCustomFrame parentFrame, Stock stock, Transaction cart) {
         super(parentFrame, stock, cart, JCartSelector.DISPLAY_STOCK);
     }
 
     // When user confirms of the item
-    @Override
     protected void confirm(){
         String itemName = getItemName();
         int itemQuantity = getItemQuantity();
 
-        NamedMap<Item> cartItems = getCart().getItems();
+        NamedMap<Item> cartItems = cart.getItems();
         Item stockedItem;
         Item newItem;
 
@@ -32,12 +31,12 @@ public class JPoSAdd extends JCartSelector {
             }
 
             // if item does not exist
-            if (!getStock().containsKey(itemName)) {
+            if (!stock.containsKey(itemName)) {
                 JOptionPane.showMessageDialog(this, "Item does not exist in stock!");
                 return;
             }
 
-            stockedItem = getStock().get(itemName);
+            stockedItem = stock.get(itemName);
 
             // if no stock left
             if (stockedItem.getQuantity() == 0) {
@@ -58,7 +57,7 @@ public class JPoSAdd extends JCartSelector {
             }
 
         stockedItem.decQuantity(itemQuantity);                  // decrement item quantity in stock
-        getCart().incWorth(itemQuantity * stockedItem.getPrice());   // increment transaction worth
+        cart.incWorth(itemQuantity * stockedItem.getPrice());   // increment transaction worth
 
         // if item already exists in cart
         if (cartItems.containsKey(itemName)) {

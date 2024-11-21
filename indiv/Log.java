@@ -1,7 +1,7 @@
 // Class which contains a financial report / summary for a single day
 // History.java keeps track of all logs
 
-package classes.indiv;
+package indiv;
 
 public class Log {
     private double totalPayment;
@@ -31,6 +31,4 @@ public class Log {
         this.totalPayment += transaction.getPayment();
         this.totalWorth += transaction.getWorth();
     }
-
-
 }

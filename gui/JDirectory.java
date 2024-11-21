@@ -5,11 +5,11 @@
 
 package gui;
 
-import classes.JCustomFrame;
-import classes.group.Contacts;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
+import group.Contacts;
 
 public class JDirectory extends JCustomFrame implements ActionListener {
         // Buttons
@@ -21,12 +21,8 @@ public class JDirectory extends JCustomFrame implements ActionListener {
         private JLabel customerSize = new JLabel("Blank default");
         private JLabel maxDebtLabel = new JLabel("Blank default");
 
-        // Saving constructor arguments to class
-        private JMainMenu parentFrame;
-        private Contacts contacts;
-
     // Constructor for the directory window
-    public JDirectory(JMainMenu parentFrame, Contacts contacts) {
+    public JDirectory(JCustomFrame parentFrame, Contacts contacts) {
         super("Directory");
         this.parentFrame = parentFrame;
         this.contacts = contacts;

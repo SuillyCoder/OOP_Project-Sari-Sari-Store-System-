@@ -1,16 +1,16 @@
-import classes.group.*;
-import classes.indiv.Log;
+import group.*;
 import gui.*;
+import indiv.Log;
 
 public class sariSariManager{
-    // Data declarations and initializations
-    public static Contacts contacts = new Contacts();
-    public static History history = new History();
-    public static Stock stock = new Stock();
-
     // "boostrapping"
     // functionality is in JMainMenu.java
-    public static void main(String[] args) {   
+    public static void main(String[] args) {
+        // declarations and initializations
+        Contacts contacts = new Contacts();
+        History history = new History();
+        Stock stock = new Stock(); 
+        
         // load from files
         contacts.fromFile();            // (Contacts.java)
         history.fromFile();             // (History.java)

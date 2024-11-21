@@ -1,9 +1,9 @@
 package gui;
-import classes.*;
-import classes.group.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
+import group.*;
 
 public class JMainMenu extends JCustomFrame implements ActionListener{
     // Buttons
@@ -21,19 +21,13 @@ public class JMainMenu extends JCustomFrame implements ActionListener{
 	private JTextArea lowStock = new JTextArea();
 	private JLabel period = new JLabel();
 
-
-    // Saving constructor arguments to class
-    private Contacts contacts;
-    private Stock stock;
-    private History history;
-
-public JMainMenu(History history, Stock stock, Contacts contacts) {
+  public JMainMenu(History history, Stock stock, Contacts contacts) {
     super("Sari Sari Store Manager");
     this.history = history;
     this.stock = stock;
     this.contacts = contacts;
 
-	// Declarations
+	  // Declarations
     JPanel mainPanel, panelOne, panelTwo, panelTwoButtons, panelTwoLogs;
     JPanel customerList;
     

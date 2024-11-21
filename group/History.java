@@ -1,4 +1,6 @@
-package classes.group;
+// Class which stores all Logs
+
+package group;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -7,8 +9,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import classes.indiv.Log;
-import classes.indiv.Transaction;
+import indiv.Log;
+import indiv.Transaction;
 
 public class History extends ArrayList<Log> {
     public void addTransaction(Transaction cart) {
@@ -98,49 +100,6 @@ public class History extends ArrayList<Log> {
     public double cumulativeRevenue(){
         return cumulativePayment() - cumulativeWorth();
     }
-
-    // public String printDay(){
-    //     int currentDay = history.size();
-    //     int currentWeek = ((currentDay - 1) / 7) + 1;
-    //     int currentMonth = ((currentDay - 1) / 30) + 1; // assuming 30 days in a month
-    //     //Currently unsure with this formatting
-    //     String dayLabel = ("Day " + currentDay + " (" + getWeekday(currentDay) + ") | Week " + currentWeek + " | Month " + currentMonth);
-    //     System.out.println(dayLabel);
-
-    //     return dayLabel;
-    // }
-
-    // public String printWeek(){
-    //     int currentDay = history.size();
-    //     int currentWeek = ((currentDay - 1) / 7) + 1;
-    //     String weekLabel = ("Week " + currentWeek);
-    //     System.out.println(weekLabel);
-
-    //     return weekLabel;
-    // }
-
-    // public String printMonth(){
-    //     int currentDay = history.size();
-    //     int currentMonth = ((currentDay - 1) / 30) + 1; // assuming 30 days in a month
-    //     String monthLabel = ("Month " + currentMonth);
-    //     System.out.println(monthLabel);
-    //     return monthLabel;
-    // }
-
-
-    // private static String getWeekday(int day) {
-    //     day = day % 7;
-    //     switch (day) {
-    //         case 1:     return "Monday";
-    //         case 2:     return "Tuesday";
-    //         case 3:     return "Wednesday";
-    //         case 4:     return "Thursday";
-    //         case 5:     return "Friday";
-    //         case 6:     return "Saturday";
-    //         case 0:     return "Sunday";
-    //         default:    return "Invalid day";
-    //     }
-    // }
 
     // file read and write operations
     public void fromFile() {

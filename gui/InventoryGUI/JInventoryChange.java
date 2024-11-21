@@ -4,7 +4,7 @@ package gui.InventoryGUI;
 
 import javax.swing.*;
 
-import classes.group.Stock;
+import group.Stock;
 import gui.JInventory;
 
 public class JInventoryChange extends JItemSelector {

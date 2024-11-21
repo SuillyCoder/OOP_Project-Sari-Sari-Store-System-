@@ -13,10 +13,9 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import classes.JCustomFrame;
-import classes.indiv.*;
-import classes.group.*;
+import group.*;
 import gui.PoSGUI.*;
+import indiv.*;
 
 
 public class JPoS extends JCustomFrame implements ActionListener {
@@ -31,16 +30,12 @@ public class JPoS extends JCustomFrame implements ActionListener {
     private JLabel priceTicker = new JLabel();
 
     // Saving constructor arguments to class
-    private JMainMenu parentFrame;
     private Contacts contacts;
     private History history;
     private Stock stock;
 
-    // Cart for this transaction
-    private Transaction cart;
-
     // Constructor for the PoS window
-    public JPoS(JMainMenu parentFrame, Contacts contacts, History history, Stock stock){
+    public JPoS(JCustomFrame parentFrame, Contacts contacts, History history, Stock stock){
         super("Transaction");
         this.parentFrame = parentFrame;
         this.contacts = contacts;

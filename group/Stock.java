@@ -1,13 +1,12 @@
 // Class which stores all items
 
-package classes.group;
+package group;
 
 import java.io.*;
 import java.util.*;
 import java.util.stream.*;
 
-import classes.NamedMap;
-import classes.indiv.Item;
+import indiv.Item;
 
 public class Stock extends NamedMap<Item> {
     private static final int LOW_INVENTORY_THRESHOLD = 5;

@@ -1,7 +1,7 @@
 // Convenience class which makes HashMap keys K strings that are automatically normalized
 // Otherwise, treat as an unmodified HashMap<String, V>
 
-package classes;
+package group;
 
 import java.util.HashMap;
 

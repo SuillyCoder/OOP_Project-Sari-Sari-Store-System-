@@ -2,10 +2,9 @@
 
 package gui.PoSGUI;
 
-import classes.JCustomFrame;
-import classes.group.Stock;
-import classes.indiv.Transaction;
+import group.Stock;
 import gui.*;
+import indiv.Transaction;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -16,6 +15,7 @@ public class JCartSelector extends JCustomFrame implements ActionListener, Docum
     // Constants
     public static final int DISPLAY_STOCK = 1;
     public static final int DISPLAY_CART = 2;
+    private int displayMode;
     
     // Buttons
     private JButton confirmButton = new JButton("Confirm");
@@ -26,14 +26,8 @@ public class JCartSelector extends JCustomFrame implements ActionListener, Docum
     private JTextField itemName = new JTextField(20);
     private JTextField itemQuantity = new JTextField(20);
 
-    // Saving constructor arguments to class
-    private JPoS parentFrame;
-    private Stock stock;
-    private Transaction cart;
-    private int displayMode;
-
     // Frame constructor
-    public JCartSelector(JPoS parentFrame, Stock stock, Transaction cart, int displayMode){
+    public JCartSelector(JCustomFrame parentFrame, Stock stock, Transaction cart, int displayMode){
         super("Point of Sale");
         this.parentFrame = parentFrame;
         this.stock = stock;
@@ -115,9 +109,6 @@ public class JCartSelector extends JCustomFrame implements ActionListener, Docum
         }
     }
 
-    public Stock getStock() { return stock; }
-    public Transaction getCart() { return cart; }
-
 	// Button actions and field completions
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -151,9 +142,9 @@ public class JCartSelector extends JCustomFrame implements ActionListener, Docum
     public void updateText(){
         if (displayMode == DISPLAY_STOCK){
             String search = getItemName();
-            itemList.setText(getStock().search(search));
+            itemList.setText(stock.search(search));
         } else if (displayMode == DISPLAY_CART){
-            itemList.setText(getCart().toString());
+            itemList.setText(cart.toString());
         }
     }
 }

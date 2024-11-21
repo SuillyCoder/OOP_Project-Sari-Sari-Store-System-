@@ -6,8 +6,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import classes.JCustomFrame;
-import classes.group.Stock;
+import group.Stock;
 import gui.*;
 
 public class JItemSelector extends JCustomFrame implements ActionListener {
@@ -22,11 +21,7 @@ public class JItemSelector extends JCustomFrame implements ActionListener {
     private JTextField itemQuantity = new JTextField(20);
     private JTextField itemPrice = new JTextField(20);
 
-    // Saving constructor arguments to class
-    private JInventory parentFrame;
-    protected Stock stock;
-
-    public JItemSelector(JInventory parentFrame, String description, Stock stock, boolean enableCategory, boolean enableQuantity, boolean enablePrice) {
+    public JItemSelector(JCustomFrame parentFrame, String description, Stock stock, boolean enableCategory, boolean enableQuantity, boolean enablePrice) {
         super("Inventory List");
         Container con = getContentPane();
         this.parentFrame = parentFrame;

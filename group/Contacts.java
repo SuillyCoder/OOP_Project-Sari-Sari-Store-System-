@@ -1,12 +1,11 @@
 // Class which stores all Customers
 
-package classes.group;
+package group;
 
 import java.io.*;
 import java.util.*;
 
-import classes.NamedMap;
-import classes.indiv.Customer;
+import indiv.Customer;
 
 public class Contacts extends NamedMap<Customer> {
     private static double maxDebt = -200; // maximum debt allowed
