@@ -5,16 +5,15 @@
 
 package gui;
 
-import java.awt.event.*;
-import java.awt.*;
-import javax.swing.*;
-
 import classes.JCustomFrame;
 import classes.group.Contacts;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
 public class JDirectory extends JCustomFrame implements ActionListener {
         // Buttons
-        private JButton back = new JButton("Back");
+        private JButton back = new JButton("Return to Main Menu");
 
         // Text areas and fields
         private JTextArea directoryList = new JTextArea();
@@ -82,6 +81,7 @@ public class JDirectory extends JCustomFrame implements ActionListener {
         // Decorating the frame
         header.setFont(Theme.HEADER2_FONT);
         debtHeader.setFont(Theme.HEADER3_FONT);
+        maxDebtLabel.setFont(Theme.HEADER3_FONT);
         directoryList.setFont(Theme.MONO_FONT);
         directoryList.setOpaque(false);
 
