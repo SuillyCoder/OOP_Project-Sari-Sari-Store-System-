@@ -1,3 +1,5 @@
+// Main menu window
+
 package gui;
 import java.awt.*;
 import java.awt.event.*;
@@ -89,6 +91,8 @@ public class JMainMenu extends JCustomFrame implements ActionListener{
     dayIndicatorLabel.setEditable(false);
     dayIndicatorLabel.setFont(Theme.MONO_FONT);
     dayIndicatorLabel.setOpaque(false);
+    lowStock.setEditable(false);
+    lowStock.setForeground(Color.RED);
     
     dailyLogs.setEnabled(false);
     period.setText("Day " + history.size());
