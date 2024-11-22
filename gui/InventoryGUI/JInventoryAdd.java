@@ -14,7 +14,6 @@ public class JInventoryAdd extends JItemSelector {
     }
 
     // When user confirms of the item
-    @Override
     protected void confirm() {
         // Get item details from user
         String itemName = getItemName();

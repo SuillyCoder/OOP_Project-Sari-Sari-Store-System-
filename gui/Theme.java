@@ -1,8 +1,9 @@
+// Ckass for constants used in the GUI
+
 package gui;
 
 import java.awt.*;
 
-//class for constant values for the GUI's in the project
 public class Theme {
     public static final int WIDTH = 800;
     public static final int HEIGHT = 600;

@@ -13,7 +13,6 @@ public class JInventoryRemove extends JItemSelector {
     }
 
     // When user confirms of removing the item
-    @Override
     public void confirm() {
         String itemName = getItemName();
 

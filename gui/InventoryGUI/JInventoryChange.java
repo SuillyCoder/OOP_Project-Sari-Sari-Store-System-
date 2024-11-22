@@ -13,7 +13,6 @@ public class JInventoryChange extends JItemSelector {
     }
 
     // When user confirms of adding the item
-    @Override
     public void confirm() {
         // Get item details from user
         String itemName = getItemName();

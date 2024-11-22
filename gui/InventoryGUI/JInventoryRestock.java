@@ -13,7 +13,6 @@ public class JInventoryRestock extends JItemSelector {
     }
 
     // When user confirms of restocking the item
-    @Override
     public void confirm() {
         String itemName = getItemName();
         int itemQuantity = getItemQuantity();
