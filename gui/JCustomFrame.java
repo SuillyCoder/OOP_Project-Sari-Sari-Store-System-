@@ -5,9 +5,7 @@ package gui;
 import java.awt.*;
 import javax.swing.*;
 
-import group.Contacts;
-import group.History;
-import group.Stock;
+import group.*;
 import indiv.Transaction;
 
 public class JCustomFrame extends JFrame {
@@ -25,7 +23,7 @@ public class JCustomFrame extends JFrame {
         setSize(Theme.WIDTH, Theme.HEIGHT);
         setResizable(false);
         setAlwaysOnTop(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         
         // Opens the frame at the center of the screen
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

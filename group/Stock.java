@@ -39,7 +39,7 @@ public class Stock extends NamedMap<Item> {
     }
 
     public String toString() {
-        String inventory = String.format("  %-15s %-15s %10s %5s %10s", "Name", "Category", "Price", "Qty", "");
+        String inventory = String.format("  %-20s %-15s %10s %5s %10s", "Name", "Category", "Price", "Qty", "");
     
         // Group items by category
         Map<String, List<Item>> itemsByCategory = this.values().stream()
@@ -69,7 +69,7 @@ public class Stock extends NamedMap<Item> {
         Stock filteredStock = new Stock();
         for (String key : this.keySet()) {
             Item item = this.get(key);
-            if (item.getName().contains(search.toLowerCase().replace(" ", ""))) {
+            if (item.getName().toUpperCase().replace(" ", "").contains(search.toUpperCase().replace(" ", ""))) {
                 filteredStock.addItem(key, item);
             }
         }

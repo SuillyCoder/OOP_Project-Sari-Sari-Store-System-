@@ -45,7 +45,7 @@ public class Item implements Cloneable, Comparable<Item> {
     }
 
     public String toString() {
-        return String.format(" %-15s %-15s %10.2f %5d", this.getName(), this.getCategory(), this.getPrice(), this.getQuantity());
+        return String.format(" %-20s %-15s %10.2f %5d", this.getName(), this.getCategory(), this.getPrice(), this.getQuantity());
     }
 
     public String totalizedString() {
