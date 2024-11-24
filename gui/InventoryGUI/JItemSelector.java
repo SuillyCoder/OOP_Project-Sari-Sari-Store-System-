@@ -5,11 +5,12 @@ package gui.InventoryGUI;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.event.*;
 
 import group.Stock;
 import gui.*;
 
-public class JItemSelector extends JCustomFrame implements ActionListener {
+public class JItemSelector extends JCustomFrame implements ActionListener, DocumentListener {
     // Buttons
     private JButton confirmButton = new JButton("Confirm");
     private JButton cancelButton = new JButton("Return");
@@ -106,6 +107,7 @@ public class JItemSelector extends JCustomFrame implements ActionListener {
         itemPrice.addActionListener(this);
         confirmButton.addActionListener(this);
         cancelButton.addActionListener(this);
+        itemName.getDocument().addDocumentListener(this);
 
         // Decorating the frame
         header.setFont(Theme.HEADER2_FONT);
@@ -171,6 +173,10 @@ public class JItemSelector extends JCustomFrame implements ActionListener {
         }
     }
 
+    @Override public void insertUpdate(DocumentEvent e) { updateText(); }
+    @Override public void changedUpdate(DocumentEvent e) { updateText(); }
+    @Override public void removeUpdate(DocumentEvent e) { updateText(); }
+
     // Should be overriden
     protected void confirm(){
         throw(new UnsupportedOperationException("Method not implemented"));
@@ -178,6 +184,7 @@ public class JItemSelector extends JCustomFrame implements ActionListener {
 
     // For updating all text areas
     public void updateText(){
-        inventoryList.setText(stock.toString());
+        String search = getItemName();
+        inventoryList.setText(stock.search(search));
     }
 }

@@ -30,7 +30,7 @@ public class Contacts extends NamedMap<Customer> {
     public String search(String name) {
         Contacts filteredContacts = new Contacts();
         for (String key : this.keySet()) {
-            if (key.toLowerCase().contains(name.toLowerCase().replace(" ", ""))) {
+            if (key.toUpperCase().replace(" ", "").contains(name.toUpperCase().replace(" ", ""))) {
                 filteredContacts.put(key, this.get(key));
             }
         }
