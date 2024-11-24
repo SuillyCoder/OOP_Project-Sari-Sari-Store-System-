@@ -2,14 +2,13 @@
 
 package gui.InventoryGUI;
 
-import javax.swing.JOptionPane;
-
 import group.Stock;
 import gui.JInventory;
+import javax.swing.JOptionPane;
 
 public class JInventoryRestock extends JItemSelector {
     public JInventoryRestock(JInventory parentFrame, Stock stock) {
-        super(parentFrame, "Change price of item", stock, false, true, false);
+        super(parentFrame, "Restock Item", stock, false, true, false);
     }
 
     // When user confirms of restocking the item
