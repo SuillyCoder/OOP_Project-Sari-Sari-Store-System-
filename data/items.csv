@@ -1,9 +1,10 @@
 Bioderm,Toiletries,35.00,15
 Lucky Me S Bulalo,Food,12.00,20
-Palmolive,Toiletries,9.00,20
+Palmolive,Toiletries,20.00,20
 Paper towel,Toiletries,35.00,12
 Safeguard,Toiletries,45.00,15
-Presto,Snacks,12.00,8
+Candy,Food,5.00,100
+Presto,Snacks,12.00,20
 Colgate Org,Toiletries,55.00,7
 Argentina CB,Canned,45.00,20
 Lemon,Drinks,14.00,20
@@ -23,7 +24,7 @@ Fudgee Bar,Snacks,10.00,15
 Milo,Sachet,10.00,20
 Pillows,Snacks,14.00,12
 RedHorse S,Drinks,45.00,9
-Bingo,Snacks,8.00,20
+Bingo,Snacks,8.00,19
 Close up Org,Toiletries,37.00,7
 Rexona RO,Toiletries,47.00,8
 Sprite 1L,Drinks,60.00,12
@@ -40,7 +41,6 @@ Egg,Food,10.00,36
 Century Tuna,Canned,42.00,20
 Sprite,Drinks,16.00,20
 Royal 1L,Drinks,55.00,12
-Zonrox,Toiletries,48.00,5
 Tang Orange,Sachet,10.00,20
 RedHorse B,Drinks,110.00,9
 Piatos,Snacks,18.00,20
